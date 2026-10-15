@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#0B0F19"
+        android:pathData="M0,0h100v100h-100z"/>
+
+    <!-- Glowing Cyan Ring -->
+    <path
+        android:strokeColor="#38BDF8"
+        android:strokeWidth="3"
+        android:pathData="M50,50m-38,0a38,38 0 1,0 76,0a38,38 0 1,0 -76,0"/>
+
+    <!-- House Outline -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M32,50 L50,32 L68,50 M38,44 L38,68 L62,68 L62,44"/>
+
+    <!-- Electric Lightning Bolt Emblem -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M52,38 L42,56 L50,56 L47,72 L60,52 L51,52 Z"/>
+
+</vector>

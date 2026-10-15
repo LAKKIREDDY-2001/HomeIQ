@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+
+    <!-- Background Gradient Box -->
+    <path
+        android:fillColor="#0B0F19"
+        android:pathData="M0,0h320v180h-320z"/>
+
+    <!-- Ambient Blue Glow Circle -->
+    <path
+        android:fillColor="#1E38BDF8"
+        android:pathData="M160,90m-80,0a80,80 0 1,0 160,0a80,80 0 1,0 -160,0"/>
+
+    <!-- Outer 3D Shield / Border -->
+    <path
+        android:fillColor="#1E293B"
+        android:strokeColor="#38BDF8"
+        android:strokeWidth="3"
+        android:pathData="M160,25 L210,55 L210,125 L160,155 L110,125 L110,55 Z"/>
+
+    <!-- Roof & House Outline -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M135,90 L160,65 L185,90 M145,80 L145,115 L175,115 L175,80"/>
+
+    <!-- Electric Lightning Bolt Emblem -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M162,70 L152,92 L161,92 L158,112 L170,88 L161,88 Z"/>
+
+</vector>
