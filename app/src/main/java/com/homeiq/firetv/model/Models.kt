@@ -133,6 +133,93 @@ data class CityLocation(
     val humidity: Int
 )
 
+// ─── ENHANCEMENT 2: Family Guardian Safety & Anomaly Detection ───
+enum class AnomalyType {
+    STOVE_LEFT_ON,
+    NO_MOTION_EXTENDED,
+    DOOR_OPENED_UNUSUAL_HOUR,
+    EXTENDED_INACTIVITY,
+    HIGH_TEMPERATURE_ALERT
+}
+
+enum class AnomalySeverity {
+    LOW, MEDIUM, HIGH, CRITICAL
+}
+
+data class Anomaly(
+    val id: String,
+    val type: AnomalyType,
+    val title: String,
+    val description: String,
+    val timestamp: String,
+    val severity: AnomalySeverity,
+    val targetDeviceId: String? = null,
+    val autoShutoffRemainingSeconds: Int? = null,
+    val isResolved: Boolean = false
+)
+
+data class FamilyMember(
+    val id: String,
+    val name: String,
+    val role: String, // e.g. "Elder / Grandmother", "Primary Admin", "Daughter"
+    val avatar: String,
+    val status: String,
+    val lastSeenLocation: String,
+    val isHome: Boolean,
+    val energySavedPct: Int = 12
+)
+
+data class FamilyGuardianSettings(
+    val isElderCareActive: Boolean = true,
+    val isChildSafetyActive: Boolean = true,
+    val isLoneOccupantActive: Boolean = false,
+    val autoShutoffStoveMinutes: Int = 180, // 3 hours
+    val noMotionThresholdHours: Int = 12,
+    val emergencyContactPhone: String = "+91 98765 43210"
+)
+
+// ─── ENHANCEMENT 3: AI Coach Personality ("IQ") ───
+data class ProactiveInsight(
+    val id: String,
+    val timeOfDay: String,
+    val greeting: String,
+    val message: String,
+    val actionLabel: String? = null,
+    val actionType: String? = null
+)
+
+// ─── ENHANCEMENT 4: Energy Savings Gamification ───
+data class Challenge(
+    val id: String,
+    val title: String,
+    val description: String,
+    val progress: Float, // 0.0 .. 1.0
+    val rewardPoints: Int,
+    val isCompleted: Boolean = false
+)
+
+data class Streak(
+    val days: Int = 7,
+    val weeklySavingsRupees: Double = 340.0,
+    val nextMilestoneDays: Int = 10
+)
+
+data class Achievement(
+    val id: String,
+    val icon: String,
+    val title: String,
+    val description: String,
+    val isUnlocked: Boolean = true,
+    val unlockedDate: String? = "Oct 12, 2026"
+)
+
+data class LeaderboardEntry(
+    val rank: Int,
+    val member: FamilyMember,
+    val scorePoints: Int,
+    val savingsKwh: Double
+)
+
 data class HomeState(
     val rooms: List<Room> = emptyList(),
     val energy: EnergyData = EnergyData(0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
@@ -182,6 +269,24 @@ data class HomeState(
     val aiInsight: String = "Your AC accounts for 42% of total energy. Setting it to 26°C could save ₹85/month.",
     val wearableBriefing: String = "Bee Pioneer Audio Briefing: Home energy usage is at 2.4 kW. All doors locked.",
     val isAiLoading: Boolean = false,
-    val ecoMode: Boolean = false
+    val ecoMode: Boolean = false,
+
+    // Enhancement 2: Family Guardian
+    val activeAnomaly: Anomaly? = null,
+    val anomalyHistory: List<Anomaly> = emptyList(),
+    val familyMembers: List<FamilyMember> = emptyList(),
+    val familyGuardianSettings: FamilyGuardianSettings = FamilyGuardianSettings(),
+    val isFamilyGuardianOpen: Boolean = false,
+
+    // Enhancement 3: AI Coach ("IQ")
+    val proactiveInsight: ProactiveInsight? = null,
+    val dailyGreeting: String = "Good evening Alex! I'm IQ, your home companion.",
+
+    // Enhancement 4: Gamification
+    val challenges: List<Challenge> = emptyList(),
+    val ecoStreak: Streak = Streak(7, 340.0, 10),
+    val achievements: List<Achievement> = emptyList(),
+    val leaderboard: List<LeaderboardEntry> = emptyList(),
+    val isGamificationOpen: Boolean = false
 )
 

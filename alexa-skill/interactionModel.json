@@ -1,0 +1,95 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "home i. q.",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "help",
+            "what can you do",
+            "how do I use HomeIQ"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "stop",
+            "quit",
+            "exit"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "EnergyReportIntent",
+          "slots": [
+            {
+              "name": "timeframe",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "show my energy report",
+            "open the energy analytics",
+            "display energy insights on Fire TV",
+            "show weekly consumption report",
+            "bring up the energy charts on TV",
+            "show {timeframe} energy report"
+          ]
+        },
+        {
+          "name": "PowerUsageIntent",
+          "slots": [],
+          "samples": [
+            "what's my power usage today",
+            "how much electricity did I use",
+            "check current kilowatt hours",
+            "what is the home power load",
+            "how much am I spending on power today"
+          ]
+        },
+        {
+          "name": "EcoModeIntent",
+          "slots": [],
+          "samples": [
+            "turn on eco mode",
+            "activate eco saver",
+            "switch air conditioner to eco temperature",
+            "optimize power consumption",
+            "enable green energy saver mode"
+          ]
+        },
+        {
+          "name": "FamilySafetyIntent",
+          "slots": [],
+          "samples": [
+            "check family safety",
+            "is grandma okay",
+            "any safety anomalies detected",
+            "is the kitchen stove off",
+            "status of elder care monitoring",
+            "check perimeter beams"
+          ]
+        },
+        {
+          "name": "ShutoffStoveIntent",
+          "slots": [],
+          "samples": [
+            "shut off the kitchen stove",
+            "turn off stove immediately",
+            "resolve the kitchen safety alert",
+            "emergency stop stove"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}

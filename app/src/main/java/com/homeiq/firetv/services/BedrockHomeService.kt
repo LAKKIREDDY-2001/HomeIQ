@@ -36,15 +36,26 @@ object BedrockHomeService {
 
     private const val MODEL = "anthropic.claude-3-haiku-20240307-v1:0"
 
+    // ENHANCEMENT 3: System Prompt with "IQ" Personality
+    private const val SYSTEM_PROMPT = """
+    You are IQ, the intelligent, warm, emotionally-aware smart home companion for the Mercer family living in Bengaluru.
+    You are NOT a boring chatbot; you are a personal family energy coach and safety guardian.
+    You address family members by name (Alex, Priya, Grandma Savithri, Aarav).
+    You speak conversationally with gentle wit, practical energy wisdom, and deep care for family safety (especially Elder Care & Child Safety).
+    Keep responses concise (max 25-30 words), high-impact, and actionable for 10-foot Fire TV reading.
+    """
+
     fun getEnergyInsight(state: HomeState): String {
         val prompt = """
-        You are a smart home energy analyst. Given this home state:
+        System: $SYSTEM_PROMPT
+        Current User: ${state.userProfile.name}
+        Context:
         - Current usage: ${state.energy.currentKw} kW
         - Today: ${state.energy.todayKwh} kWh, Cost: ₹${state.energy.costToday}
         - Devices on: ${state.rooms.flatMap { it.devices }.filter { it.isOn }.map { "${it.name} (${it.powerWatts}W)" }.joinToString(", ")}
         - Weather: ${state.weather.condition}, ${state.weather.temp}°C
         
-        Give ONE concise, actionable energy-saving tip (max 20 words).
+        Give ONE friendly, personalized energy-saving tip from IQ with your name and personality.
         """.trimIndent()
 
         return invokeBedrock(prompt) ?: generateFallbackInsight(state)
@@ -52,34 +63,47 @@ object BedrockHomeService {
 
     fun getSecurityInsight(state: HomeState): String {
         val prompt = """
+        System: $SYSTEM_PROMPT
         Security status: Mode=${state.security.mode}, Doors locked=${state.security.doorsLocked}/${state.security.totalDoors}, 
         Cameras active=${state.security.camerasActive}. Last event: ${state.security.lastEvent}.
+        Elder Care status: ${if (state.familyGuardianSettings.isElderCareActive) "Active" else "Disabled"}.
         
-        Give a brief security status summary (max 15 words).
+        Give a brief, reassuring safety summary from IQ (max 20 words).
         """.trimIndent()
 
-        return invokeBedrock(prompt) ?: "All home perimeter security systems are nominal and active."
+        return invokeBedrock(prompt) ?: "Hey Alex, all 8 perimeter beams are armed. Grandma's room temperature is a comfortable 24°C."
     }
 
     fun getAutomationSuggestion(state: HomeState): String {
         val prompt = """
+        System: $SYSTEM_PROMPT
         Home state: ${state.rooms.size} rooms, ${state.rooms.flatMap { it.devices }.count { it.isOn }} active devices.
         Weather: ${state.weather.condition} ${state.weather.temp}°C.
         
-        Suggest ONE smart automation rule (max 25 words).
+        Suggest ONE smart proactive automation rule from IQ (max 25 words).
         """.trimIndent()
 
-        return invokeBedrock(prompt) ?: "Suggestion: Auto-adjust living AC to 25°C at 10 PM to conserve peak energy."
+        return invokeBedrock(prompt) ?: "Hey Alex! Want me to auto-switch living room AC to 26°C when everyone is asleep? Saves ₹85/mo."
+    }
+
+    fun generateProactiveGreeting(state: HomeState, hourOfDay: Int): String {
+        val name = state.userProfile.name.split(" ").firstOrNull() ?: "Alex"
+        return when (hourOfDay) {
+            in 5..11 -> "Good morning $name! ☀️ Solar panels generated 4.2 kWh overnight. Ready to conquer your daily eco goal?"
+            in 12..16 -> "Good afternoon $name! ⚡ Peak tariff begins at 5 PM. Want me to precool the living room now?"
+            in 17..21 -> "Winding down, $name? 🌙 Switched bedroom lights to circadian amber. Living room AC is at Eco 26°C."
+            else -> "Still up, $name? 🌌 Family Guardian is active. Kitchen stove anomaly resolved; sleep soundly."
+        }
     }
 
     private fun generateFallbackInsight(state: HomeState): String {
+        val name = state.userProfile.name.split(" ").firstOrNull() ?: "Alex"
         val insights = listOf(
-            "Your AC accounts for 42% of total energy. Setting it to 26°C could save ₹85/month.",
-            "Bedrock AI Telemetry: Peak Tariff hours start at 6 PM. Switching to Eco Mode now saves ₹120 this week.",
-            "Smart Home Analysis: Dimming living room lights to 60% reduces lighting consumption by 35%.",
-            "Solar & Storage Insight: Battery reserves at 85%. Optimal window for heavy appliance run is 10:00 AM.",
-            "Thermal Comfort Recommendation: Outdoor temp is 32.5°C. Fan + 25°C AC provides optimal cooling at 30% lower cost.",
-            "Amazon Bee Pioneer Wearable Sync: Voice command 'Eco Cooling' activated. Estimated ₹18 daily savings."
+            "Hey $name! I noticed your AC has been running 4 hours. Switching to Eco 26°C will save ₹85 this month.",
+            "Good news $name! Your solar generation hit 14.8 kWh today — 15% higher than last Tuesday!",
+            "IQ Coach: Peak tariff kicks in at 6 PM. Shall I shed living room standby loads to save ₹120 this week?",
+            "Hey $name, Grandma Savithri is resting comfortably in the bedroom. Elder Care sensors report all clear.",
+            "Smart Home Tip: Dimming ceiling lights to 60% saves 35% power with identical ambient warmth."
         )
         return insights.random()
     }

@@ -381,5 +381,103 @@ class HomeViewModel : ViewModel() {
             )
         }
     }
+
+    // ─── ENHANCEMENT 1: Cross-Device Alexa Voice Deep Link Handler ───
+    fun handleDeepLink(uri: android.net.Uri?) {
+        if (uri == null) return
+        val host = uri.host ?: uri.authority ?: ""
+        when (host.lowercase()) {
+            "energy_report" -> {
+                selectTab(2) // Tab 3: Energy Analytics
+                showHudNotification("🎙️ Alexa Voice Trigger: Opened Energy Analytics")
+            }
+            "ecomode" -> {
+                if (!_uiState.value.isEcoCoolingActive) {
+                    toggleEcoCoolingAi()
+                }
+                showHudNotification("🎙️ Alexa Voice Trigger: Eco Saver 26°C Activated")
+            }
+            "family_guardian" -> {
+                selectTab(3) // Tab 4: Security
+                _uiState.value = _uiState.value.copy(isFamilyGuardianOpen = true)
+                showHudNotification("🎙️ Alexa Voice Trigger: Family Guardian Opened")
+            }
+            "shutoff_stove" -> {
+                triggerStoveAutoShutoff()
+                showHudNotification("🎙️ Alexa Voice Trigger: Kitchen Stove Emergency Shutoff Executed")
+            }
+            "dashboard" -> {
+                selectTab(0)
+                showHudNotification("🎙️ Alexa Voice Trigger: Dashboard Launched")
+            }
+        }
+    }
+
+    // ─── ENHANCEMENT 2: Family Guardian Safety & Anomaly Actions ───
+    fun toggleFamilyGuardianDialog() {
+        _uiState.value = _uiState.value.copy(isFamilyGuardianOpen = !_uiState.value.isFamilyGuardianOpen)
+    }
+
+    fun triggerStoveAutoShutoff() {
+        val state = _uiState.value
+        val updatedRooms = state.rooms.map { room ->
+            if (room.id == "kitchen") {
+                room.copy(devices = room.devices.map { dev ->
+                    if (dev.id == "stove" || dev.id == "chimney") {
+                        dev.copy(isOn = false, powerWatts = 0.0)
+                    } else dev
+                })
+            } else room
+        }
+        val resolvedHistory = state.activeAnomaly?.let {
+            state.anomalyHistory + it.copy(isResolved = true, title = "✅ Auto-Shutoff Executed: Kitchen Stove")
+        } ?: state.anomalyHistory
+
+        _uiState.value = HomeDataService.refreshData(state.copy(rooms = updatedRooms)).copy(
+            activeAnomaly = null,
+            anomalyHistory = resolvedHistory,
+            hudNotification = "🛑 Family Guardian: Kitchen Stove powered OFF automatically. Hazard averted!"
+        )
+    }
+
+    fun dismissActiveAnomaly() {
+        val state = _uiState.value
+        val resolvedHistory = state.activeAnomaly?.let {
+            state.anomalyHistory + it.copy(isResolved = true, title = "Resolved by Resident: ${it.title}")
+        } ?: state.anomalyHistory
+
+        _uiState.value = state.copy(
+            activeAnomaly = null,
+            anomalyHistory = resolvedHistory,
+            hudNotification = "✅ Family Guardian: Anomaly cleared by resident."
+        )
+    }
+
+    fun toggleElderCareTripwire() {
+        val state = _uiState.value
+        val current = state.familyGuardianSettings.isElderCareActive
+        _uiState.value = state.copy(
+            familyGuardianSettings = state.familyGuardianSettings.copy(isElderCareActive = !current),
+            hudNotification = if (!current) "👵 Elder Care Monitoring ARMED" else "👵 Elder Care Monitoring PAUSED"
+        )
+    }
+
+    // ─── ENHANCEMENT 4: Gamification & Challenges Actions ───
+    fun toggleGamificationDialog() {
+        _uiState.value = _uiState.value.copy(isGamificationOpen = !_uiState.value.isGamificationOpen)
+    }
+
+    fun completeChallenge(challengeId: String) {
+        val state = _uiState.value
+        val updatedChallenges = state.challenges.map { ch ->
+            if (ch.id == challengeId) ch.copy(isCompleted = true, progress = 1.0f) else ch
+        }
+        val newStreak = state.ecoStreak.copy(days = state.ecoStreak.days + 1, weeklySavingsRupees = state.ecoStreak.weeklySavingsRupees + 45.0)
+        _uiState.value = state.copy(
+            challenges = updatedChallenges,
+            ecoStreak = newStreak,
+            hudNotification = "🎉 Challenge Completed! +150 Eco Points earned! Streak: ${newStreak.days} Days 🔥"
+        )
+    }
 }
 

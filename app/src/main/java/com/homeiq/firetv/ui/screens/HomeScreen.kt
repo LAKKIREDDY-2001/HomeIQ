@@ -444,9 +444,78 @@ fun HomeScreen(viewModel: HomeViewModel) {
             }
         }
 
+        // ─── ENHANCEMENT 2: Family Guardian Anomaly Slide-in Notification Overlay ───
+        AnimatedVisibility(
+            visible = state.activeAnomaly != null,
+            enter = fadeIn() + slideInVertically(initialOffsetY = { -80 }),
+            exit = fadeOut() + slideOutVertically(targetOffsetY = { -80 }),
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp)
+        ) {
+            state.activeAnomaly?.let { anom ->
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = Color(0xF21C0B0B),
+                    modifier = Modifier
+                        .width(760.dp)
+                        .border(1.5.dp, Color(0xFFEF4444), RoundedCornerShape(16.dp))
+                        .shadow(20.dp, RoundedCornerShape(16.dp), spotColor = Color(0xFFEF4444))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
+                            Box(
+                                modifier = Modifier
+                                    .size(38.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(0x35EF4444)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("⚠", fontSize = 18.sp, color = Color(0xFFEF4444))
+                            }
+                            Spacer(Modifier.width(12.dp))
+                            Column {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text(anom.title, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                    Spacer(Modifier.width(8.dp))
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = Color(0x30EF4444),
+                                        modifier = Modifier.border(1.dp, Color(0x60EF4444), RoundedCornerShape(6.dp))
+                                    ) {
+                                        Text("FAMILY GUARDIAN ALERT", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = Color(0xFFF87171), modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                                    }
+                                }
+                                Spacer(Modifier.height(2.dp))
+                                Text(anom.description, fontSize = 10.sp, color = Theme3D.textSecondary)
+                            }
+                        }
+                        Spacer(Modifier.width(12.dp))
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                            TvButton3D(
+                                text = "🛑 Auto-Shutoff (60s)",
+                                isDanger = true,
+                                fontSize = 10,
+                                onClick = { viewModel.triggerStoveAutoShutoff() }
+                            )
+                            TvButton3D(
+                                text = "✅ Dismiss",
+                                fontSize = 10,
+                                onClick = { viewModel.dismissActiveAnomaly() }
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
         // Floating Animated HUD Status Banner (Instant Feedback for Every Button Click)
         AnimatedVisibility(
-            visible = state.hudNotification != null,
+            visible = state.hudNotification != null && state.activeAnomaly == null,
             enter = fadeIn() + slideInVertically(initialOffsetY = { -50 }),
             exit = fadeOut() + slideOutVertically(targetOffsetY = { -50 }),
             modifier = Modifier
@@ -530,12 +599,24 @@ fun HomeScreen(viewModel: HomeViewModel) {
             )
         }
 
-        // Customer Profile & Safety Vault Dialog
-        if (state.isProfileOpen) {
+        // Customer Profile & Family Guardian Safety Vault Dialog
+        if (state.isProfileOpen || state.isFamilyGuardianOpen) {
             CustomerProfileSecurityDialog(
                 state = state,
                 viewModel = viewModel,
-                onClose = { viewModel.toggleProfileDialog() }
+                onClose = {
+                    if (state.isProfileOpen) viewModel.toggleProfileDialog()
+                    if (state.isFamilyGuardianOpen) viewModel.toggleFamilyGuardianDialog()
+                }
+            )
+        }
+
+        // Gamification & Eco Challenges Dialog
+        if (state.isGamificationOpen) {
+            GamificationDialog(
+                state = state,
+                viewModel = viewModel,
+                onClose = { viewModel.toggleGamificationDialog() }
             )
         }
     }
@@ -607,6 +688,24 @@ fun Screen1MainDashboard(
                     }
                 }
 
+                // Gamification & Eco Challenges Pill
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = Color(0x3010B981),
+                    modifier = Modifier
+                        .border(1.dp, Color(0x6010B981), RoundedCornerShape(12.dp))
+                        .clickable { viewModel.toggleGamificationDialog() }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("🏆", fontSize = 11.sp)
+                        Spacer(Modifier.width(4.dp))
+                        Text("Challenges 🔥 ${state.ecoStreak.days}d", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
+                    }
+                }
+
                 // Theme Switcher Button
                 Surface(
                     shape = RoundedCornerShape(12.dp),
@@ -662,10 +761,9 @@ fun Screen1MainDashboard(
                 modifier = Modifier.weight(0.67f).fillMaxHeight(),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                // 1. AI Recommendation Banner
+                // 1. AI Recommendation Banner (Normal stage, highlights on focus)
                 Card3D(
                     modifier = Modifier.fillMaxWidth(),
-                    borderColor = Theme3D.accentCyan,
                     onClick = { viewModel.selectTab(4) }
                 ) {
                     Row(
@@ -686,13 +784,14 @@ fun Screen1MainDashboard(
                             }
                             Spacer(Modifier.width(12.dp))
                             Column {
-                                Row {
-                                    Text("Your AC uses ", fontSize = 14.sp, fontWeight = FontWeight.Medium, color = Color.White)
-                                    Text("42%", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
-                                    Text(" of total energy.", fontSize = 14.sp, fontWeight = FontWeight.Medium, color = Color.White)
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text("IQ • ", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                    Text("Your AC uses ", fontSize = 13.sp, fontWeight = FontWeight.Medium, color = Color.White)
+                                    Text("42%", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                    Text(" of total energy.", fontSize = 13.sp, fontWeight = FontWeight.Medium, color = Color.White)
                                 }
                                 Spacer(Modifier.height(2.dp))
-                                Text("Setting to 26°C could save ₹85/month.", fontSize = 12.sp, color = Theme3D.textSecondary)
+                                Text("Setting to 26°C could save ₹85/month. Tap to talk to IQ ➔", fontSize = 11.sp, color = Theme3D.textSecondary)
                             }
                         }
                         Text(">", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
@@ -1116,7 +1215,7 @@ fun Screen2RoomDetailView(
                 // Card 1: TV
                 val tvDev = state.rooms.flatMap { it.devices }.find { it.id == "tv1" }
                 val tvBright = tvDev?.brightness ?: 80
-                Card3D(modifier = Modifier.fillMaxWidth().weight(1f), borderColor = Theme3D.accentCyan) {
+                Card3D(modifier = Modifier.fillMaxWidth().weight(1f)) {
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             // 3D TV Frame Graphic
@@ -1417,18 +1516,33 @@ fun Screen3EnergyAnalytics(
                 Spacer(Modifier.width(10.dp))
                 Text("📊 Energy Insights", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
                 Spacer(Modifier.width(14.dp))
-                // Segmented Range Buttons
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                // Segmented Range Enclosed Capsule (Exact match to reference mockup)
+                Surface(
+                    shape = RoundedCornerShape(20.dp),
+                    color = Color(0x35101A30),
+                    modifier = Modifier.border(1.dp, Color(0x3038BDF8), RoundedCornerShape(20.dp))
                 ) {
-                    listOf("Today", "Week", "Month", "Year").forEach { r ->
-                        TvButton3D(
-                            text = r,
-                            isSelected = state.selectedAnalyticsRange == r,
-                            fontSize = 11,
-                            onClick = { viewModel.setAnalyticsRange(r) }
-                        )
+                    Row(
+                        modifier = Modifier.padding(3.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        listOf("Today", "Week", "Month", "Year").forEach { r ->
+                            val isSel = (state.selectedAnalyticsRange == r)
+                            Surface(
+                                onClick = { viewModel.setAnalyticsRange(r) },
+                                shape = RoundedCornerShape(16.dp),
+                                color = if (isSel) Color(0xFF0284C7) else Color.Transparent,
+                                modifier = Modifier.padding(horizontal = 2.dp)
+                            ) {
+                                Text(
+                                    text = r,
+                                    fontSize = 11.sp,
+                                    fontWeight = if (isSel) FontWeight.Bold else FontWeight.Medium,
+                                    color = if (isSel) Color.White else Theme3D.textSecondary,
+                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp)
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -1557,12 +1671,11 @@ fun Screen3EnergyAnalytics(
                 .weight(1f),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // LEFT CARD: Spline Wave Line Chart
+            // LEFT CARD: Spline Wave Line Chart (Normal stage, highlights on focus)
             Card3D(
                 modifier = Modifier
                     .weight(0.68f)
-                    .fillMaxHeight(),
-                borderColor = Theme3D.accentCyan
+                    .fillMaxHeight()
             ) {
                 // Top Row inside Card: Title + Date Range
                 Row(
@@ -2189,11 +2302,10 @@ fun Screen5AiAssistantVoice(
         // Dynamic AI Speech Bubble Card (Reflects current state.aiInsight)
         Card3D(
             modifier = Modifier.width(620.dp),
-            borderColor = Theme3D.accentCyan,
             onClick = { viewModel.loadAiInsight() }
         ) {
             Text(
-                if (state.isAiLoading) "⚡ Claude 3 Haiku analyzing real-time home telemetry..." else "\"${state.aiInsight}\"",
+                if (state.isAiLoading) "⚡ IQ (Claude 3 Haiku) analyzing real-time home telemetry..." else "\"${state.aiInsight}\"",
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White,
@@ -2225,7 +2337,7 @@ fun Screen5AiAssistantVoice(
                     ) {
                         if (state.aiInputText.isEmpty()) {
                             Text(
-                                "Ask Bedrock AI (e.g. 'How to save ₹500 on bill?')...",
+                                "Ask IQ (e.g. 'How to save ₹500 on bill?')...",
                                 fontSize = 10.sp,
                                 color = Theme3D.textMuted
                             )
@@ -2242,7 +2354,6 @@ fun Screen5AiAssistantVoice(
                     TvButton3D(
                         text = if (state.isAiLoading) "⏳ Thinking..." else "➤ Send",
                         fontSize = 10,
-                        isSelected = true,
                         onClick = { viewModel.submitCustomAiPrompt() }
                     )
                 }
@@ -2262,9 +2373,9 @@ fun Screen5AiAssistantVoice(
                     ).forEach { chip ->
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color(0x300284C7),
+                            color = Color(0x251E293B),
                             modifier = Modifier
-                                .border(1.dp, Color(0x3038BDF8), RoundedCornerShape(8.dp))
+                                .border(1.dp, Color(0x2538BDF8), RoundedCornerShape(8.dp))
                                 .clickable {
                                     viewModel.setAiInputText(chip)
                                     viewModel.submitCustomAiPrompt(chip)
@@ -2284,12 +2395,11 @@ fun Screen5AiAssistantVoice(
 
         Spacer(Modifier.height(6.dp))
 
-        // QUICK ACTION PILLS ROW 1: DYNAMIC TWO-WAY TOGGLES
+        // QUICK ACTION PILLS ROW 1: DYNAMIC TWO-WAY TOGGLES (Normal unselected stage, highlights on focus)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // Light On / Off 2-Way Toggle
             TvButton3D(
                 text = if (state.areLightsAllOff) "💡 Turn ON Lights" else "💡 Turn OFF Lights",
-                isSelected = state.areLightsAllOff,
                 fontSize = 10,
                 onClick = { viewModel.toggleAllLightsAi() }
             )
@@ -2297,7 +2407,6 @@ fun Screen5AiAssistantVoice(
             // Door Lock / Unlock 2-Way Toggle
             TvButton3D(
                 text = if (state.security.isArmed) "🔓 Unlock All Doors" else "🔒 Lock All Doors",
-                isSelected = state.security.isArmed,
                 fontSize = 10,
                 onClick = { viewModel.toggleSecurityLockAi() }
             )
@@ -2305,7 +2414,6 @@ fun Screen5AiAssistantVoice(
             // Night / Day Mode 2-Way Toggle
             TvButton3D(
                 text = if (state.isNightModeActive) "☀️ Day Mode" else "🌙 Night Mode",
-                isSelected = state.isNightModeActive,
                 fontSize = 10,
                 onClick = { viewModel.toggleNightModeAi() }
             )
@@ -2313,7 +2421,6 @@ fun Screen5AiAssistantVoice(
             // Eco Cooling / Max Cooling 2-Way Toggle
             TvButton3D(
                 text = if (state.isEcoCoolingActive) "❄️ Max Cooling (20°)" else "🌱 Eco Saver (26°)",
-                isSelected = state.isEcoCoolingActive,
                 fontSize = 10,
                 onClick = { viewModel.toggleEcoCoolingAi() }
             )
@@ -2326,7 +2433,6 @@ fun Screen5AiAssistantVoice(
                     else -> "🌌 Navy"
                 },
                 fontSize = 10,
-                isSelected = state.activeTheme == "OLED_BLACK",
                 onClick = { viewModel.cycleTheme() }
             )
         }
@@ -2762,46 +2868,44 @@ fun CustomerProfileSecurityDialog(
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
-                            Text("Resident Identity & Access", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
-                            Spacer(Modifier.height(8.dp))
-
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text("Full Name", fontSize = 11.sp, color = Theme3D.textSecondary)
-                                Text(state.userProfile.name, fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                Text("Family Guardian: Resident & Elder Care", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                Surface(
+                                    shape = RoundedCornerShape(4.dp),
+                                    color = Color(0x3010B981)
+                                ) {
+                                    Text("4 MEMBERS SAFE", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen, modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp))
+                                }
                             }
                             Spacer(Modifier.height(6.dp))
 
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text("Email", fontSize = 11.sp, color = Theme3D.textSecondary)
-                                Text(state.userProfile.email, fontSize = 11.sp, color = Color.White)
-                            }
-                            Spacer(Modifier.height(6.dp))
-
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text("Phone", fontSize = 11.sp, color = Theme3D.textSecondary)
-                                Text(state.userProfile.phone, fontSize = 11.sp, color = Color.White)
-                            }
-                            Spacer(Modifier.height(6.dp))
-
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text("Auth Role", fontSize = 11.sp, color = Theme3D.textSecondary)
-                                Text("Primary Admin", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
-                            }
-                            Spacer(Modifier.height(6.dp))
-
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text("Two-Factor Auth", fontSize = 11.sp, color = Theme3D.textSecondary)
-                                Text("Biometric / 2FA ✅", fontSize = 11.sp, color = Theme3D.successGreen, fontWeight = FontWeight.Bold)
+                            // Family Members Quick Telemetry
+                            state.familyMembers.forEach { member ->
+                                Row(
+                                    modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text(member.avatar, fontSize = 12.sp)
+                                        Spacer(Modifier.width(6.dp))
+                                        Column {
+                                            Text(member.name, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                            Text(member.role, fontSize = 8.sp, color = Theme3D.textSecondary)
+                                        }
+                                    }
+                                    Text(member.status, fontSize = 9.sp, color = if (member.isHome) Theme3D.successGreen else Theme3D.accentCyan)
+                                }
                             }
                         }
 
-                        // Switch / Re-login Quick Simulator
+                        // Switch / Re-sync Buttons
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             TvButton3D(
-                                text = "🔄 Re-Sync Vault",
+                                text = "🔄 Sync Vault",
                                 fontSize = 10,
                                 modifier = Modifier.weight(1f),
                                 onClick = {
@@ -2810,11 +2914,11 @@ fun CustomerProfileSecurityDialog(
                                 }
                             )
                             TvButton3D(
-                                text = "👥 Switch Account",
+                                text = "👵 Elder Care Mode",
                                 fontSize = 10,
                                 modifier = Modifier.weight(1f),
                                 onClick = {
-                                    viewModel.showHudNotification("👤 Guest Mode / Family Profile switch activated")
+                                    viewModel.toggleElderCareTripwire()
                                 }
                             )
                         }
@@ -2833,50 +2937,53 @@ fun CustomerProfileSecurityDialog(
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
-                            Text("Safety Tripwires & Circuit Protection", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
-                            Spacer(Modifier.height(8.dp))
+                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                Text("Safety Tripwires & Circuit Protection", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
+                                Text("ACTIVE 🛡️", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
+                            }
+                            Spacer(Modifier.height(6.dp))
 
-                            // Tripwire 1
+                            // Tripwire 1: Elder Care Stove Auto-Shutoff
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column {
-                                    Text("⚡ Surge Protection", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text("230V Nominal • 50 Hz", fontSize = 9.sp, color = Theme3D.textMuted)
+                                    Text("👵 Elder Care Stove Rule", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                    Text("180 min timer with no motion", fontSize = 8.sp, color = Theme3D.textMuted)
                                 }
-                                Text("SAFE ✅", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
+                                Text(if (state.familyGuardianSettings.isElderCareActive) "ARMED ✅" else "PAUSED", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = if (state.familyGuardianSettings.isElderCareActive) Theme3D.successGreen else Color.Gray)
                             }
 
-                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 4.dp))
+                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 3.dp))
 
-                            // Tripwire 2
+                            // Tripwire 2: Gas & CO
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column {
-                                    Text("🧯 Gas & CO Monitor", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text("Kitchen & Garage sensors", fontSize = 9.sp, color = Theme3D.textMuted)
+                                    Text("🧯 Gas & CO Monitor", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                    Text("0.0 ppm • Clean Air", fontSize = 8.sp, color = Theme3D.textMuted)
                                 }
-                                Text("NORMAL ✅", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
+                                Text("NORMAL ✅", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
                             }
 
-                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 4.dp))
+                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 3.dp))
 
-                            // Tripwire 3
+                            // Tripwire 3: Child Safety / Perimeter
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column {
-                                    Text("🚨 Breach Tripwire", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text("Auto-lock on signal loss", fontSize = 9.sp, color = Theme3D.textMuted)
+                                    Text("🚨 Child Safety / Perimeter", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                    Text("8/8 Beams • School hours lock", fontSize = 8.sp, color = Theme3D.textMuted)
                                 }
-                                Text("ARMED 🔒", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                Text("ARMED 🔒", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
                             }
                         }
 
@@ -2894,13 +3001,13 @@ fun CustomerProfileSecurityDialog(
                                 }
                         ) {
                             Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 7.dp),
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
                                 horizontalArrangement = Arrangement.Center,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text("🚨", fontSize = 13.sp)
+                                Text("🚨", fontSize = 12.sp)
                                 Spacer(Modifier.width(6.dp))
-                                Text("Emergency Breaker: Trip All Mains Circuits", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFFFCA5A5))
+                                Text("Emergency Breaker: Trip All Mains (10ms)", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFFFCA5A5))
                             }
                         }
                     }
@@ -2908,7 +3015,169 @@ fun CustomerProfileSecurityDialog(
             }
         },
         confirmButton = {
-            TvButton3D(text = "Close Safety Vault", onClick = onClose)
+            TvButton3D(text = "Close Family Guardian Vault", onClick = onClose)
+        },
+        containerColor = Color(0xFF0F172A)
+    )
+}
+
+// ─── ENHANCEMENT 4: GAMIFICATION & CHALLENGES DIALOG ───
+@Composable
+fun GamificationDialog(
+    state: HomeState,
+    viewModel: HomeViewModel,
+    onClose: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onClose,
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+        title = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(Brush.radialGradient(listOf(Color(0xFF10B981), Color(0xFF065F46)))),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("🏆", fontSize = 18.sp)
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Column {
+                        Text("HomeIQ Eco Challenges & Leaderboard", fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text("Daily Engagement & Energy Habit Building", fontSize = 10.sp, color = Theme3D.textSecondary)
+                    }
+                }
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0x30F59E0B),
+                    modifier = Modifier.border(1.dp, Color(0x60F59E0B), RoundedCornerShape(8.dp))
+                ) {
+                    Text(
+                        "🔥 ${state.ecoStreak.days}-DAY STREAK (Saved ₹${state.ecoStreak.weeklySavingsRupees.toInt()})",
+                        fontSize = 9.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Theme3D.warningAmber,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                    )
+                }
+            }
+        },
+        text = {
+            Row(
+                modifier = Modifier
+                    .width(680.dp)
+                    .height(290.dp),
+                horizontalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                // LEFT COLUMN: Daily Challenges
+                Card3D(modifier = Modifier.weight(1f).fillMaxHeight()) {
+                    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+                        Column {
+                            Text("Active Eco Challenges", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                            Spacer(Modifier.height(6.dp))
+
+                            state.challenges.forEach { ch ->
+                                Surface(
+                                    shape = RoundedCornerShape(8.dp),
+                                    color = Color(0x201E293B),
+                                    modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp).border(1.dp, Color(0x1538BDF8), RoundedCornerShape(8.dp))
+                                ) {
+                                    Column(modifier = Modifier.padding(8.dp)) {
+                                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                                            Text(ch.title, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                            Text(if (ch.isCompleted) "COMPLETED ✅" else "+${ch.rewardPoints} Pts", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = if (ch.isCompleted) Theme3D.successGreen else Theme3D.warningAmber)
+                                        }
+                                        Text(ch.description, fontSize = 8.sp, color = Theme3D.textSecondary)
+                                        Spacer(Modifier.height(4.dp))
+                                        Box(
+                                            modifier = Modifier.fillMaxWidth().height(4.dp).clip(CircleShape).background(Color(0x30FFFFFF))
+                                        ) {
+                                            Box(modifier = Modifier.fillMaxWidth(ch.progress).fillMaxHeight().background(if (ch.isCompleted) Theme3D.successGreen else Theme3D.accentCyan))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        TvButton3D(
+                            text = "⚡ Claim Daily Bonus Points",
+                            fontSize = 10,
+                            modifier = Modifier.fillMaxWidth(),
+                            onClick = {
+                                viewModel.completeChallenge("CHALLENGE_01")
+                            }
+                        )
+                    }
+                }
+
+                // RIGHT COLUMN: Family Leaderboard & Achievements
+                Card3D(modifier = Modifier.weight(1f).fillMaxHeight()) {
+                    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+                        Column {
+                            Text("Weekly Family Leaderboard", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
+                            Spacer(Modifier.height(6.dp))
+
+                            state.leaderboard.forEach { entry ->
+                                Row(
+                                    modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text(
+                                            when (entry.rank) {
+                                                1 -> "🥇"
+                                                2 -> "🥈"
+                                                3 -> "🥉"
+                                                else -> "4."
+                                            },
+                                            fontSize = 11.sp
+                                        )
+                                        Spacer(Modifier.width(6.dp))
+                                        Text(entry.member.name.split(" ").first(), fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                    }
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text("${entry.savingsKwh} kWh saved", fontSize = 9.sp, color = Theme3D.successGreen)
+                                        Spacer(Modifier.width(6.dp))
+                                        Text("${entry.scorePoints} pts", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                    }
+                                }
+                            }
+
+                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 4.dp))
+
+                            Text("Unlocked Achievement Badges:", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                            Spacer(Modifier.height(4.dp))
+                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                state.achievements.filter { it.isUnlocked }.forEach { ach ->
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = Color(0x301E293B),
+                                        modifier = Modifier.border(1.dp, Color(0x3010B981), RoundedCornerShape(6.dp))
+                                    ) {
+                                        Row(modifier = Modifier.padding(horizontal = 6.dp, vertical = 3.dp), verticalAlignment = Alignment.CenterVertically) {
+                                            Text(ach.icon, fontSize = 10.sp)
+                                            Spacer(Modifier.width(3.dp))
+                                            Text(ach.title, fontSize = 8.sp, color = Color.White)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Text("Target: Save ₹500 this month • Progress: 68%", fontSize = 9.sp, color = Theme3D.accentCyan)
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TvButton3D(text = "Close Challenges", onClick = onClose)
         },
         containerColor = Color(0xFF0F172A)
     )

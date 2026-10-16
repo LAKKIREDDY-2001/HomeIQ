@@ -1,0 +1,15 @@
+{
+  "name": "homeiq-alexa-skill",
+  "version": "1.0.0",
+  "description": "Cross-device Alexa Voice Skill bridging Echo & Fire TV for HomeIQ",
+  "main": "lambda/index.js",
+  "scripts": {
+    "test": "node lambda/index.js"
+  },
+  "dependencies": {
+    "ask-sdk-core": "^2.14.0",
+    "ask-sdk-model": "^1.40.0"
+  },
+  "author": "HomeIQ Team",
+  "license": "Apache-2.0"
+}

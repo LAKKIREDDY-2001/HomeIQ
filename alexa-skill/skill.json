@@ -1,0 +1,42 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Control HomeIQ Smart Home Energy Dashboard on Fire TV with Alexa voice.",
+          "examplePhrases": [
+            "Alexa, open HomeIQ",
+            "Alexa, show my energy report on HomeIQ",
+            "Alexa, ask HomeIQ what's my power usage today",
+            "Alexa, tell HomeIQ to turn on eco mode"
+          ],
+          "name": "HomeIQ Smart Home Assistant",
+          "description": "Voice-enabled cross-device companion for the HomeIQ Fire TV application. Seamlessly bridges Alexa voice commands with your big-screen smart home dashboard to monitor energy, control 13 multi-room devices, and protect your family with Elder Care safety alerts.",
+          "keywords": [
+            "fire tv",
+            "smart home",
+            "energy",
+            "claude 3 haiku",
+            "amazon bedrock",
+            "family guardian",
+            "elder care"
+          ]
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Open skill via Alexa simulator or Echo device. Deep link notifications are dispatched via AWS SNS / Firebase / Intent URI to the target Fire TV device running com.homeiq.firetv.",
+      "category": "SMART_HOME",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:123456789012:function:HomeIQAlexaSkillHandler"
+        },
+        "interfaces": []
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": []
+  }
+}

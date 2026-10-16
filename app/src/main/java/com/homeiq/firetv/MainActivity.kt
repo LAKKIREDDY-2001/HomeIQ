@@ -12,7 +12,13 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.homeiq.firetv.ui.screens.HomeScreen
 
+import android.content.Intent
+import androidx.activity.viewModels
+import com.homeiq.firetv.viewmodel.HomeViewModel
+
 class MainActivity : ComponentActivity() {
+
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +30,11 @@ class MainActivity : ComponentActivity() {
         insetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
+        // Handle incoming deep link intent on launch
+        intent?.data?.let { uri ->
+            homeViewModel.handleDeepLink(uri)
+        }
+
         setContent {
             MaterialTheme(
                 colorScheme = darkColorScheme(
@@ -31,8 +42,16 @@ class MainActivity : ComponentActivity() {
                     surface = Color(0xFF1E293B)
                 )
             ) {
-                HomeScreen(viewModel = viewModel())
+                HomeScreen(viewModel = homeViewModel)
             }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        intent?.data?.let { uri ->
+            homeViewModel.handleDeepLink(uri)
         }
     }
 }

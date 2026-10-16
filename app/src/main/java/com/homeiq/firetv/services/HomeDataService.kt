@@ -27,6 +27,7 @@ object HomeDataService {
             name = "Kitchen",
             icon = "🍳",
             devices = listOf(
+                SmartDevice("stove", "Induction Stove", DeviceType.PLUG, "kitchen", isOn = true, powerWatts = 1800.0),
                 SmartDevice("fridge", "Smart Fridge", DeviceType.PLUG, "kitchen", isOn = true, powerWatts = 150.0),
                 SmartDevice("microwave", "Microwave", DeviceType.PLUG, "kitchen", isOn = false, powerWatts = 0.0),
                 SmartDevice("light2", "Kitchen Light", DeviceType.LIGHT, "kitchen", isOn = true, powerWatts = 30.0, brightness = 100)
@@ -81,6 +82,26 @@ object HomeDataService {
 
         val settings = UserSettings()
 
+        val gamificationService = GamificationService()
+        val defaultFamilyMembers = listOf(
+            FamilyMember("fam_1", "Alex Mercer", "Primary Admin", "👨‍💼", "Active in Living Room", "Living Room", true, 18),
+            FamilyMember("fam_2", "Grandma Savithri", "Elder Care (Monitored)", "👵", "Resting in Bedroom", "Bedroom", true, 28),
+            FamilyMember("fam_3", "Priya Mercer", "Family Co-Admin", "👩‍💻", "Remote at Office (Safe)", "Workplace", false, 14),
+            FamilyMember("fam_4", "Aarav Mercer", "Son (School Hours)", "👦", "At School (Bus GPS Synced)", "School", false, 9)
+        )
+
+        val demoAnomaly = Anomaly(
+            id = "ANOM_STOVE_01",
+            type = AnomalyType.STOVE_LEFT_ON,
+            title = "⚠ Family Guardian Alert: Kitchen Stove ON for 3 Hours",
+            description = "Elder Care Sensor: No kitchen motion detected for 180 mins. Auto-shutoff armed to prevent fire hazard.",
+            timestamp = "02:14 AM",
+            severity = AnomalySeverity.CRITICAL,
+            targetDeviceId = "stove",
+            autoShutoffRemainingSeconds = 60,
+            isResolved = false
+        )
+
         return HomeState(
             rooms = initialRooms,
             energy = EnergyData(
@@ -124,10 +145,37 @@ object HomeDataService {
                 currentRate = 8.0,
                 peakRangeText = "Next Peak Hours: 18:00 - 21:00 (₹12/kWh)"
             ),
-            aiInsight = "Your AC accounts for 42% of total energy. Setting it to 26°C could save ₹85/month.",
+            aiInsight = "Hey Alex! I'm IQ. Your AC accounts for 42% of total energy. Setting it to 26°C could save ₹85/month.",
             wearableBriefing = "Bee Pioneer Audio Briefing: Home energy usage is at ${initialKw} kW. All doors locked.",
             isAiLoading = false,
-            ecoMode = false
+            ecoMode = false,
+
+            // Enhancement 2: Family Guardian
+            activeAnomaly = demoAnomaly,
+            anomalyHistory = listOf(
+                Anomaly("ANOM_PAST_01", AnomalyType.DOOR_OPENED_UNUSUAL_HOUR, "Front Door Sensor Alert", "Unlocked during school hours; verified with Priya.", "Yesterday 11:30 AM", AnomalySeverity.MEDIUM, "door1", null, true)
+            ),
+            familyMembers = defaultFamilyMembers,
+            familyGuardianSettings = FamilyGuardianSettings(),
+            isFamilyGuardianOpen = false,
+
+            // Enhancement 3: AI Coach ("IQ")
+            dailyGreeting = "Good evening Alex! 🌙 I'm IQ, your smart home companion.",
+            proactiveInsight = ProactiveInsight(
+                id = "PRO_01",
+                timeOfDay = "Evening",
+                greeting = "Good evening Alex!",
+                message = "Peak tariff starts at 6 PM. I can switch AC to Eco Saver 26°C to save ₹120 this week.",
+                actionLabel = "Activate Eco Saver",
+                actionType = "ECO_SAVER"
+            ),
+
+            // Enhancement 4: Gamification
+            challenges = gamificationService.getDefaultChallenges(),
+            ecoStreak = gamificationService.getDefaultStreak(),
+            achievements = gamificationService.getDefaultAchievements(),
+            leaderboard = gamificationService.getFamilyLeaderboard(defaultFamilyMembers),
+            isGamificationOpen = false
         )
     }
 
