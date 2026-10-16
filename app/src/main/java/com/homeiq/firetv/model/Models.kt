@@ -120,7 +120,8 @@ data class UserProfile(
     val isLoggedIn: Boolean = true,
     val securityLevel: String = "Enterprise AES-256",
     val twoFactorEnabled: Boolean = true,
-    val linkedAccounts: Int = 3
+    val linkedAccounts: Int = 3,
+    val role: String = "Home Administrator"
 )
 
 data class CityLocation(
@@ -232,6 +233,7 @@ data class HomeState(
     val phoneCompanion: PhoneCompanion = PhoneCompanion(),
     val userProfile: UserProfile = UserProfile(),
     val isProfileOpen: Boolean = false,
+    val authMode: String = "PROFILE", // "PROFILE", "LOGIN", "SIGNUP"
     val isLocationPickerOpen: Boolean = false,
     val selectedCityIndex: Int = 0,
     val availableCities: List<CityLocation> = listOf(

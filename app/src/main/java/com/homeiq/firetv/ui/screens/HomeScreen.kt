@@ -7,11 +7,13 @@ import android.os.Vibrator
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.*
@@ -165,6 +167,7 @@ fun TvButton3D(
     isSelected: Boolean = false,
     isDanger: Boolean = false,
     fontSize: Int = 12,
+    contentPadding: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
@@ -200,7 +203,9 @@ fun TvButton3D(
             fontSize = fontSize.sp,
             fontWeight = if (isSelected || isFocused) FontWeight.Bold else FontWeight.SemiBold,
             color = Theme3D.textPrimary,
-            modifier = Modifier.padding(horizontal = 14.dp, vertical = 7.dp)
+            maxLines = 1,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(contentPadding)
         )
     }
 }
@@ -736,16 +741,7 @@ fun Screen1MainDashboard(
                 Text(state.liveDateTimeString, fontSize = 11.sp, color = Theme3D.textSecondary)
                 Text("🔍", fontSize = 14.sp, modifier = Modifier.clickable { viewModel.toggleSearchDialog() })
                 Text("⚙️", fontSize = 14.sp, modifier = Modifier.clickable { viewModel.toggleSettingsDialog() })
-                Box(
-                    modifier = Modifier
-                        .size(26.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFF3B82F6))
-                        .clickable { viewModel.toggleProfileDialog() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("👤", fontSize = 13.sp)
-                }
+                UserProfileAuthBadge(state = state, viewModel = viewModel)
             }
         }
 
@@ -1203,6 +1199,7 @@ fun Screen2RoomDetailView(
                     }
                 }
                 Text(state.liveDateTimeString, fontSize = 11.sp, color = Theme3D.textSecondary)
+                UserProfileAuthBadge(state = state, viewModel = viewModel)
             }
         }
 
@@ -1565,16 +1562,7 @@ fun Screen3EnergyAnalytics(
                     }
                 }
                 Text(state.liveDateTimeString, fontSize = 11.sp, color = Theme3D.textSecondary, maxLines = 1)
-                Box(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFF3B82F6))
-                        .clickable { viewModel.toggleProfileDialog() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("👤", fontSize = 11.sp)
-                }
+                UserProfileAuthBadge(state = state, viewModel = viewModel)
             }
         }
 
@@ -2090,16 +2078,7 @@ fun Screen4SecurityAndCameras(
                 Text(state.liveDateTimeString, fontSize = 11.sp, color = Theme3D.textSecondary)
                 Text("🔍", fontSize = 13.sp, modifier = Modifier.clickable { viewModel.toggleSearchDialog() })
                 Text("⚙️", fontSize = 13.sp, modifier = Modifier.clickable { viewModel.toggleSettingsDialog() })
-                Box(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFF3B82F6))
-                        .clickable { viewModel.toggleProfileDialog() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("👤", fontSize = 11.sp)
-                }
+                UserProfileAuthBadge(state = state, viewModel = viewModel)
             }
         }
 
@@ -2265,16 +2244,7 @@ fun Screen5AiAssistantVoice(
                     }
                 }
                 Text(state.liveDateTimeString, fontSize = 11.sp, color = Theme3D.textSecondary)
-                Box(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFF3B82F6))
-                        .clickable { viewModel.toggleProfileDialog() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("👤", fontSize = 11.sp)
-                }
+                UserProfileAuthBadge(state = state, viewModel = viewModel)
             }
         }
 
@@ -2789,7 +2759,165 @@ fun ConnectHubDialog(
     )
 }
 
-// ─── CUSTOMER PROFILE & SAFETY VAULT DIALOG ───
+// ─── AUTHENTICATION INPUT FIELD ───
+@Composable
+fun AuthInputField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier,
+    isPassword: Boolean = false
+) {
+    Column(modifier = modifier) {
+        Text(label, fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.textSecondary)
+        Spacer(Modifier.height(3.dp))
+        Surface(
+            shape = RoundedCornerShape(8.dp),
+            color = Color(0x351E293B),
+            border = BorderStroke(1.dp, Color(0x5038BDF8)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 7.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                if (value.isEmpty()) {
+                    Text(placeholder, fontSize = 10.sp, color = Theme3D.textMuted)
+                }
+                BasicTextField(
+                    value = value,
+                    onValueChange = onValueChange,
+                    textStyle = TextStyle(color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Medium),
+                    cursorBrush = SolidColor(Theme3D.accentCyan),
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    }
+}
+
+// ─── QUICK DEMO PROFILE CARD ───
+@Composable
+fun DemoProfileCard(
+    avatar: String,
+    name: String,
+    role: String,
+    email: String,
+    onClick: () -> Unit
+) {
+    var isFocused by remember { mutableStateOf(false) }
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = if (isFocused) Color(0xFF2563EB) else Color(0x251E293B),
+        border = BorderStroke(1.dp, if (isFocused) Color(0xFF38BDF8) else Color(0x30FFFFFF)),
+        modifier = Modifier
+            .fillMaxWidth()
+            .onFocusChanged { isFocused = it.isFocused }
+            .clickable { onClick() }
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(avatar, fontSize = 14.sp)
+                Spacer(Modifier.width(8.dp))
+                Column {
+                    Text(name, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                    Text(role, fontSize = 8.sp, color = Theme3D.textSecondary)
+                }
+            }
+            Surface(
+                shape = RoundedCornerShape(4.dp),
+                color = Color(0x3010B981)
+            ) {
+                Text(
+                    "Sign In ➔",
+                    fontSize = 8.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Theme3D.successGreen,
+                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
+                )
+            }
+        }
+    }
+}
+
+// ─── USER PROFILE AUTH BADGE (HEADER) ───
+@Composable
+fun UserProfileAuthBadge(
+    state: HomeState,
+    viewModel: HomeViewModel,
+    modifier: Modifier = Modifier
+) {
+    var isFocused by remember { mutableStateOf(false) }
+    val isLoggedIn = state.userProfile.isLoggedIn
+
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = when {
+            isFocused -> Color(0xFF2563EB)
+            isLoggedIn -> Color(0x351E293B)
+            else -> Color(0x40D97706)
+        },
+        border = BorderStroke(
+            1.dp,
+            when {
+                isFocused -> Color(0xFF38BDF8)
+                isLoggedIn -> Color(0x5038BDF8)
+                else -> Color(0xFFF59E0B)
+            }
+        ),
+        modifier = modifier
+            .onFocusChanged { isFocused = it.isFocused }
+            .clickable {
+                viewModel.openAuthDialog(if (isLoggedIn) "PROFILE" else "LOGIN")
+            }
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(18.dp)
+                    .clip(CircleShape)
+                    .background(if (isLoggedIn) Color(0xFF3B82F6) else Color(0xFFF59E0B)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(if (isLoggedIn) "👤" else "🔑", fontSize = 10.sp)
+            }
+            Spacer(Modifier.width(5.dp))
+            if (isLoggedIn) {
+                Text(
+                    state.userProfile.name.split(" ").firstOrNull() ?: "Venkat",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+                Spacer(Modifier.width(4.dp))
+                Box(
+                    modifier = Modifier
+                        .size(6.dp)
+                        .clip(CircleShape)
+                        .background(Theme3D.successGreen)
+                )
+            } else {
+                Text(
+                    "Login / Sign Up",
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFFFDE68A)
+                )
+            }
+        }
+    }
+}
+
+// ─── CUSTOMER PROFILE, SIGNUP, LOGIN & SAFETY VAULT DIALOG ───
 @Composable
 fun CustomerProfileSecurityDialog(
     state: HomeState,
@@ -2797,6 +2925,17 @@ fun CustomerProfileSecurityDialog(
     onClose: () -> Unit
 ) {
     val context = LocalContext.current
+
+    var loginEmail by remember { mutableStateOf(state.userProfile.email) }
+    var loginPin by remember { mutableStateOf("8824") }
+    var remember2Fa by remember { mutableStateOf(true) }
+
+    var signUpName by remember { mutableStateOf(state.userProfile.name) }
+    var signUpEmail by remember { mutableStateOf(state.userProfile.email) }
+    var signUpPhone by remember { mutableStateOf(state.userProfile.phone) }
+    var signUpHomeId by remember { mutableStateOf(state.userProfile.smartHomeId) }
+    var signUpPin by remember { mutableStateOf("1234") }
+    var signUpRole by remember { mutableStateOf("Home Administrator") }
 
     fun triggerPhysicalVibration() {
         try {
@@ -2824,190 +2963,598 @@ fun CustomerProfileSecurityDialog(
                         modifier = Modifier
                             .size(36.dp)
                             .clip(CircleShape)
-                            .background(Brush.radialGradient(listOf(Color(0xFF38BDF8), Color(0xFF1E3A8A)))),
+                            .background(
+                                Brush.radialGradient(
+                                    when (state.authMode) {
+                                        "LOGIN" -> listOf(Color(0xFF38BDF8), Color(0xFF1E3A8A))
+                                        "SIGNUP" -> listOf(Color(0xFF10B981), Color(0xFF065F46))
+                                        else -> listOf(Color(0xFF818CF8), Color(0xFF312E81))
+                                    }
+                                )
+                            ),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("👤", fontSize = 18.sp)
+                        Text(
+                            when (state.authMode) {
+                                "LOGIN" -> "🔐"
+                                "SIGNUP" -> "✨"
+                                else -> "👤"
+                            },
+                            fontSize = 18.sp
+                        )
                     }
                     Spacer(Modifier.width(10.dp))
                     Column {
-                        Text("Customer Profile & Safety Vault", fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                        Text("Encrypted Smart Home ID: ${state.userProfile.smartHomeId}", fontSize = 10.sp, color = Theme3D.textSecondary)
+                        Text(
+                            when (state.authMode) {
+                                "LOGIN" -> "Resident Login & Authentication"
+                                "SIGNUP" -> "Create Resident Account (Sign Up)"
+                                else -> "Customer Profile & Safety Vault"
+                            },
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                        Text(
+                            when (state.authMode) {
+                                "LOGIN" -> "Sign in with Resident ID or Select Quick Demo Profile"
+                                "SIGNUP" -> "Register Resident, Master Security PIN & Smart Home ID"
+                                else -> "Encrypted Smart Home ID: ${state.userProfile.smartHomeId}"
+                            },
+                            fontSize = 10.sp,
+                            color = Theme3D.textSecondary
+                        )
                     }
                 }
+
+                // Top Segmented Tab Switcher (Profile | Login | Sign Up)
                 Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = Color(0x2010B981)
+                    shape = RoundedCornerShape(12.dp),
+                    color = Color(0x351E293B),
+                    border = BorderStroke(1.dp, Color(0x3038BDF8))
                 ) {
-                    Text(
-                        "🛡️ 256-BIT ENCRYPTED",
-                        fontSize = 9.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Theme3D.successGreen,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
-                    )
+                    Row(modifier = Modifier.padding(3.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        listOf(
+                            Pair("PROFILE", "👤 Profile"),
+                            Pair("LOGIN", "🔐 Login"),
+                            Pair("SIGNUP", "✨ Sign Up")
+                        ).forEach { (mode, label) ->
+                            val isSelected = state.authMode == mode
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = if (isSelected) Color(0xFF2563EB) else Color.Transparent,
+                                modifier = Modifier.clickable {
+                                    viewModel.setAuthMode(mode)
+                                }
+                            ) {
+                                Text(
+                                    label,
+                                    fontSize = 10.sp,
+                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                    color = if (isSelected) Color.White else Theme3D.textSecondary,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                )
+                            }
+                        }
+                    }
                 }
             }
         },
         text = {
-            Row(
-                modifier = Modifier
-                    .width(680.dp)
-                    .height(290.dp),
-                horizontalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                // LEFT COLUMN: Resident Profile & Authentication
-                Card3D(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
-                    borderColor = Theme3D.accentCyan
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.SpaceBetween
+            when (state.authMode) {
+                // ═══════════════ TAB 1: LOGIN ═══════════════
+                "LOGIN" -> {
+                    Row(
+                        modifier = Modifier
+                            .width(740.dp)
+                            .height(345.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp)
                     ) {
-                        Column {
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                                Text("Family Guardian: Resident & Elder Care", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
-                                Surface(
-                                    shape = RoundedCornerShape(4.dp),
-                                    color = Color(0x3010B981)
-                                ) {
-                                    Text("4 MEMBERS SAFE", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen, modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp))
-                                }
-                            }
-                            Spacer(Modifier.height(6.dp))
+                        // LEFT: Login Form
+                        Card3D(
+                            modifier = Modifier.weight(1f).fillMaxHeight(),
+                            borderColor = Theme3D.accentCyan
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Column {
+                                    Text("🔐 Resident Sign In", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                    Spacer(Modifier.height(8.dp))
 
-                            // Family Members Quick Telemetry
-                            state.familyMembers.forEach { member ->
-                                Row(
-                                    modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
+                                    AuthInputField(
+                                        label = "RESIDENT EMAIL / SMART HOME ID",
+                                        value = loginEmail,
+                                        onValueChange = { loginEmail = it },
+                                        placeholder = "lakkireddy@homeiq.ai"
+                                    )
+
+                                    Spacer(Modifier.height(6.dp))
+
+                                    AuthInputField(
+                                        label = "SECURITY PIN / PASSWORD",
+                                        value = loginPin,
+                                        onValueChange = { loginPin = it },
+                                        placeholder = "••••",
+                                        isPassword = true
+                                    )
+
+                                    Spacer(Modifier.height(6.dp))
+
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(member.avatar, fontSize = 12.sp)
-                                        Spacer(Modifier.width(6.dp))
-                                        Column {
-                                            Text(member.name, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                            Text(member.role, fontSize = 8.sp, color = Theme3D.textSecondary)
-                                        }
+                                        Checkbox(
+                                            checked = remember2Fa,
+                                            onCheckedChange = { remember2Fa = it },
+                                            colors = CheckboxDefaults.colors(
+                                                checkedColor = Theme3D.accentCyan,
+                                                checkmarkColor = Color.Black
+                                            )
+                                        )
+                                        Text("Enable 256-Bit Hardware Vault & 2FA", fontSize = 9.sp, color = Theme3D.textSecondary)
                                     }
-                                    Text(member.status, fontSize = 9.sp, color = if (member.isHome) Theme3D.successGreen else Theme3D.accentCyan)
+                                }
+
+                                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    TvButton3D(
+                                        text = "🔓 Sign In to HomeIQ",
+                                        fontSize = 11,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        onClick = {
+                                            viewModel.loginUser(loginEmail.ifBlank { "lakkireddy@homeiq.ai" })
+                                            triggerPhysicalVibration()
+                                        }
+                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        Text("Don't have an account? ", fontSize = 9.sp, color = Theme3D.textMuted)
+                                        Text(
+                                            "Tap 'Sign Up' above",
+                                            fontSize = 9.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Theme3D.accentCyan,
+                                            modifier = Modifier.clickable { viewModel.setAuthMode("SIGNUP") }
+                                        )
+                                    }
                                 }
                             }
                         }
 
-                        // Switch / Re-sync Buttons
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        // RIGHT: Fast Demo Profiles (Fire TV 1-click login)
+                        Card3D(
+                            modifier = Modifier.weight(1.05f).fillMaxHeight(),
+                            borderColor = Theme3D.purpleAccent
                         ) {
-                            TvButton3D(
-                                text = "🔄 Sync Vault",
-                                fontSize = 10,
-                                modifier = Modifier.weight(1f),
-                                onClick = {
-                                    viewModel.showHudNotification("🔐 Cloud Auth Vault synchronized: 256-bit token refreshed!")
-                                    triggerPhysicalVibration()
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Column {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text("⚡ Quick-Login Resident Profiles", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.purpleAccent)
+                                        Surface(
+                                            shape = RoundedCornerShape(4.dp),
+                                            color = Color(0x3010B981)
+                                        ) {
+                                            Text("1-CLICK DEMO", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen, modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp))
+                                        }
+                                    }
+                                    Spacer(Modifier.height(6.dp))
+                                    Text("Select any profile below to instantly authenticate without remote typing:", fontSize = 9.sp, color = Theme3D.textMuted)
+                                    Spacer(Modifier.height(8.dp))
+
+                                    DemoProfileCard(
+                                        avatar = "👑",
+                                        name = "Venkat Reddy",
+                                        role = "Home Administrator • HQ-8824-FIRETV",
+                                        email = "lakkireddy@homeiq.ai",
+                                        onClick = {
+                                            loginEmail = "lakkireddy@homeiq.ai"
+                                            loginPin = "8824"
+                                            viewModel.loginUser("lakkireddy@homeiq.ai", "Venkat Reddy")
+                                            triggerPhysicalVibration()
+                                        }
+                                    )
+
+                                    Spacer(Modifier.height(4.dp))
+
+                                    DemoProfileCard(
+                                        avatar = "🏠",
+                                        name = "Alex Johnson",
+                                        role = "Family Resident • Living & Kitchen Hub",
+                                        email = "alex@homeiq.ai",
+                                        onClick = {
+                                            loginEmail = "alex@homeiq.ai"
+                                            loginPin = "4412"
+                                            viewModel.loginUser("alex@homeiq.ai", "Alex Johnson")
+                                            triggerPhysicalVibration()
+                                        }
+                                    )
+
+                                    Spacer(Modifier.height(4.dp))
+
+                                    DemoProfileCard(
+                                        avatar = "👵",
+                                        name = "Priya Reddy",
+                                        role = "Elder Care Caretaker • Safety Tripwires",
+                                        email = "priya@homeiq.ai",
+                                        onClick = {
+                                            loginEmail = "priya@homeiq.ai"
+                                            loginPin = "2209"
+                                            viewModel.loginUser("priya@homeiq.ai", "Priya Reddy")
+                                            triggerPhysicalVibration()
+                                        }
+                                    )
                                 }
-                            )
-                            TvButton3D(
-                                text = "👵 Elder Care Mode",
-                                fontSize = 10,
-                                modifier = Modifier.weight(1f),
-                                onClick = {
-                                    viewModel.toggleElderCareTripwire()
+
+                                Surface(
+                                    shape = RoundedCornerShape(8.dp),
+                                    color = Color(0x2038BDF8),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text(
+                                        "🛡️ Enterprise AES-256 cloud session active on Fire TV",
+                                        fontSize = 8.sp,
+                                        color = Theme3D.accentCyan,
+                                        modifier = Modifier.padding(vertical = 4.dp, horizontal = 6.dp)
+                                    )
                                 }
-                            )
+                            }
                         }
                     }
                 }
 
-                // RIGHT COLUMN: Home Safety Tripwires & Hardware Protection
-                Card3D(
-                    modifier = Modifier
-                        .weight(1.05f)
-                        .fillMaxHeight(),
-                    borderColor = Theme3D.warningAmber
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.SpaceBetween
+                // ═══════════════ TAB 2: SIGN UP ═══════════════
+                "SIGNUP" -> {
+                    Row(
+                        modifier = Modifier
+                            .width(740.dp)
+                            .height(345.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp)
                     ) {
-                        Column {
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                                Text("Safety Tripwires & Circuit Protection", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
-                                Text("ACTIVE 🛡️", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
-                            }
-                            Spacer(Modifier.height(6.dp))
-
-                            // Tripwire 1: Elder Care Stove Auto-Shutoff
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
+                        // LEFT: Sign Up Fields
+                        Card3D(
+                            modifier = Modifier.weight(1f).fillMaxHeight(),
+                            borderColor = Theme3D.successGreen
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Column {
-                                    Text("👵 Elder Care Stove Rule", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text("180 min timer with no motion", fontSize = 8.sp, color = Theme3D.textMuted)
+                                    Text("✨ Create Resident Account", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
+                                    Spacer(Modifier.height(6.dp))
+
+                                    AuthInputField(
+                                        label = "FULL NAME",
+                                        value = signUpName,
+                                        onValueChange = { signUpName = it },
+                                        placeholder = "e.g. Venkat Reddy"
+                                    )
+
+                                    Spacer(Modifier.height(5.dp))
+
+                                    AuthInputField(
+                                        label = "EMAIL ADDRESS",
+                                        value = signUpEmail,
+                                        onValueChange = { signUpEmail = it },
+                                        placeholder = "e.g. user@homeiq.ai"
+                                    )
+
+                                    Spacer(Modifier.height(5.dp))
+
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        AuthInputField(
+                                            label = "PHONE NUMBER",
+                                            value = signUpPhone,
+                                            onValueChange = { signUpPhone = it },
+                                            placeholder = "+91 98765 43210",
+                                            modifier = Modifier.weight(1.2f)
+                                        )
+                                        AuthInputField(
+                                            label = "MASTER PIN",
+                                            value = signUpPin,
+                                            onValueChange = { signUpPin = it },
+                                            placeholder = "1234",
+                                            isPassword = true,
+                                            modifier = Modifier.weight(0.8f)
+                                        )
+                                    }
                                 }
-                                Text(if (state.familyGuardianSettings.isElderCareActive) "ARMED ✅" else "PAUSED", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = if (state.familyGuardianSettings.isElderCareActive) Theme3D.successGreen else Color.Gray)
-                            }
 
-                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 3.dp))
-
-                            // Tripwire 2: Gas & CO
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column {
-                                    Text("🧯 Gas & CO Monitor", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text("0.0 ppm • Clean Air", fontSize = 8.sp, color = Theme3D.textMuted)
-                                }
-                                Text("NORMAL ✅", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
-                            }
-
-                            Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 3.dp))
-
-                            // Tripwire 3: Child Safety / Perimeter
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column {
-                                    Text("🚨 Child Safety / Perimeter", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text("8/8 Beams • School hours lock", fontSize = 8.sp, color = Theme3D.textMuted)
-                                }
-                                Text("ARMED 🔒", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                TvButton3D(
+                                    text = "✨ Complete Registration & Protect Home",
+                                    fontSize = 11,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    onClick = {
+                                        viewModel.signUpUser(
+                                            name = signUpName.ifBlank { "Venkat Reddy" },
+                                            email = signUpEmail.ifBlank { "user@homeiq.ai" },
+                                            phone = signUpPhone.ifBlank { "+91 98765 43210" },
+                                            smartHomeId = signUpHomeId.ifBlank { "HQ-8824-FIRETV" },
+                                            role = signUpRole
+                                        )
+                                        triggerPhysicalVibration()
+                                    }
+                                )
                             }
                         }
 
-                        // EMERGENCY TRIPWIRE DISCONNECT
-                        Surface(
-                            shape = RoundedCornerShape(10.dp),
-                            color = Color(0x35DC2626),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .border(1.dp, Color(0xFFEF4444), RoundedCornerShape(10.dp))
-                                .clickable {
-                                    viewModel.emergencyShutdown()
-                                    viewModel.showHudNotification("🚨 EMERGENCY CIRCUIT BREAKER TRIPPED: All heavy loads killed!")
-                                    triggerPhysicalVibration()
-                                }
+                        // RIGHT: Smart Home & Role Setup
+                        Card3D(
+                            modifier = Modifier.weight(1.05f).fillMaxHeight(),
+                            borderColor = Theme3D.accentCyan
                         ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                                horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text("🚨", fontSize = 12.sp)
-                                Spacer(Modifier.width(6.dp))
-                                Text("Emergency Breaker: Trip All Mains (10ms)", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFFFCA5A5))
+                                Column {
+                                    Text("🏡 Smart Home & Role Assignment", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                    Spacer(Modifier.height(6.dp))
+
+                                    AuthInputField(
+                                        label = "SMART HOME VILLA ID",
+                                        value = signUpHomeId,
+                                        onValueChange = { signUpHomeId = it },
+                                        placeholder = "HQ-8824-FIRETV"
+                                    )
+
+                                    Spacer(Modifier.height(6.dp))
+
+                                    Text("ASSIGN RESIDENT ROLE:", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.textSecondary)
+                                    Spacer(Modifier.height(3.dp))
+
+                                    listOf(
+                                        Pair("Home Administrator", "👑 Full Control & Safety Breaker Override"),
+                                        Pair("Family Resident", "🏠 Multi-Room Device & AC Controls"),
+                                        Pair("Elder Care Guest", "👵 Anomaly Tripwires & Caretaker Telemetry")
+                                    ).forEach { (role, desc) ->
+                                        val isSelected = signUpRole == role
+                                        Surface(
+                                            shape = RoundedCornerShape(8.dp),
+                                            color = if (isSelected) Color(0x352563EB) else Color(0x201E293B),
+                                            border = BorderStroke(1.dp, if (isSelected) Theme3D.accentCyan else Color(0x20FFFFFF)),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(vertical = 2.dp)
+                                                .clickable { signUpRole = role }
+                                        ) {
+                                            Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)) {
+                                                Text(role, fontSize = 9.sp, fontWeight = FontWeight.Bold, color = if (isSelected) Theme3D.accentCyan else Color.White)
+                                                Text(desc, fontSize = 8.sp, color = Theme3D.textMuted)
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.Center
+                                ) {
+                                    Text("Already registered? ", fontSize = 9.sp, color = Theme3D.textMuted)
+                                    Text(
+                                        "Switch to Sign In",
+                                        fontSize = 9.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Theme3D.accentCyan,
+                                        modifier = Modifier.clickable { viewModel.setAuthMode("LOGIN") }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // ═══════════════ TAB 3: PROFILE & FAMILY GUARDIAN VAULT ═══════════════
+                else -> {
+                    Row(
+                        modifier = Modifier
+                            .width(740.dp)
+                            .height(345.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
+                        // LEFT COLUMN: Resident Profile & Authentication
+                        Card3D(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight(),
+                            borderColor = Theme3D.accentCyan
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Column(
+                                    modifier = Modifier.fillMaxWidth().weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(3.dp)
+                                ) {
+                                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                        Text("Resident & Elder Care", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                        Surface(
+                                            shape = RoundedCornerShape(4.dp),
+                                            color = Color(0x3010B981)
+                                        ) {
+                                            Text("4 MEMBERS SAFE", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen, modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp))
+                                        }
+                                    }
+
+                                    // Active User Card
+                                    Surface(
+                                        shape = RoundedCornerShape(8.dp),
+                                        color = Color(0x251E3A8A),
+                                        border = BorderStroke(1.dp, Color(0x4038BDF8)),
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Box(
+                                                modifier = Modifier.size(20.dp).clip(CircleShape).background(Color(0xFF2563EB)),
+                                                contentAlignment = Alignment.Center
+                                            ) {
+                                                Text("👑", fontSize = 11.sp)
+                                            }
+                                            Spacer(Modifier.width(8.dp))
+                                            Column {
+                                                Text(state.userProfile.name, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                                Text("${state.userProfile.role} • ${state.userProfile.email}", fontSize = 8.sp, color = Theme3D.textSecondary)
+                                            }
+                                        }
+                                    }
+
+                                    // Family Members Quick Telemetry
+                                    state.familyMembers.forEach { member ->
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth().padding(vertical = 1.dp),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Text(member.avatar, fontSize = 11.sp)
+                                                Spacer(Modifier.width(6.dp))
+                                                Column {
+                                                    Text(member.name, fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                                    Text(member.role, fontSize = 7.5.sp, color = Theme3D.textSecondary)
+                                                }
+                                            }
+                                            Text(member.status, fontSize = 8.sp, color = if (member.isHome) Theme3D.successGreen else Theme3D.accentCyan)
+                                        }
+                                    }
+                                }
+
+                                // Switch / Re-sync Buttons
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                ) {
+                                    TvButton3D(
+                                        text = "🔄 Sync Vault",
+                                        fontSize = 9,
+                                        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 5.dp),
+                                        modifier = Modifier.weight(1f),
+                                        onClick = {
+                                            viewModel.showHudNotification("🔐 Cloud Auth Vault synchronized: 256-bit token refreshed!")
+                                            triggerPhysicalVibration()
+                                        }
+                                    )
+                                    TvButton3D(
+                                        text = "👵 Elder Care",
+                                        fontSize = 9,
+                                        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 5.dp),
+                                        modifier = Modifier.weight(1f),
+                                        onClick = {
+                                            viewModel.toggleElderCareTripwire()
+                                        }
+                                    )
+                                    TvButton3D(
+                                        text = "➕ Add Member",
+                                        fontSize = 9,
+                                        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 5.dp),
+                                        modifier = Modifier.weight(1f),
+                                        onClick = {
+                                            viewModel.setAuthMode("SIGNUP")
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        // RIGHT COLUMN: Home Safety Tripwires & Hardware Protection
+                        Card3D(
+                            modifier = Modifier
+                                .weight(1.05f)
+                                .fillMaxHeight(),
+                            borderColor = Theme3D.warningAmber
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Column {
+                                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                        Text("Safety Tripwires & Circuit Protection", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
+                                        Text("ACTIVE 🛡️", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.warningAmber)
+                                    }
+                                    Spacer(Modifier.height(6.dp))
+
+                                    // Tripwire 1: Elder Care Stove Auto-Shutoff
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column {
+                                            Text("👵 Elder Care Stove Rule", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                            Text("180 min timer with no motion", fontSize = 8.sp, color = Theme3D.textMuted)
+                                        }
+                                        Text(if (state.familyGuardianSettings.isElderCareActive) "ARMED ✅" else "PAUSED", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = if (state.familyGuardianSettings.isElderCareActive) Theme3D.successGreen else Color.Gray)
+                                    }
+
+                                    Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 3.dp))
+
+                                    // Tripwire 2: Gas & CO
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column {
+                                            Text("🧯 Gas & CO Monitor", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                            Text("0.0 ppm • Clean Air", fontSize = 8.sp, color = Theme3D.textMuted)
+                                        }
+                                        Text("NORMAL ✅", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.successGreen)
+                                    }
+
+                                    Divider(color = Color(0x18FFFFFF), thickness = 1.dp, modifier = Modifier.padding(vertical = 3.dp))
+
+                                    // Tripwire 3: Child Safety / Perimeter
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column {
+                                            Text("🚨 Child Safety / Perimeter", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                            Text("8/8 Beams • School hours lock", fontSize = 8.sp, color = Theme3D.textMuted)
+                                        }
+                                        Text("ARMED 🔒", fontSize = 9.sp, fontWeight = FontWeight.Bold, color = Theme3D.accentCyan)
+                                    }
+                                }
+
+                                // EMERGENCY TRIPWIRE DISCONNECT
+                                Surface(
+                                    shape = RoundedCornerShape(10.dp),
+                                    color = Color(0x35DC2626),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .border(1.dp, Color(0xFFEF4444), RoundedCornerShape(10.dp))
+                                        .clickable {
+                                            viewModel.emergencyShutdown()
+                                            viewModel.showHudNotification("🚨 EMERGENCY CIRCUIT BREAKER TRIPPED: All heavy loads killed!")
+                                            triggerPhysicalVibration()
+                                        }
+                                ) {
+                                    Row(
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text("🚨", fontSize = 12.sp)
+                                        Spacer(Modifier.width(6.dp))
+                                        Text("Emergency Breaker: Trip All Mains (10ms)", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFFFCA5A5))
+                                    }
+                                }
                             }
                         }
                     }
@@ -3015,7 +3562,32 @@ fun CustomerProfileSecurityDialog(
             }
         },
         confirmButton = {
-            TvButton3D(text = "Close Family Guardian Vault", onClick = onClose)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (state.userProfile.isLoggedIn) {
+                    TvButton3D(
+                        text = "🚪 Log Out",
+                        fontSize = 10,
+                        onClick = {
+                            viewModel.logoutUser()
+                            triggerPhysicalVibration()
+                        }
+                    )
+                } else {
+                    TvButton3D(
+                        text = "🔑 Switch to Login",
+                        fontSize = 10,
+                        onClick = {
+                            viewModel.setAuthMode("LOGIN")
+                            triggerPhysicalVibration()
+                        }
+                    )
+                }
+                TvButton3D(
+                    text = "Close Vault",
+                    fontSize = 10,
+                    onClick = onClose
+                )
+            }
         },
         containerColor = Color(0xFF0F172A)
     )

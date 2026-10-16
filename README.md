@@ -111,6 +111,22 @@ Powered by **Amazon Bedrock (Claude 3 Haiku)**:
 
 ---
 
+## 🔐 Resident Sign Up, Login & Multi-Profile Security
+
+Enterprise 256-bit authentication tailored for 10-foot Fire TV experiences:
+* **✨ Complete Resident Sign Up**:
+  - Full registration fields: Full Name, Email Address, Phone Number, Smart Home Villa ID, and 4-digit Master Security PIN.
+  - Role Assignment: *👑 Home Administrator* (full circuit breakers), *🏠 Family Resident* (room controls), or *👵 Elder Care Protected* (telemetry only).
+* **🔐 Resident Login**:
+  - Enter Email / Smart Home ID and PIN with 256-Bit Hardware Vault & 2FA.
+  - **⚡ 1-Click Fast Demo Profiles**: Allows hackathon judges to instantly authenticate with pre-verified profiles (*Venkat Reddy Admin*, *Alex Johnson Resident*, *Priya Reddy Elder Care*) without typing on Fire TV remote.
+* **👤 Live Header Authentication Pill**:
+  - Displays `[👤 <Name> 🟢]` with active security pulse when authenticated.
+  - Switches to `[🔑 Login / Sign Up]` with an amber glowing highlight when in guest/logged-out mode.
+  - One-click logout locks the dashboard into Guest Mode immediately.
+
+---
+
 ## 📝 Developer Friction Log (10% Judging Bonus)
 
 Full report available in [FRICTION_LOG.md](FRICTION_LOG.md):

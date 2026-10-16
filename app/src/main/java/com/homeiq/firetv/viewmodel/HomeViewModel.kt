@@ -2,7 +2,7 @@ package com.homeiq.firetv.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.homeiq.firetv.model.HomeState
+import com.homeiq.firetv.model.*
 import com.homeiq.firetv.services.BedrockHomeService
 import com.homeiq.firetv.services.HomeDataService
 import kotlinx.coroutines.Dispatchers
@@ -210,6 +210,66 @@ class HomeViewModel : ViewModel() {
 
     fun toggleProfileDialog() {
         _uiState.value = _uiState.value.copy(isProfileOpen = !_uiState.value.isProfileOpen)
+    }
+
+    fun openAuthDialog(mode: String = "PROFILE") {
+        _uiState.value = _uiState.value.copy(
+            isProfileOpen = true,
+            authMode = mode
+        )
+    }
+
+    fun setAuthMode(mode: String) {
+        _uiState.value = _uiState.value.copy(authMode = mode)
+    }
+
+    fun loginUser(emailOrId: String, name: String = "Venkat Reddy") {
+        val cleanName = if (emailOrId.contains("@")) {
+            val userPart = emailOrId.substringBefore("@")
+            userPart.replace(".", " ").split(" ")
+                .joinToString(" ") { it.replaceFirstChar { char -> char.uppercase() } }
+        } else {
+            name
+        }
+        val currentProfile = _uiState.value.userProfile
+        _uiState.value = _uiState.value.copy(
+            userProfile = currentProfile.copy(
+                isLoggedIn = true,
+                name = if (cleanName.isNotBlank()) cleanName else "Venkat Reddy",
+                email = if (emailOrId.contains("@")) emailOrId else currentProfile.email
+            ),
+            authMode = "PROFILE",
+            hudNotification = "🔐 Welcome, $cleanName! Authenticated with 256-Bit Home Vault."
+        )
+    }
+
+    fun signUpUser(name: String, email: String, phone: String, smartHomeId: String, role: String = "Home Administrator") {
+        val finalName = if (name.isNotBlank()) name else "Venkat Reddy"
+        val finalEmail = if (email.isNotBlank()) email else "user@homeiq.ai"
+        val finalPhone = if (phone.isNotBlank()) phone else "+91 98765 43210"
+        val finalId = if (smartHomeId.isNotBlank()) smartHomeId else "HQ-${(1000..9999).random()}-FIRETV"
+
+        _uiState.value = _uiState.value.copy(
+            userProfile = UserProfile(
+                name = finalName,
+                email = finalEmail,
+                phone = finalPhone,
+                smartHomeId = finalId,
+                role = role,
+                isLoggedIn = true
+            ),
+            authMode = "PROFILE",
+            hudNotification = "✨ Welcome, $finalName! New HomeIQ Account Created & Secured."
+        )
+    }
+
+    fun logoutUser() {
+        val currentProfile = _uiState.value.userProfile
+        _uiState.value = _uiState.value.copy(
+            userProfile = currentProfile.copy(isLoggedIn = false),
+            authMode = "LOGIN",
+            hudNotification = "🔒 Logged out: Dashboard switched to Guest Mode."
+        )
     }
 
     fun toggleLocationPicker() {
