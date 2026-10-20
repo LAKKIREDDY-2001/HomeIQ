@@ -115,6 +115,36 @@ Below is our structured friction log formatted according to the official Hackath
 
 ---
 
+## 🔍 Friction Point 8: Amazon Bedrock `UnrecognizedClientException` Lacks Contextual Setup Guidance
+
+* **Component / Tool**: AWS Bedrock Runtime Client / IAM Policy Validation.
+* **What Happened**: When first initializing the Bedrock client without explicitly enabling model access for Anthropic Claude 3 Haiku in AWS Console, the SDK threw a generic `UnrecognizedClientException` / `ResourceNotFoundException` with no clear actionable instructions or direct console link.
+* **What Was Expected**: Developer-friendly error responses indicating that the requested model (`anthropic.claude-3-haiku-20240307-v1:0`) requires one-click activation under Bedrock Model Access.
+* **What We Did to Fix It**: Created resilient edge fallbacks in `BedrockHomeService.kt` that detect authorization and client exceptions gracefully, serving deterministic local coaching insights while logging clear setup guidance.
+* **Suggestion for SDK Team**: Return diagnostic URLs and developer hints inside client exceptions pointing directly to the AWS Bedrock Model Access console page.
+
+---
+
+## 🔍 Friction Point 9: Fire TV Emulator Frame Rates on Apple Silicon (M-Series Chips)
+
+* **Component / Tool**: Android Emulator (Television 1080p AVD) on Apple Silicon / macOS.
+* **What Happened**: The default Android TV emulator ran at approximately 15–20 FPS out-of-the-box due to OpenGL ES to Metal translation bottlenecks under SwiftShader, causing Bézier spline wave animations to stutter during initial testing.
+* **What Was Expected**: Hardware-accelerated 60 FPS rendering utilizing Apple Silicon GPU cores via Vulkan/ANGLE.
+* **What We Did to Fix It**: Configured hardware GPU acceleration flags (`-gpu host` / `ANGLE (Vulkan)`) and tuned canvas draw paths to minimize layer allocations and path reconstructions during animation ticks.
+* **Suggestion for Platform Team**: Publish optimized emulator profiles and documentation specifically configured for Apple Silicon host machines running Fire TV / Android TV system images.
+
+---
+
+## 🔍 Friction Point 10: Jetpack Compose for TV Focus Jumps on LazyRow to Column Navigation
+
+* **Component / Tool**: Compose for TV Spatial Navigation (`TvLazyRow` ➔ `Column`).
+* **What Happened**: Navigating vertically from device cards inside a horizontal row down to full-width section cards caused the focus cursor to jump unexpectedly to index 0 rather than the nearest horizontal coordinate.
+* **What Was Expected**: Natural 2D geometric focus projection preserving horizontal position when crossing layout boundaries.
+* **What We Did to Fix It**: Used explicit `focusProperties` and `focusRequester` anchors connecting vertical siblings across room and device sections.
+* **Suggestion for SDK Team**: Enhance default 2D spatial focus traversal in `androidx.tv.foundation` to automatically retain horizontal proximity across nested scrolling rows.
+
+---
+
 ## 📊 Summary Table
 
 | # | Friction Area | Severity | Resolution Status | SDK Impact |
@@ -123,8 +153,11 @@ Below is our structured friction log formatted according to the official Hackath
 | 2 | Accidental Pre-Selection in D-Pad Trees | High | Fixed via pure `isFocused` gating | Need `TvActionToggle` |
 | 3 | AWS Bedrock SDK Footprint on Leanback | Medium | Fixed via packaging exclusions + edge engine | Need Android-native Bedrock SDK |
 | 4 | D-Pad Navigation Traps on Filter Rows | Medium | Fixed via encapsulated capsule pill | Need 2D spatial navigation helpers |
-| 5 | Bézier Spline Math on 1080p Canvas | Medium | Fixed via custom Catmull-Rom spline algorithm | Need `drawSplineWave` Canvas helper |
-| 6 | Alexa Deep Linking & singleTask Lifecycle | Low | Fixed via `onNewIntent` + StateFlow routing | Need Cross-Device docs |
+| 5 | Bézier Spline Math on 1080p Canvas | Low | Fixed via custom Catmull-Rom spline algorithm | Need `drawSplineWave` Canvas helper |
+| 6 | Alexa Deep Linking & singleTask Lifecycle | High | Fixed via `onNewIntent` + StateFlow routing | Need Cross-Device docs |
 | 7 | Kotlin Type Inference with Anonymous Objects | Low | Fixed via `AnalyticsRangeConfig` data class | Diagnostics improvement |
+| 8 | Bedrock UnrecognizedClientException Guidance | Medium | Fixed via graceful offline fallback & setup logs | Need developer-friendly setup links |
+| 9 | Fire TV Emulator FPS on Apple Silicon | Medium | Fixed via GPU host flags & canvas optimizations | Need M-series optimized AVD configs |
+| 10 | Compose TV Focus Jumps on LazyRow ➔ Column | High | Fixed via explicit focusProperties & anchors | Improve default 2D spatial focus |
 
 *Submitted with pride by the HomeIQ Team for the Amazon Fire TV Hackathon.*

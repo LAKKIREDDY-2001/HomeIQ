@@ -16,4 +16,9 @@
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
+
+    <!-- Multi-Language Localization -->
+    <string name="greeting_morning">Good morning</string>
+    <string name="family_guardian">Family Guardian</string>
+    <string name="all_safe">All safe</string>
 </resources>

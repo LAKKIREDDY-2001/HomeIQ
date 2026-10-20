@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HomeIQ</string>
+    <string name="greeting_morning">शुभ प्रभात</string>
+    <string name="family_guardian">परिवार रक्षक</string>
+    <string name="all_safe">सब सुरक्षित</string>
+</resources>

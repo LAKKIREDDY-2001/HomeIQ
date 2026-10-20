@@ -45,4 +45,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("software.amazon.awssdk:bedrockruntime:2.25.0")
     implementation("org.json:json:20231013")
+    testImplementation("junit:junit:4.13.2")
 }
