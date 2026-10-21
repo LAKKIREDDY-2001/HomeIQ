@@ -29,6 +29,19 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 
 ---
 
+## 🔑 Testing & Login Access for Hackathon Judges
+
+> **Zero Setup Required**: HomeIQ is completely pre-configured for rapid testing on Amazon Fire TV and Android TV without requiring external API keys or cloud account signups.
+
+| Access Method | Instructions | Test Capabilities |
+|:---|:---|:---|
+| **⚡ 1-Click Fast Demo Profiles** *(Recommended)* | Click **`[🔑 Login / Sign Up]`** in the top-right header ➔ Select any profile card:<br/>• **Venkat Reddy (Admin)**<br/>• **Alex Johnson (Resident)**<br/>• **Priya Caretaker (Elder Care)** | Instant role assignment, unlocks master breakers, live telemetry, and active 7-day streak. |
+| **👀 Guest Mode** | No login needed! Explore all tabs directly upon launching the app. | Full access to Spline Wave Analytics, Device Hub steppers, AI Coach prompts, and Security status. |
+| **🔢 Master Demo PIN** | Default 4-digit Master Security PIN: **`1234`** | Unlocks the AES-256 Customer Safety Vault and custom PIN login. |
+| **🎙️ Alexa Voice Deep Links** | Test via ADB:<br/>`adb shell am start -a android.intent.action.VIEW -d "homeiq://energy_report" com.homeiq.firetv` | Cross-device voice handoff directly into Energy Analytics, Eco Mode, or Family Guardian. |
+
+---
+
 ## 🏗️ System Architecture
 
 ```
