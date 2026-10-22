@@ -17,6 +17,7 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/badge/Release-v1.0.0%20APK-brightgreen.svg)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/tag/v1.0.0)
 [![Direct Download](https://img.shields.io/badge/Download-APK%20%2813%20MB%29-blue.svg)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/download/v1.0.0/HomeIQ-FireTV-debug.apk)
+[![Live Web Simulator](https://img.shields.io/badge/Live%20Web%20Simulator-Try%20in%20Browser-00C7B7.svg?logo=googlechrome)](https://lakkireddy-2001.github.io/HomeIQ/)
 
 ---
 
@@ -37,6 +38,7 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 
 | Access Method | Instructions | Test Capabilities |
 |:---|:---|:---|
+| **🌐 Live Web Simulator (Instant Browser Demo)** | [Open Live Web Demo (lakkireddy-2001.github.io/HomeIQ)](https://lakkireddy-2001.github.io/HomeIQ/) | Instant full-fidelity simulation for judges to test on any browser with keyboard or virtual Fire TV remote! |
 | **📥 Direct APK Download** | [Download HomeIQ-FireTV-debug.apk (v1.0.0)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/download/v1.0.0/HomeIQ-FireTV-debug.apk) | Ready to install on Fire TV Stick or Android TV via ADB (`adb install -r HomeIQ-FireTV-debug.apk`). |
 | **⚡ 1-Click Fast Demo Profiles** *(Recommended)* | Click **`[🔑 Login / Sign Up]`** in the top-right header ➔ Select any profile card:<br/>• **Venkat Reddy (Admin)**<br/>• **Alex Johnson (Resident)**<br/>• **Priya Caretaker (Elder Care)** | Instant role assignment, unlocks master breakers, live telemetry, and active 7-day streak. |
 | **👀 Guest Mode** | No login needed! Explore all tabs directly upon launching the app. | Full access to Spline Wave Analytics, Device Hub steppers, AI Coach prompts, and Security status. |
