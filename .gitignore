@@ -10,3 +10,6 @@ captures/
 .cxx
 *.apk
 *.aab
+node_modules/
+.DS_Store
+
