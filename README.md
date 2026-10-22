@@ -17,7 +17,8 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/badge/Release-v1.0.0%20APK-brightgreen.svg)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/tag/v1.0.0)
 [![Direct Download](https://img.shields.io/badge/Download-APK%20%2813%20MB%29-blue.svg)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/download/v1.0.0/HomeIQ-FireTV-debug.apk)
-[![Live Web Simulator](https://img.shields.io/badge/Live%20Web%20Simulator-Try%20in%20Browser-00C7B7.svg?logo=googlechrome)](https://lakkireddy-2001.github.io/HomeIQ/)
+[![Render Live App](https://img.shields.io/badge/Render%20Live%20App-Try%20Live%20Demo-46E3B7.svg?logo=render)](https://homeiq-tefz.onrender.com/#ai)
+[![GitHub Pages Simulator](https://img.shields.io/badge/GitHub%20Pages-Web%20Simulator-00C7B7.svg?logo=github)](https://lakkireddy-2001.github.io/HomeIQ/)
 
 ---
 
@@ -28,6 +29,14 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
   <br />
   <img src="docs/screenshots/01_main_dashboard.png" alt="HomeIQ Live Fire TV Dashboard" width="920" style="border-radius: 14px; box-shadow: 0 16px 36px rgba(0,0,0,0.6);" />
   <p><em>↑ Bézier spline energy chart animation with real-time peak detection and Family Guardian hazard alert</em></p>
+  <p>
+    <a href="https://homeiq-tefz.onrender.com/#ai"><strong>🚀 Launch Live Web App (Render)</strong></a> •
+    <a href="https://homeiq-tefz.onrender.com/#dashboard">🏠 Dashboard</a> •
+    <a href="https://homeiq-tefz.onrender.com/#rooms">🛋️ Room Details</a> •
+    <a href="https://homeiq-tefz.onrender.com/#analytics">📊 Energy Analytics</a> •
+    <a href="https://homeiq-tefz.onrender.com/#security">🛡️ Security Feeds</a> •
+    <a href="https://homeiq-tefz.onrender.com/#ai">🤖 Bedrock AI Coach</a>
+  </p>
 </div>
 
 ---
@@ -38,12 +47,13 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 
 | Access Method | Instructions | Test Capabilities |
 |:---|:---|:---|
-| **🌐 Live Web Simulator (Instant Browser Demo)** | [Open Live Web Demo (lakkireddy-2001.github.io/HomeIQ)](https://lakkireddy-2001.github.io/HomeIQ/) | Instant full-fidelity simulation for judges to test on any browser with keyboard or virtual Fire TV remote! |
+| **🚀 Render Cloud Deployment (Live App)** | [Open Live App on Render (homeiq-tefz.onrender.com/#ai)](https://homeiq-tefz.onrender.com/#ai) | **Primary Live Interactive Deployment on Render!** Directly opens the Bedrock Claude 3 Haiku AI Coach view (`#ai`), with top and bottom navigation bars to switch to Dashboard, Room Details, Spline Analytics, and Security Cameras. |
+| **🌐 GitHub Pages Mirror** | [Open GitHub Pages Mirror](https://lakkireddy-2001.github.io/HomeIQ/) | Standalone CDN mirror of the 10-foot Fire TV web simulator. |
 | **📥 Direct APK Download** | [Download HomeIQ-FireTV-debug.apk (v1.0.0)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/download/v1.0.0/HomeIQ-FireTV-debug.apk) | Ready to install on Fire TV Stick or Android TV via ADB (`adb install -r HomeIQ-FireTV-debug.apk`). |
-| **⚡ 1-Click Fast Demo Profiles** *(Recommended)* | Click **`[🔑 Login / Sign Up]`** in the top-right header ➔ Select any profile card:<br/>• **Venkat Reddy (Admin)**<br/>• **Alex Johnson (Resident)**<br/>• **Priya Caretaker (Elder Care)** | Instant role assignment, unlocks master breakers, live telemetry, and active 7-day streak. |
+| **⚡ 1-Click Fast Demo Profiles** *(Recommended)* | Click **`[👤 Venkat Reddy ● Admin]`** or **`[🔑 Login]`** in the header ➔ Select any profile card:<br/>• **Venkat Reddy (Admin)**<br/>• **Alex Johnson (Resident)**<br/>• **Priya Caretaker (Elder Care)** | Instant role assignment, unlocks master breakers, live telemetry, and active 7-day streak. |
 | **👀 Guest Mode** | No login needed! Explore all tabs directly upon launching the app. | Full access to Spline Wave Analytics, Device Hub steppers, AI Coach prompts, and Security status. |
 | **🔢 Master Demo PIN** | Default 4-digit Master Security PIN: **`1234`** | Unlocks the AES-256 Customer Safety Vault and custom PIN login. |
-| **🎙️ Alexa Voice Deep Links** | Test via ADB:<br/>`adb shell am start -a android.intent.action.VIEW -d "homeiq://energy_report" com.homeiq.firetv` | Cross-device voice handoff directly into Energy Analytics, Eco Mode, or Family Guardian. |
+| **🎙️ Alexa Voice Deep Links** | Test via ADB or simulated button:<br/>`adb shell am start -a android.intent.action.VIEW -d "homeiq://energy_report" com.homeiq.firetv` | Cross-device voice handoff directly into Energy Analytics, Eco Mode, or Family Guardian. |
 
 ---
 
