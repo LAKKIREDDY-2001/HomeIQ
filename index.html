@@ -45,7 +45,6 @@
       padding: 16px 24px;
     }
 
-    /* 10-Foot TV Stage Container (16:9 Aspect Ratio) */
     .tv-stage {
       max-width: 1440px;
       margin: 0 auto;
@@ -64,6 +63,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      cursor: pointer;
     }
 
     .brand-logo-img {
@@ -266,104 +266,6 @@
       background: rgba(51, 65, 85, 0.9);
     }
 
-    /* AI Coach Companion Banner */
-    .ai-banner {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      border-radius: 16px;
-      padding: 14px 20px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      backdrop-filter: blur(12px);
-    }
-
-    .ai-identity {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex: 1;
-    }
-
-    .ai-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #0284C7, #0369A1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      box-shadow: 0 0 16px var(--cyan-glow);
-    }
-
-    .ai-msg-box {
-      flex: 1;
-    }
-
-    .ai-prompt-line {
-      font-size: 14px;
-      font-weight: 600;
-      color: #E2E8F0;
-      line-height: 1.4;
-    }
-
-    .ai-quick-chips {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .chip {
-      background: rgba(30, 41, 59, 0.9);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      color: var(--cyan);
-      padding: 4px 10px;
-      border-radius: 14px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .chip:hover {
-      background: var(--cyan);
-      color: #0F172A;
-      transform: translateY(-1px);
-    }
-
-    .ai-action-toggle {
-      background: linear-gradient(135deg, #0284C7, #0369A1);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .ai-action-toggle:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 16px var(--cyan-glow);
-    }
-
-    /* Main Grid Layout */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 2.2fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
     /* Cards */
     .card {
       background: var(--card-bg);
@@ -424,7 +326,7 @@
       margin-top: 2px;
     }
 
-    /* Chart Section */
+    /* Canvas / Chart */
     .chart-header {
       display: flex;
       justify-content: space-between;
@@ -499,104 +401,7 @@
       50% { transform: translateY(-4px); }
     }
 
-    /* Right Column: Goal & Security */
-    .goal-circle-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .goal-info h4 {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .goal-info .goal-val {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--text-main);
-      margin: 4px 0;
-    }
-
-    .goal-ring {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: conic-gradient(var(--cyan) 61%, rgba(30, 41, 59, 0.6) 0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .goal-ring-inner {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #111827;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--cyan);
-    }
-
-    /* Security Mode Card */
-    .security-status-card {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 14px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 12px;
-    }
-
-    .security-status-card:hover {
-      transform: scale(1.02);
-      border-color: var(--emerald);
-      box-shadow: 0 0 16px var(--emerald-glow);
-    }
-
-    .sec-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .sec-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: rgba(16, 185, 129, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .sec-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #A7F3D0;
-    }
-
-    .sec-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* Device Hub Section */
-    .devices-section {
-      margin-top: 16px;
-    }
-
+    /* Devices */
     .room-tabs {
       display: flex;
       gap: 10px;
@@ -737,40 +542,61 @@
       margin-top: 18px;
       display: flex;
       gap: 12px;
+      position: sticky;
+      bottom: 8px;
+      z-index: 50;
     }
 
     .tv-nav-item {
       flex: 1;
-      background: rgba(17, 24, 39, 0.8);
-      border: 1px solid var(--card-border);
+      background: rgba(17, 24, 39, 0.95);
+      border: 1.5px solid var(--card-border);
       border-radius: 14px;
       padding: 12px 14px;
       text-align: center;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
 
     .tv-nav-item.active {
-      background: var(--blue);
+      background: linear-gradient(135deg, #0284C7, #0369A1);
       color: #FFFFFF;
       border-color: var(--cyan);
-      box-shadow: 0 4px 20px var(--cyan-glow);
+      box-shadow: 0 0 24px var(--cyan-glow);
+      transform: translateY(-2px);
     }
 
     .tv-nav-item:hover {
       transform: scale(1.02);
       border-color: var(--cyan);
+      color: #FFFFFF;
     }
 
-    /* Floating Virtual Remote Controller for Browser Testing */
+    /* Tab Contents Section */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Virtual Remote Controller */
     .remote-widget {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.96);
       border: 1.5px solid #334155;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
       border-radius: 24px;
@@ -873,7 +699,7 @@
       border-radius: 20px;
       padding: 24px;
       width: 90%;
-      max-width: 540px;
+      max-width: 560px;
       animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -939,7 +765,7 @@
       font-weight: 600;
     }
 
-    /* Notification toast */
+    /* Toast */
     .toast-msg {
       position: fixed;
       top: 24px;
@@ -956,9 +782,147 @@
       animation: fadeIn 0.3s;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Camera Feed Cards */
+    .cam-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .cam-feed {
+      height: 200px;
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cam-scanline {
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 10px var(--cyan);
+      animation: scan 3s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
+    .cam-label {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #38BDF8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cam-status {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 11px;
+      color: #10B981;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    /* AI Chat Window */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .chat-bubble.ai {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #E2E8F0;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .chat-bubble.user {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      color: #FFFFFF;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-input-bar {
+      padding: 16px;
+      background: #0B132B;
+      border-top: 1px solid #1E293B;
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: #1E293B;
+      border: 1px solid #475569;
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 24px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 16px var(--cyan-glow);
+    }
+
+    .chat-send-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 0 24px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chat-send-btn:hover {
+      background: #0369A1;
+      transform: scale(1.04);
     }
   </style>
 </head>
@@ -967,7 +931,7 @@
   <div class="tv-stage">
     <!-- Header -->
     <header>
-      <div class="brand-wrap">
+      <div class="brand-wrap" onclick="switchTab(1)">
         <img src="docs/images/homeiq_app_icon_3d.jpg" alt="HomeIQ Logo" class="brand-logo-img">
         <div>
           <div class="brand-title">Home<span class="brand-iq">IQ</span></div>
@@ -977,7 +941,7 @@
 
       <div class="header-center">
         <span>📍 <strong>32.5°C</strong> • Bengaluru, IN (Sunny 65%)</span>
-        <span id="liveClock">Sun, Oct 22 • 7:15 PM</span>
+        <span id="liveClock">Thu, Oct 22 • 8:45 PM</span>
       </div>
 
       <div class="header-actions">
@@ -1009,130 +973,345 @@
       </div>
     </div>
 
-    <!-- AI Coach Companion Banner -->
-    <div class="ai-banner">
-      <div class="ai-identity">
-        <div class="ai-avatar">🤖</div>
-        <div class="ai-msg-box">
-          <div class="ai-prompt-line" id="aiCoachText">
-            "Hey Venkat! Your AC accounts for 42% of total energy. Setting to 26°C could save ₹85/month."
+    <!-- ========================================== -->
+    <!-- TAB 1: MAIN DASHBOARD -->
+    <!-- ========================================== -->
+    <div class="tab-content active" id="tabContent_1">
+      <!-- AI Coach Companion Banner -->
+      <div class="ai-banner">
+        <div class="ai-identity">
+          <div class="ai-avatar">🤖</div>
+          <div class="ai-msg-box">
+            <div class="ai-prompt-line" id="aiCoachText">
+              "Hey Venkat! Your AC accounts for 42% of total energy. Setting to 26°C could save ₹85/month."
+            </div>
+            <div class="ai-quick-chips">
+              <span class="chip" onclick="askAi('How to save ₹500 this month?')">💡 Save ₹500 Tip</span>
+              <span class="chip" onclick="askAi('What is peak tariff rate?')">⚡ Peak Tariff Alert</span>
+              <span class="chip" onclick="askAi('How is Grandma Savithri doing?')">👵 Elder Care Status</span>
+            </div>
           </div>
-          <div class="ai-quick-chips">
-            <span class="chip" onclick="askAi('How to save ₹500 this month?')">💡 Save ₹500 Tip</span>
-            <span class="chip" onclick="askAi('What is peak tariff rate?')">⚡ Peak Tariff Alert</span>
-            <span class="chip" onclick="askAi('How is Grandma Savithri doing?')">👵 Elder Care Status</span>
+        </div>
+        <button class="ai-action-toggle" id="aiActionBtn" onclick="toggleAllLights()">
+          <span>💡 Turn OFF All Lights</span>
+        </button>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Left: Telemetry & Spline Wave Chart -->
+        <div class="card">
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-label">⚡ Live Power</div>
+              <div class="stat-val"><span id="liveWatts">847</span> <span class="stat-unit">W</span></div>
+              <div class="stat-sub">Normal Base Load</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">📅 Today Total</div>
+              <div class="stat-val">18.4 <span class="stat-unit">kWh</span></div>
+              <div class="stat-sub">₹89.20 Spent</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">📊 Month Total</div>
+              <div class="stat-val">485.6 <span class="stat-unit">kWh</span></div>
+              <div class="stat-sub">↓ 12% vs last month</div>
+            </div>
+          </div>
+
+          <div class="chart-header">
+            <div class="chart-title-wrap">
+              <h3>Power Consumption Analytics (Catmull-Rom Spline)</h3>
+            </div>
+            <div class="filter-capsule">
+              <button class="filter-btn active" onclick="setChartRange('today', this)">Today</button>
+              <button class="filter-btn" onclick="setChartRange('week', this)">Week</button>
+              <button class="filter-btn" onclick="setChartRange('month', this)">Month</button>
+              <button class="filter-btn" onclick="setChartRange('year', this)">Year</button>
+            </div>
+          </div>
+
+          <div class="canvas-container">
+            <div class="floating-peak-badge" id="peakBadge">
+              <span>⚡ Peak: 6 PM • 4.8 kW</span>
+            </div>
+            <canvas id="splineCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Right: Daily Goal & Security Status -->
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="card goal-circle-card">
+            <div class="goal-info">
+              <h4>DAILY ECO TARGET</h4>
+              <div class="goal-val">18.4 / 30</div>
+              <p style="font-size: 11px; color: var(--text-muted);">kWh Consumed Today</p>
+            </div>
+            <div class="goal-ring">
+              <div class="goal-ring-inner">61%</div>
+            </div>
+          </div>
+
+          <div class="security-status-card" onclick="switchTab(4)">
+            <div class="sec-left">
+              <div class="sec-icon">🛡️</div>
+              <div>
+                <div class="sec-title">HOME MODE: ARMED</div>
+                <div class="sec-sub">8/8 Perimeter Beams • Gas 0.0 ppm</div>
+              </div>
+            </div>
+            <span style="font-size: 18px; color: var(--emerald);">➔</span>
+          </div>
+
+          <div class="card" style="padding: 14px 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--text-muted);">CROSS-DEVICE VOICE</div>
+              <span class="badge-pill" style="background: rgba(0,202,255,0.15); color: #00CAFF;">Echo Active</span>
+            </div>
+            <p style="font-size: 12px; color: #CBD5E1; margin-top: 6px;">
+              <em>"Alexa, show my energy report"</em> deep-links directly to this Fire TV dashboard.
+            </p>
           </div>
         </div>
       </div>
-      <button class="ai-action-toggle" id="aiActionBtn" onclick="toggleAllLights()">
-        <span>💡 Turn OFF All Lights</span>
-      </button>
+
+      <!-- Device Hub Steppers & Toggles -->
+      <div class="card devices-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 16px; font-weight: 700;">Multi-Room Device Hub (13 Connected Devices)</h3>
+          <span style="font-size: 12px; color: var(--cyan); font-weight: 600; cursor: pointer;" onclick="switchTab(2)">View Detailed Room Controls ➔</span>
+        </div>
+
+        <div class="room-tabs">
+          <button class="room-tab active" onclick="switchRoom('living', this)">🛋️ Living Room (4)</button>
+          <button class="room-tab" onclick="switchRoom('kitchen', this)">🍳 Kitchen (4)</button>
+          <button class="room-tab" onclick="switchRoom('bedroom', this)">🛏️ Master Bedroom (4)</button>
+          <button class="room-tab" onclick="switchRoom('garage', this)">🚗 Garage (1)</button>
+        </div>
+
+        <div class="devices-list" id="devicesContainer"></div>
+      </div>
     </div>
 
-    <!-- Main Dashboard Grid -->
-    <div class="dashboard-grid">
-      <!-- Left: Telemetry & Spline Wave Chart -->
-      <div class="card">
-        <div class="stats-row">
+    <!-- ========================================== -->
+    <!-- TAB 2: ROOM DETAIL VIEW -->
+    <!-- ========================================== -->
+    <div class="tab-content" id="tabContent_2">
+      <div class="card" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">🛋️ Room Detail & Zone Controls</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Full hardware telemetry, smart steppers, and automation schedules per room.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-pill" onclick="applyPreset('cinema')">🎬 Cinema Mode</button>
+            <button class="btn-pill" onclick="applyPreset('eco')">🌱 Eco Saver</button>
+            <button class="btn-pill" onclick="applyPreset('night')">🌙 Night Mode</button>
+          </div>
+        </div>
+
+        <div class="room-tabs" style="margin-bottom: 20px;">
+          <button class="room-tab active" onclick="switchDetailRoom('living', this)">🛋️ Living Room</button>
+          <button class="room-tab" onclick="switchDetailRoom('kitchen', this)">🍳 Kitchen</button>
+          <button class="room-tab" onclick="switchDetailRoom('bedroom', this)">🛏️ Master Bedroom</button>
+          <button class="room-tab" onclick="switchDetailRoom('garage', this)">🚗 Garage</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
           <div class="stat-box">
-            <div class="stat-label">⚡ Live Power</div>
-            <div class="stat-val"><span id="liveWatts">847</span> <span class="stat-unit">W</span></div>
-            <div class="stat-sub">Normal Base Load</div>
+            <div class="stat-label">Active Power</div>
+            <div class="stat-val" id="detailRoomPower">1,695 <span class="stat-unit">W</span></div>
           </div>
           <div class="stat-box">
-            <div class="stat-label">📅 Today Total</div>
-            <div class="stat-val">18.4 <span class="stat-unit">kWh</span></div>
-            <div class="stat-sub">₹89.20 Spent</div>
+            <div class="stat-label">Room Climate</div>
+            <div class="stat-val">24.0 <span class="stat-unit">°C</span></div>
           </div>
           <div class="stat-box">
-            <div class="stat-label">📊 Month Total</div>
-            <div class="stat-val">485.6 <span class="stat-unit">kWh</span></div>
-            <div class="stat-sub">↓ 12% vs last month</div>
+            <div class="stat-label">Active Devices</div>
+            <div class="stat-val" id="detailDeviceCount">4 / 4</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Hourly Cost</div>
+            <div class="stat-val">₹21.01 <span class="stat-unit">/hr</span></div>
+          </div>
+        </div>
+
+        <div class="devices-list" id="detailDevicesContainer"></div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: ENERGY ANALYTICS -->
+    <!-- ========================================== -->
+    <div class="tab-content" id="tabContent_3">
+      <div class="card" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">📊 Dynamic Spline Energy Analytics</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Cubic Bézier wave curves with Catmull-Rom tangent pathing & peak tariff evaluation.</p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">REGION:</span>
+            <select id="tariffSelect" onchange="changeTariffRegion(this.value)" style="background: #1E293B; color: #38BDF8; border: 1px solid #475569; padding: 6px 14px; border-radius: 12px; font-weight: 700; outline: none; cursor: pointer;">
+              <option value="blr">📍 Bengaluru (BESCOM)</option>
+              <option value="mum">📍 Mumbai (Tata Power)</option>
+              <option value="del">📍 Delhi (BSES)</option>
+              <option value="lon">📍 London (UK Power)</option>
+              <option value="nyc">📍 New York (ConEd)</option>
+            </select>
           </div>
         </div>
 
         <div class="chart-header">
-          <div class="chart-title-wrap">
-            <h3>Power Consumption Analytics (Catmull-Rom Spline)</h3>
-          </div>
+          <div class="stat-sub" style="font-size: 13px;">Peak Tariff Window: <strong>6:00 PM – 8:00 PM (₹12.40/kWh)</strong></div>
           <div class="filter-capsule">
-            <button class="filter-btn active" onclick="setChartRange('today', this)">Today</button>
-            <button class="filter-btn" onclick="setChartRange('week', this)">Week</button>
-            <button class="filter-btn" onclick="setChartRange('month', this)">Month</button>
-            <button class="filter-btn" onclick="setChartRange('year', this)">Year</button>
+            <button class="filter-btn active" onclick="setAnalyticsRange('today', this)">Today</button>
+            <button class="filter-btn" onclick="setAnalyticsRange('week', this)">Week</button>
+            <button class="filter-btn" onclick="setAnalyticsRange('month', this)">Month</button>
+            <button class="filter-btn" onclick="setAnalyticsRange('year', this)">Year</button>
           </div>
         </div>
 
-        <div class="canvas-container">
-          <div class="floating-peak-badge" id="peakBadge">
-            <span>⚡ Peak: 6 PM • 4.8 kW</span>
+        <div class="canvas-container" style="height: 280px;">
+          <div class="floating-peak-badge" id="analyticsPeakBadge">
+            <span>⚡ Max Peak: 6:00 PM • 4.8 kW (₹59.50/hr)</span>
           </div>
-          <canvas id="splineCanvas"></canvas>
+          <canvas id="analyticsSplineCanvas"></canvas>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px;">
+          <div class="stat-box">
+            <div class="stat-label">❄️ HVAC &amp; AC Load</div>
+            <div class="stat-val">42% <span class="stat-unit">7.7 kWh</span></div>
+            <div class="stat-sub">₹95.48 spent today</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">🍳 Kitchen Appliances</div>
+            <div class="stat-val">28% <span class="stat-unit">5.1 kWh</span></div>
+            <div class="stat-sub">Stove &amp; fridge</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">📺 Entertainment</div>
+            <div class="stat-val">14% <span class="stat-unit">2.6 kWh</span></div>
+            <div class="stat-sub">TV &amp; Sonos audio</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">💡 Lighting &amp; Others</div>
+            <div class="stat-val">16% <span class="stat-unit">3.0 kWh</span></div>
+            <div class="stat-sub">Ambient &amp; outdoor</div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Right: Daily Goal & Security Status -->
-      <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div class="card goal-circle-card">
-          <div class="goal-info">
-            <h4>DAILY ECO TARGET</h4>
-            <div class="goal-val">18.4 / 30</div>
-            <p style="font-size: 11px; color: var(--text-muted);">kWh Consumed Today</p>
+    <!-- ========================================== -->
+    <!-- TAB 4: SECURITY & CAMERAS -->
+    <!-- ========================================== -->
+    <div class="tab-content" id="tabContent_4">
+      <div class="card" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">🛡️ Security Center &amp; IP Cameras</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Real-time perimeter tripwires, infrared camera feeds, and emergency circuit disconnects.</p>
           </div>
-          <div class="goal-ring">
-            <div class="goal-ring-inner">61%</div>
+          <button class="btn-auto-shutoff" onclick="alert('⚡ Master Breaker Disconnected: All heavy circuits isolated in 10ms.');">
+            🛑 Emergency 10ms Breaker Disconnect
+          </button>
+        </div>
+
+        <div class="cam-grid">
+          <div class="cam-feed">
+            <div class="cam-scanline"></div>
+            <div class="cam-label">📹 CAM 1: FRONT ENTRANCE</div>
+            <div style="font-size: 40px; opacity: 0.6;">🚪</div>
+            <div class="cam-status">SMART DEADBOLT: LOCKED 🔒</div>
+          </div>
+          <div class="cam-feed">
+            <div class="cam-scanline"></div>
+            <div class="cam-label">📹 CAM 2: LIVING ROOM</div>
+            <div style="font-size: 40px; opacity: 0.6;">🛋️</div>
+            <div class="cam-status">PIR MOTION: NORMAL 🟢</div>
+          </div>
+          <div class="cam-feed">
+            <div class="cam-scanline"></div>
+            <div class="cam-label">📹 CAM 3: KITCHEN INDUCTION</div>
+            <div style="font-size: 40px; opacity: 0.6;">🍳</div>
+            <div class="cam-status" style="color: var(--crimson);">ELDER CARE ANOMALY DETECTED ⚠</div>
+          </div>
+          <div class="cam-feed">
+            <div class="cam-scanline"></div>
+            <div class="cam-label">📹 CAM 4: BACKYARD PATIO</div>
+            <div style="font-size: 40px; opacity: 0.6;">🌲</div>
+            <div class="cam-status">8/8 BEAMS ARMED 🟢</div>
           </div>
         </div>
 
-        <div class="security-status-card" onclick="openSecurityModal()">
-          <div class="sec-left">
-            <div class="sec-icon">🛡️</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px;">
+          <div class="stat-box">
+            <div class="stat-label">Catalytic Gas / CO Sensor</div>
+            <div class="stat-val" style="color: var(--emerald);">0.0 <span class="stat-unit">ppm</span></div>
+            <div class="stat-sub">Air quality 100% safe</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">40kA Surge Arrester</div>
+            <div class="stat-val" style="color: var(--emerald);">ARMED</div>
+            <div class="stat-sub">Grid protection active</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Customer Safety Vault</div>
+            <div class="stat-val" style="color: var(--cyan);">AES-256</div>
+            <div class="stat-sub">Cryptographic hardware seal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: AI ASSISTANT / VOICE COMMAND -->
+    <!-- ========================================== -->
+    <div class="tab-content" id="tabContent_5">
+      <div class="card" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="ai-avatar" style="width: 48px; height: 48px; font-size: 26px;">🤖</div>
             <div>
-              <div class="sec-title">HOME MODE: ARMED</div>
-              <div class="sec-sub">8/8 Perimeter Beams • Gas 0.0 ppm</div>
+              <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">"IQ" — AI Smart Home Energy Coach</h2>
+              <p style="font-size: 13px; color: var(--text-muted);">Powered by Amazon Bedrock (Anthropic Claude 3 Haiku) with cross-device Alexa integration.</p>
             </div>
           </div>
-          <span style="font-size: 18px; color: var(--emerald);">➔</span>
+          <button class="btn-pill" style="border-color: #00CAFF; color: #00CAFF;" onclick="simulateVoiceAsk()">
+            🎙️ Simulate Alexa Voice Trigger
+          </button>
         </div>
 
-        <div class="card" style="padding: 14px 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--text-muted);">CROSS-DEVICE VOICE</div>
-            <span class="badge-pill" style="background: rgba(0,202,255,0.15); color: #00CAFF;">Echo Active</span>
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMsgContainer">
+            <div class="chat-bubble ai">
+              👋 <strong>Good evening Venkat!</strong> I'm IQ, your smart home companion. I noticed your living room AC has been running for 4.5 hours while outside temperature is a pleasant 28°C. Want me to switch to Eco 26°C or dim lights to save ₹85 this week?
+            </div>
           </div>
-          <p style="font-size: 12px; color: #CBD5E1; margin-top: 6px;">
-            <em>"Alexa, show my energy report"</em> deep-links directly to this Fire TV dashboard.
-          </p>
+          <div class="chat-input-bar">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask IQ anything (e.g., 'How to save ₹500 on my electricity bill?')" onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <button class="chat-send-btn" onclick="sendChatMessage()">Send ➔</button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <span class="chip" onclick="askAiChat('How to save ₹500 on electricity bill?')">💡 How to save ₹500?</span>
+          <span class="chip" onclick="askAiChat('Is Grandma Savithri safe in Bengaluru?')">👵 Elder Care Wellness Check</span>
+          <span class="chip" onclick="askAiChat('What appliances are consuming peak power right now?')">⚡ Peak Load Breakdown</span>
+          <span class="chip" onclick="askAiChat('Turn off living room AC and dim all lights')">🌙 Bedtime Automation</span>
         </div>
       </div>
     </div>
 
-    <!-- Device Hub Steppers & Toggles -->
-    <div class="card devices-section">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h3 style="font-size: 16px; font-weight: 700;">Multi-Room Device Hub (13 Connected Devices)</h3>
-        <span style="font-size: 12px; color: var(--cyan); font-weight: 600;">D-Pad Remote Accessible</span>
-      </div>
-
-      <div class="room-tabs">
-        <button class="room-tab active" onclick="switchRoom('living', this)">🛋️ Living Room (4)</button>
-        <button class="room-tab" onclick="switchRoom('kitchen', this)">🍳 Kitchen (4)</button>
-        <button class="room-tab" onclick="switchRoom('bedroom', this)">🛏️ Master Bedroom (4)</button>
-        <button class="room-tab" onclick="switchRoom('garage', this)">🚗 Garage (1)</button>
-      </div>
-
-      <div class="devices-list" id="devicesContainer">
-        <!-- Rendered dynamically via JS -->
-      </div>
-    </div>
-
-    <!-- Bottom TV Navigation Bar -->
+    <!-- Bottom TV Navigation Bar (Tabs 1 to 5) -->
     <div class="tv-nav-bar">
-      <div class="tv-nav-item active" onclick="switchNav(this)">1. MAIN DASHBOARD</div>
-      <div class="tv-nav-item" onclick="switchNav(this); alert('Switched to Room Detail View')">2. ROOM DETAIL VIEW</div>
-      <div class="tv-nav-item" onclick="switchNav(this); alert('Switched to Spline Energy Analytics')">3. ENERGY ANALYTICS</div>
-      <div class="tv-nav-item" onclick="switchNav(this); openSecurityModal()">4. SECURITY & CAMERAS</div>
-      <div class="tv-nav-item" onclick="switchNav(this); askAi('Give me a full home audit summary')">5. AI ASSISTANT / VOICE</div>
+      <div class="tv-nav-item active" id="navItem_1" onclick="switchTab(1)">1. MAIN DASHBOARD</div>
+      <div class="tv-nav-item" id="navItem_2" onclick="switchTab(2)">2. ROOM DETAIL VIEW</div>
+      <div class="tv-nav-item" id="navItem_3" onclick="switchTab(3)">3. ENERGY ANALYTICS</div>
+      <div class="tv-nav-item" id="navItem_4" onclick="switchTab(4)">4. SECURITY &amp; CAMERAS</div>
+      <div class="tv-nav-item" id="navItem_5" onclick="switchTab(5)">5. AI ASSISTANT / VOICE</div>
     </div>
   </div>
 
@@ -1152,7 +1331,7 @@
     </div>
     <div class="remote-action-row">
       <button class="remote-sm-btn" onclick="simulateKey('Escape')">BACK</button>
-      <button class="remote-sm-btn alexa" onclick="askAi('Alexa: What is my power usage today?')">🎙️ ALEXA</button>
+      <button class="remote-sm-btn alexa" onclick="switchTab(5); simulateVoiceAsk();">🎙️ ALEXA</button>
     </div>
   </div>
 
@@ -1160,7 +1339,7 @@
   <div class="modal-backdrop" id="authModal">
     <div class="modal-box">
       <div class="modal-header">
-        <div class="modal-title">🔑 Resident Authentication & Fast Demo Profiles</div>
+        <div class="modal-title">🔑 Resident Authentication &amp; Fast Demo Profiles</div>
         <button class="modal-close" onclick="closeModal('authModal')">✕</button>
       </div>
       <p style="font-size: 13px; color: var(--text-muted);">
@@ -1171,21 +1350,21 @@
         <div class="prof-card" onclick="selectProfile('Venkat Reddy', 'Admin', '👑')">
           <div>
             <div class="prof-name">👑 Venkat Reddy (Admin)</div>
-            <div class="prof-role">Full access: master breakers, tripwires & regional tariffs</div>
+            <div class="prof-role">Full access: master breakers, tripwires &amp; regional tariffs</div>
           </div>
           <span style="font-size: 12px; color: var(--emerald); font-weight: 700;">Select ➔</span>
         </div>
         <div class="prof-card" onclick="selectProfile('Alex Johnson', 'Resident', '🏠')">
           <div>
             <div class="prof-name">🏠 Alex Johnson (Resident)</div>
-            <div class="prof-role">Daily resident view, room steppers & daily challenges</div>
+            <div class="prof-role">Daily resident view, room steppers &amp; daily challenges</div>
           </div>
           <span style="font-size: 12px; color: var(--cyan); font-weight: 700;">Select ➔</span>
         </div>
         <div class="prof-card" onclick="selectProfile('Priya Caretaker', 'Elder Care', '👵')">
           <div>
             <div class="prof-name">👵 Priya Caretaker (Elder Care)</div>
-            <div class="prof-role">Grandma Savithri safety tracking & stove auto-shutoff</div>
+            <div class="prof-role">Grandma Savithri safety tracking &amp; stove auto-shutoff</div>
           </div>
           <span style="font-size: 12px; color: var(--amber); font-weight: 700;">Select ➔</span>
         </div>
@@ -1197,7 +1376,7 @@
   <div class="modal-backdrop" id="streakModal">
     <div class="modal-box">
       <div class="modal-header">
-        <div class="modal-title">🏆 Energy Savings Leaderboard & Challenges</div>
+        <div class="modal-title">🏆 Energy Savings Leaderboard &amp; Challenges</div>
         <button class="modal-close" onclick="closeModal('streakModal')">✕</button>
       </div>
       <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid var(--amber); padding: 12px 16px; border-radius: 12px; margin-bottom: 14px;">
@@ -1213,33 +1392,37 @@
     </div>
   </div>
 
-  <!-- Security Vault Modal -->
-  <div class="modal-backdrop" id="secModal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <div class="modal-title">🛡️ Customer Safety Vault (AES-256 GCM)</div>
-        <button class="modal-close" onclick="closeModal('secModal')">✕</button>
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
-        <div class="stat-box">
-          <div class="stat-label">Perimeter Beams</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--emerald); margin-top: 4px;">8/8 Armed</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Catalytic Gas/CO</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--emerald); margin-top: 4px;">0.0 ppm (Safe)</div>
-        </div>
-      </div>
-      <button class="btn-auto-shutoff" style="width: 100%; justify-content: center;" onclick="alert('⚡ Emergency Circuit Breaker Activated: All heavy loads disconnected in 10ms.'); closeModal('secModal');">
-        🛑 Emergency 10ms Breaker Disconnect
-      </button>
-    </div>
-  </div>
-
   <!-- Toast Notification -->
   <div class="toast-msg" id="toastMsg">Action Executed</div>
 
   <script>
+    // Tab Switching Router
+    let currentActiveTab = 1;
+
+    function switchTab(tabIndex) {
+      currentActiveTab = tabIndex;
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      document.querySelectorAll('.tv-nav-item').forEach(btn => btn.classList.remove('active'));
+
+      const targetTab = document.getElementById(`tabContent_${tabIndex}`);
+      if (targetTab) targetTab.classList.add('active');
+
+      const targetNav = document.getElementById(`navItem_${tabIndex}`);
+      if (targetNav) targetNav.classList.add('active');
+
+      if (tabIndex === 1) {
+        setTimeout(drawSpline, 60);
+      } else if (tabIndex === 2) {
+        renderDetailDevices();
+      } else if (tabIndex === 3) {
+        setTimeout(drawAnalyticsSpline, 60);
+      } else if (tabIndex === 5) {
+        document.getElementById('chatInput').focus();
+      }
+
+      showToast(`Navigated to Tab ${tabIndex}`);
+    }
+
     // Live Clock
     function updateClock() {
       const now = new Date();
@@ -1275,9 +1458,11 @@
     };
 
     let activeRoom = 'living';
+    let activeDetailRoom = 'living';
 
     function renderDevices() {
       const container = document.getElementById('devicesContainer');
+      if (!container) return;
       container.innerHTML = '';
       const list = roomDevices[activeRoom] || [];
 
@@ -1323,11 +1508,93 @@
       recalcTotalWatts();
     }
 
+    function renderDetailDevices() {
+      const container = document.getElementById('detailDevicesContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const list = roomDevices[activeDetailRoom] || [];
+      let roomPower = 0;
+      let activeCount = 0;
+
+      list.forEach((dev) => {
+        if (dev.state) {
+          roomPower += dev.watts;
+          activeCount++;
+        }
+        const div = document.createElement('div');
+        div.className = 'device-card';
+
+        let controlHtml = '';
+        if (dev.type === 'stepper') {
+          controlHtml = `
+            <div class="device-controls">
+              <button class="stepper-btn" onclick="stepVal('${dev.id}', -1); renderDetailDevices();">-</button>
+              <span class="stepper-val">${dev.val}${dev.unit}</span>
+              <button class="stepper-btn" onclick="stepVal('${dev.id}', 1); renderDetailDevices();">+</button>
+              <button class="toggle-pill ${dev.state ? 'on' : 'off'}" onclick="toggleDevice('${dev.id}', this); renderDetailDevices();">
+                ${dev.state ? '● ON' : '○ OFF'}
+              </button>
+            </div>
+          `;
+        } else {
+          controlHtml = `
+            <div class="device-controls">
+              <button class="toggle-pill ${dev.state ? 'on' : 'off'}" onclick="toggleDevice('${dev.id}', this); renderDetailDevices();">
+                ${dev.state ? '● ON' : '○ OFF'}
+              </button>
+            </div>
+          `;
+        }
+
+        div.innerHTML = `
+          <div class="device-meta">
+            <span class="dev-icon">${dev.icon}</span>
+            <div>
+              <div class="dev-name">${dev.name}</div>
+              <div class="dev-power">${dev.state ? dev.watts + ' W' : '0 W'}</div>
+            </div>
+          </div>
+          ${controlHtml}
+        `;
+        container.appendChild(div);
+      });
+
+      document.getElementById('detailRoomPower').innerHTML = `${roomPower} <span class="stat-unit">W</span>`;
+      document.getElementById('detailDeviceCount').innerText = `${activeCount} / ${list.length}`;
+    }
+
     function switchRoom(room, btn) {
       activeRoom = room;
-      document.querySelectorAll('.room-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.room-tabs .room-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderDevices();
+    }
+
+    function switchDetailRoom(room, btn) {
+      activeDetailRoom = room;
+      document.querySelectorAll('#tabContent_2 .room-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderDetailDevices();
+    }
+
+    function applyPreset(preset) {
+      if (preset === 'cinema') {
+        roomDevices.living[0].state = true; // TV
+        roomDevices.living[1].state = true; // Sonos
+        roomDevices.living[2].val = 20;     // Dim lights
+        roomDevices.living[3].val = 22;     // AC cool
+        showToast('🎬 Cinema Preset Activated: TV ON, lights dimmed to 20%, AC at 22°C.');
+      } else if (preset === 'eco') {
+        roomDevices.living[3].val = 26;     // Eco AC
+        roomDevices.living[2].val = 50;
+        showToast('🌱 Eco Saver Preset: AC set to 26°C, shedding 35% load.');
+      } else if (preset === 'night') {
+        roomDevices.living[0].state = false;
+        roomDevices.living[2].state = false;
+        showToast('🌙 Night Mode: Living room devices shut off, security armed.');
+      }
+      renderDevices();
+      renderDetailDevices();
     }
 
     function stepVal(devId, delta) {
@@ -1335,7 +1602,8 @@
         const d = roomDevices[r].find(x => x.id === devId);
         if (d) {
           d.val = Math.max(0, d.val + (d.unit === '°C' ? delta : delta * 5));
-          document.getElementById(`val_${devId}`).innerText = `${d.val}${d.unit}`;
+          const el = document.getElementById(`val_${devId}`);
+          if (el) el.innerText = `${d.val}${d.unit}`;
           showToast(`${d.name} adjusted to ${d.val}${d.unit}`);
           break;
         }
@@ -1349,7 +1617,8 @@
           d.state = !d.state;
           btn.className = `toggle-pill ${d.state ? 'on' : 'off'}`;
           btn.innerText = d.state ? '● ON' : '○ OFF';
-          document.getElementById(`pwr_${devId}`).innerText = d.state ? `${d.watts} W` : '0 W';
+          const pEl = document.getElementById(`pwr_${devId}`);
+          if (pEl) pEl.innerText = d.state ? `${d.watts} W` : '0 W';
           showToast(`${d.name} switched ${d.state ? 'ON' : 'OFF'}`);
           recalcTotalWatts();
           break;
@@ -1364,10 +1633,11 @@
           if (d.state) total += d.watts;
         });
       }
-      document.getElementById('liveWatts').innerText = total;
+      const el = document.getElementById('liveWatts');
+      if (el) el.innerText = total;
     }
 
-    // Spline Canvas Chart
+    // Spline Canvas Chart (Tab 1)
     const chartDataSets = {
       today: [320, 280, 240, 220, 310, 580, 940, 1100, 1450, 1200, 1680, 2200, 2450, 2100, 1950, 2400, 3200, 4800, 4200, 3600, 2900, 2100, 1400, 847],
       week: [18.2, 22.4, 19.8, 24.1, 21.0, 17.5, 18.4],
@@ -1376,10 +1646,11 @@
     };
 
     let activeRange = 'today';
+    let activeAnalyticsRange = 'today';
 
     function setChartRange(range, btn) {
       activeRange = range;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#tabContent_1 .filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const peakBadge = document.getElementById('peakBadge');
       if (range === 'today') {
@@ -1394,8 +1665,16 @@
       drawSpline();
     }
 
+    function setAnalyticsRange(range, btn) {
+      activeAnalyticsRange = range;
+      document.querySelectorAll('#tabContent_3 .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      drawAnalyticsSpline();
+    }
+
     function drawSpline() {
       const canvas = document.getElementById('splineCanvas');
+      if (!canvas || !canvas.parentElement) return;
       const ctx = canvas.getContext('2d');
       const dpr = window.devicePixelRatio || 1;
       
@@ -1478,16 +1757,95 @@
       ctx.shadowBlur = 0;
     }
 
-    window.addEventListener('resize', drawSpline);
-    setTimeout(drawSpline, 100);
+    function drawAnalyticsSpline() {
+      const canvas = document.getElementById('analyticsSplineCanvas');
+      if (!canvas || !canvas.parentElement) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      
+      canvas.width = canvas.parentElement.clientWidth * dpr;
+      canvas.height = canvas.parentElement.clientHeight * dpr;
+      ctx.scale(dpr, dpr);
+
+      const w = canvas.parentElement.clientWidth;
+      const h = canvas.parentElement.clientHeight;
+      const pts = chartDataSets[activeAnalyticsRange];
+      const maxVal = Math.max(...pts) * 1.15;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Grid
+      ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)';
+      ctx.lineWidth = 1;
+      for (let y = 30; y < h; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      const coords = pts.map((val, i) => ({
+        x: (i / (pts.length - 1)) * (w - 40) + 20,
+        y: h - 35 - (val / maxVal) * (h - 70)
+      }));
+
+      ctx.beginPath();
+      ctx.moveTo(coords[0].x, coords[0].y);
+      for (let i = 0; i < coords.length - 1; i++) {
+        const p0 = coords[i === 0 ? i : i - 1];
+        const p1 = coords[i];
+        const p2 = coords[i + 1];
+        const p3 = coords[i + 2 < coords.length ? i + 2 : i + 1];
+        const cp1x = p1.x + (p2.x - p0.x) / 6;
+        const cp1y = p1.y + (p2.y - p0.y) / 6;
+        const cp2x = p2.x - (p3.x - p1.x) / 6;
+        const cp2y = p2.y - (p3.y - p1.y) / 6;
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+      }
+
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, 'rgba(16, 185, 129, 0.45)');
+      grad.addColorStop(0.7, 'rgba(56, 189, 248, 0.15)');
+      grad.addColorStop(1, 'rgba(7, 11, 22, 0)');
+
+      ctx.lineTo(coords[coords.length - 1].x, h);
+      ctx.lineTo(coords[0].x, h);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(coords[0].x, coords[0].y);
+      for (let i = 0; i < coords.length - 1; i++) {
+        const p0 = coords[i === 0 ? i : i - 1];
+        const p1 = coords[i];
+        const p2 = coords[i + 1];
+        const p3 = coords[i + 2 < coords.length ? i + 2 : i + 1];
+        const cp1x = p1.x + (p2.x - p0.x) / 6;
+        const cp1y = p1.y + (p2.y - p0.y) / 6;
+        const cp2x = p2.x - (p3.x - p1.x) / 6;
+        const cp2y = p2.y - (p3.y - p1.y) / 6;
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+      }
+      ctx.strokeStyle = '#10B981';
+      ctx.lineWidth = 3.5;
+      ctx.shadowColor = 'rgba(16, 185, 129, 0.9)';
+      ctx.shadowBlur = 14;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    window.addEventListener('resize', () => {
+      drawSpline();
+      drawAnalyticsSpline();
+    });
 
     // Hazard Auto-Shutoff Logic
     let shutoffTimer = 58;
     const shutoffInterval = setInterval(() => {
       shutoffTimer--;
-      if (document.getElementById('shutoffSecs')) {
-        document.getElementById('shutoffSecs').innerText = Math.max(0, shutoffTimer);
-      }
+      const el = document.getElementById('shutoffSecs');
+      if (el) el.innerText = Math.max(0, shutoffTimer);
       if (shutoffTimer <= 0) {
         triggerAutoShutoff();
         clearInterval(shutoffInterval);
@@ -1496,9 +1854,9 @@
 
     function triggerAutoShutoff() {
       clearInterval(shutoffInterval);
-      // Turn off kitchen stove
-      roomDevices.kitchen[0].state = false;
+      roomDevices.kitchen[0].state = false; // Stove
       renderDevices();
+      renderDetailDevices();
       document.getElementById('hazardBanner').style.display = 'none';
       showToast('🛑 Emergency Auto-Shutoff Executed: Kitchen stove disconnected in 10ms. Hazard resolved!');
       document.getElementById('aiCoachText').innerText = '"Family Guardian: Stove anomaly resolved safely. Kitchen wattage dropped to 0W."';
@@ -1510,7 +1868,7 @@
       showToast('Hazard banner dismissed');
     }
 
-    // AI Coach Interaction
+    // AI Coach Chat
     function askAi(query) {
       showToast(`AI Processing: "${query}"`);
       setTimeout(() => {
@@ -1526,20 +1884,81 @@
       }, 350);
     }
 
+    function askAiChat(promptText) {
+      appendUserMsg(promptText);
+      setTimeout(() => {
+        if (promptText.includes('500')) {
+          appendAiMsg("💡 **Actionable Saving Plan**:\n1. Precool living room AC to 23°C at 4:30 PM, then raise to 26°C during 6–8 PM peak tariff (Saves ₹280/mo).\n2. Schedule EV Charger for 1 AM overnight off-peak grid rate (Saves ₹160/mo).\n3. Dim living room ambient lighting to 60% after 9 PM (Saves ₹100/mo).\n\n**Total Estimated Savings: ₹540/month!**");
+        } else if (promptText.includes('Grandma')) {
+          appendAiMsg("👵 **Family Guardian Status**:\n• Grandma Savithri (72): Bedroom motion detected 14 mins ago.\n• Room Climate: 24°C (Comfortable).\n• Stove & Chimney: Disconnected and safe.\n• Perimeter Beams: 8/8 Armed.\n\nEverything is peaceful and secure.");
+        } else if (promptText.includes('peak')) {
+          appendAiMsg("⚡ **Peak Load Breakdown**:\nCurrently drawing **1,847W**:\n• AC Compressor: 1,500W (81%)\n• Smart TV: 120W (6%)\n• Refrigerator: 150W (8%)\n• Ambient Lights: 77W (5%)\n\nRecommend switching AC to Eco Mode to save ₹85.");
+        } else {
+          appendAiMsg("🌙 Executed bedtime preset: Living room TV and ceiling lights have been powered down. Perimeter security armed.");
+          roomDevices.living[0].state = false;
+          roomDevices.living[2].state = false;
+          renderDevices();
+          renderDetailDevices();
+        }
+      }, 450);
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      askAiChat(text);
+    }
+
+    function appendUserMsg(msg) {
+      const c = document.getElementById('chatMsgContainer');
+      const div = document.createElement('div');
+      div.className = 'chat-bubble user';
+      div.innerText = msg;
+      c.appendChild(div);
+      c.scrollTop = c.scrollHeight;
+    }
+
+    function appendAiMsg(msg) {
+      const c = document.getElementById('chatMsgContainer');
+      const div = document.createElement('div');
+      div.className = 'chat-bubble ai';
+      div.innerHTML = `🤖 <strong>IQ (Amazon Bedrock)</strong>:<br/>` + msg.replace(/\n/g, '<br/>');
+      c.appendChild(div);
+      c.scrollTop = c.scrollHeight;
+    }
+
+    function simulateVoiceAsk() {
+      showToast('🎙️ Echo Voice Trigger: "Alexa, show my energy report"');
+      appendUserMsg('🎙️ "Alexa, show my energy report"');
+      setTimeout(() => {
+        appendAiMsg("Opening Energy Analytics on your Fire TV. Current active draw is 847 Watts. Today's consumption is 18.4 kWh (12% lower than yesterday).");
+        setTimeout(() => {
+          switchTab(3);
+        }, 800);
+      }, 500);
+    }
+
     let allLightsState = true;
     function toggleAllLights() {
       allLightsState = !allLightsState;
       roomDevices.living[2].state = allLightsState;
       roomDevices.bedroom[2].state = allLightsState;
       renderDevices();
+      renderDetailDevices();
       document.getElementById('aiActionBtn').innerHTML = `<span>💡 Turn ${allLightsState ? 'OFF' : 'ON'} All Lights</span>`;
       showToast(`All household lights switched ${allLightsState ? 'ON' : 'OFF'}`);
+    }
+
+    function changeTariffRegion(region) {
+      showToast(`Tariff switched to ${region.toUpperCase()}`);
+      drawAnalyticsSpline();
     }
 
     // Modal Handlers
     function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
     function openStreakModal() { document.getElementById('streakModal').style.display = 'flex'; }
-    function openSecurityModal() { document.getElementById('secModal').style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
     function selectProfile(name, role, icon) {
@@ -1548,44 +1967,37 @@
       showToast(`Authenticated as ${name} (${role})`);
     }
 
-    // Toast Utility
     function showToast(msg) {
       const toast = document.getElementById('toastMsg');
       toast.innerText = msg;
       toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2800);
+      setTimeout(() => { toast.style.display = 'none'; }, 2600);
     }
 
-    // Keyboard / D-Pad Remote Navigation Simulation
-    let focusedIndex = 0;
+    // Keyboard / Remote Navigation
     function simulateKey(key) {
       showToast(`Remote Key: ${key}`);
-      const cards = document.querySelectorAll('.device-card');
-      cards.forEach(c => c.classList.remove('focused'));
-
-      if (key === 'ArrowRight' || key === 'ArrowDown') {
-        focusedIndex = (focusedIndex + 1) % cards.length;
-      } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
-        focusedIndex = (focusedIndex - 1 + cards.length) % cards.length;
-      } else if (key === 'Enter') {
-        if (cards[focusedIndex]) {
-          cards[focusedIndex].querySelector('.toggle-pill').click();
-        }
-      }
-      if (cards[focusedIndex]) {
-        cards[focusedIndex].classList.add('focused');
-        cards[focusedIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (key === 'ArrowRight') {
+        const nextTab = (currentActiveTab % 5) + 1;
+        switchTab(nextTab);
+      } else if (key === 'ArrowLeft') {
+        const prevTab = currentActiveTab === 1 ? 5 : currentActiveTab - 1;
+        switchTab(prevTab);
+      } else if (key === 'Escape') {
+        switchTab(1);
       }
     }
 
     window.addEventListener('keydown', (e) => {
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', 'Escape'].includes(e.key)) {
+      if (['ArrowLeft', 'ArrowRight', 'Escape'].includes(e.key)) {
         simulateKey(e.key);
       }
     });
 
     // Initial render
     renderDevices();
+    renderDetailDevices();
+    setTimeout(drawSpline, 150);
   </script>
 </body>
 </html>
