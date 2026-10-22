@@ -15,6 +15,8 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 [![Accessibility](https://img.shields.io/badge/Accessibility-WCAG%20AAA%20%7C%20TalkBack-00C7B7.svg)](docs/ACCESSIBILITY.md)
 [![Bonus](https://img.shields.io/badge/Friction%20Log-10%25%20Judging%20Bonus-success.svg)](FRICTION_LOG.md)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/badge/Release-v1.0.0%20APK-brightgreen.svg)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/tag/v1.0.0)
+[![Direct Download](https://img.shields.io/badge/Download-APK%20%2813%20MB%29-blue.svg)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/download/v1.0.0/HomeIQ-FireTV-debug.apk)
 
 ---
 
@@ -35,6 +37,7 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 
 | Access Method | Instructions | Test Capabilities |
 |:---|:---|:---|
+| **📥 Direct APK Download** | [Download HomeIQ-FireTV-debug.apk (v1.0.0)](https://github.com/LAKKIREDDY-2001/HomeIQ/releases/download/v1.0.0/HomeIQ-FireTV-debug.apk) | Ready to install on Fire TV Stick or Android TV via ADB (`adb install -r HomeIQ-FireTV-debug.apk`). |
 | **⚡ 1-Click Fast Demo Profiles** *(Recommended)* | Click **`[🔑 Login / Sign Up]`** in the top-right header ➔ Select any profile card:<br/>• **Venkat Reddy (Admin)**<br/>• **Alex Johnson (Resident)**<br/>• **Priya Caretaker (Elder Care)** | Instant role assignment, unlocks master breakers, live telemetry, and active 7-day streak. |
 | **👀 Guest Mode** | No login needed! Explore all tabs directly upon launching the app. | Full access to Spline Wave Analytics, Device Hub steppers, AI Coach prompts, and Security status. |
 | **🔢 Master Demo PIN** | Default 4-digit Master Security PIN: **`1234`** | Unlocks the AES-256 Customer Safety Vault and custom PIN login. |
