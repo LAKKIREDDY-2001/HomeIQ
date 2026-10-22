@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HomeIQ</string>
+    <string name="app_tagline">आपका घर स्मार्ट है। आपका परिवार सुरक्षित है।</string>
     <string name="greeting_morning">शुभ प्रभात</string>
+    <string name="greeting_evening">शुभ संध्या</string>
+    <string name="greeting_night">शुभ रात्रि</string>
     <string name="family_guardian">परिवार रक्षक</string>
-    <string name="all_safe">सब सुरक्षित</string>
+    <string name="family_guardian_alert">परिवार रक्षक चेतावनी</string>
+    <string name="stove_hazard_alert">रसोई का चूल्हा 3 घंटे से चालू है</string>
+    <string name="auto_shutoff">स्वतः बंद (ऑटो-शटऑफ)</string>
+    <string name="all_safe">सभी प्रणालियां सुरक्षित हैं</string>
+    <string name="ai_insight_title">"IQ" एआई ऊर्जा सलाहकार</string>
+    <string name="peak_tariff_alert">उच्च बिजली दर चेतावनी</string>
+    <string name="save_energy_tip">ऊर्जा बचत सुझाव</string>
+    <string name="energy_analytics">ऊर्जा विश्लेषण</string>
+    <string name="live_power">सक्रिय बिजली भार</string>
+    <string name="room_detail">कमरे का विवरण और नियंत्रण</string>
+    <string name="security_center">सुरक्षा केंद्र और कैमरे</string>
+    <string name="master_breaker_disconnect">आपातकालीन 10ms ब्रेकर डिस्कनेक्ट</string>
+    <string name="elder_care">वरिष्ठ नागरिक सुरक्षा</string>
+    <string name="child_safety">बाल सुरक्षा</string>
+    <string name="daily_eco_target">दैनिक पर्यावरण लक्ष्य</string>
+    <string name="streak_active">पर्यावरण संरक्षण स्ट्रीक सक्रिय</string>
 </resources>

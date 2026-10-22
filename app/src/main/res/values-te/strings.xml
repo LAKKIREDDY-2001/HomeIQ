@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HomeIQ</string>
+    <string name="app_tagline">మీ ఇల్లు స్మార్ట్. మీ కుటుంబం సురక్షితం.</string>
     <string name="greeting_morning">శుభోదయం</string>
+    <string name="greeting_evening">శుభ సాయంత్రం</string>
+    <string name="greeting_night">శుభరాత్రి</string>
     <string name="family_guardian">కుటుంబ సంరక్షకుడు</string>
-    <string name="all_safe">అంతా సురక్షితం</string>
+    <string name="family_guardian_alert">కుటుంబ సంరక్షక హెచ్చరిక</string>
+    <string name="stove_hazard_alert">వంటగది స్టవ్ 3 గంటలుగా ఆన్‌లో ఉంది</string>
+    <string name="auto_shutoff">ఆటో-షట్‌ఆఫ్</string>
+    <string name="all_safe">అన్ని వ్యవస్థలు సురక్షితం</string>
+    <string name="ai_insight_title">"IQ" AI ఎనర్జీ కోచ్</string>
+    <string name="peak_tariff_alert">పీక్ టారిఫ్ హెచ్చరిక</string>
+    <string name="save_energy_tip">విద్యుత్ ఆదా చిట్కా</string>
+    <string name="energy_analytics">శక్తి విశ్లేషణ</string>
+    <string name="live_power">లైవ్ పవర్ వినియోగం</string>
+    <string name="room_detail">గది వివరాలు &amp; జోన్ నియంత్రణలు</string>
+    <string name="security_center">భద్రతా కేంద్రం &amp; కెమెరాలు</string>
+    <string name="master_breaker_disconnect">ఎమర్జెన్సీ 10ms బ్రేకర్ డిస్‌కనెక్ట్</string>
+    <string name="elder_care">పెద్దల సంరక్షణ వెల్నెస్</string>
+    <string name="child_safety">పిల్లల భద్రత</string>
+    <string name="daily_eco_target">రోజువారీ పర్యావరణ లక్ష్యం</string>
+    <string name="streak_active">ఎకో స్ట్రీక్ యాక్టివ్</string>
 </resources>

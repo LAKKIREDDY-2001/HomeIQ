@@ -27,8 +27,8 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
 <div align="center">
   <img src="docs/images/homeiq_app_icon_3d.jpg" alt="HomeIQ 3D Hero App Icon" width="180" style="border-radius: 28px; margin-bottom: 12px;" />
   <br />
-  <img src="docs/screenshots/01_main_dashboard.png" alt="HomeIQ Live Fire TV Dashboard" width="920" style="border-radius: 14px; box-shadow: 0 16px 36px rgba(0,0,0,0.6);" />
-  <p><em>↑ Bézier spline energy chart animation with real-time peak detection and Family Guardian hazard alert</em></p>
+  <img src="docs/screenshots/homeiq-demo.gif" alt="HomeIQ 10-Foot Fire TV Live Demo Animation" width="920" style="border-radius: 14px; box-shadow: 0 16px 36px rgba(0,0,0,0.6);" />
+  <p><em>↑ 15-second live Fire TV walkthrough: Bézier spline wave telemetry, Family Guardian stove auto-shutoff, Bedrock AI Coach &amp; Alexa voice integration</em></p>
   <p>
     <a href="https://homeiq-tefz.onrender.com/#ai"><strong>🚀 Launch Live Web App (Render)</strong></a> •
     <a href="https://homeiq-tefz.onrender.com/#dashboard">🏠 Dashboard</a> •
@@ -479,6 +479,29 @@ Every family has someone they worry about. A parent living alone. A child home f
 | **P10**| **Architecture Diagram + Assets** | ~0.5 hrs | Visual comprehension for judges | ✅ Complete |
 | **Bonus**| **Auth System (Sign Up + Login + Roles)**| ~2.0 hrs | Multi-profile + 1-click demo for judges | ✅ Complete |
 | **TOTAL** | — | **~14.5 hrs** | **Score: 9.75/10 + 10% Bonus (~98% Win Probability)** | **100% Shipped** |
+
+---
+
+## 🎬 3-Minute Demo Video Script & Story Arc
+
+> **Detailed Script**: Complete scene-by-scene script available in [`docs/DEMO_VIDEO_SCRIPT.md`](docs/DEMO_VIDEO_SCRIPT.md).
+
+| Timestamp | Scene / Section | Key Visual & Storyboard | Spoken Narrative |
+|:---:|:---|:---|:---|
+| **0:00 – 0:05** | **The Question** | Black screen with dramatic typography | *"Every 19 minutes, a house fire starts. Every 40 seconds, an elderly person falls. What if your TV could prevent both?"* |
+| **0:05 – 0:30** | **The Emotional Hook** | Red hazard alert overlay slides in on Fire TV | *"Grandma Savithri fell asleep with the stove on at 2 AM. HomeIQ detects 180 min no motion, counts down 60s, and triggers 10ms auto-shutoff. Grandma is safe."* |
+| **0:30 – 1:15** | **The 10-Foot Dashboard** | Native Compose TV UI, Catmull-Rom spline wave | *"13 devices across 4 rooms, live load curve, Today/Week/Month range filters, and instant couch controls."* |
+| **1:15 – 2:00** | **"IQ" AI Coach (Bedrock)** | Bedrock Claude 3 Haiku dialog & quick chips | *"Empathetic energy coaching. 'Turn OFF All Lights' two-way toggle. 'Alexa, show my energy report' deep link."* |
+| **2:00 – 2:30** | **Safety & Gamification** | 8 IR beams, gas 0.0 ppm, 7-day streak, 1-click profiles | *"Enterprise AES-256 safety vault, daily eco challenges, and instant 1-click judge authentication."* |
+| **2:30 – 3:00** | **Closing & Architecture** | Full dashboard fade to tagline and stack badges | *"Your home is smart. Your family is safe. Built with Kotlin, Compose for TV, Amazon Bedrock & Alexa Skills Kit."* |
+
+---
+
+## 👥 Hackathon Reviewers & Collaborators
+
+Per the official Amazon Developer Hackathon rules, the repository is open source under Apache 2.0 and pre-configured for Amazon team review:
+* **Testing Email**: `testing@devpost.com`
+* **Amazon Team Collaborators**: `@knmeiss`, `@giolaq`, `@anishamalde`, `@mosesroth`, `@emersonsklar`
 
 ---
 
