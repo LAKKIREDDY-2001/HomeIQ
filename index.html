@@ -11,7 +11,7 @@
   <style>
     :root {
       --bg-dark: #070B16;
-      --card-bg: rgba(17, 24, 39, 0.88);
+      --card-bg: rgba(17, 24, 39, 0.9);
       --card-border: #1F2937;
       --cyan: #38BDF8;
       --cyan-glow: rgba(56, 189, 248, 0.4);
@@ -36,17 +36,17 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.7) 0%, transparent 100%);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
-      padding: 16px 24px;
+      padding: 14px 20px 80px 20px;
     }
 
     .tv-stage {
-      max-width: 1440px;
+      max-width: 1400px;
       margin: 0 auto;
       position: relative;
     }
@@ -56,19 +56,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
     }
 
     .brand-logo-img {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       box-shadow: 0 4px 16px var(--cyan-glow);
     }
@@ -88,40 +90,70 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .badge-pill {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+    .live-dot-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--emerald);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
-    .badge-firetv {
-      background: rgba(255, 153, 0, 0.15);
-      border: 1px solid rgba(255, 153, 0, 0.4);
-      color: #FF9900;
+    .pulsing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+      animation: blink 1.4s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
     .header-center {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       font-size: 13px;
       color: var(--text-muted);
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--card-border);
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+
+    .weather-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .weather-btn:hover {
+      color: var(--cyan);
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-pill {
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(30, 41, 59, 0.85);
       border: 1px solid var(--card-border);
       color: var(--text-main);
       padding: 8px 16px;
@@ -136,7 +168,7 @@
     }
 
     .btn-pill:hover, .btn-pill.focused {
-      transform: scale(1.05);
+      transform: scale(1.04);
       border-color: var(--cyan);
       box-shadow: 0 0 16px var(--cyan-glow);
       background: rgba(14, 165, 233, 0.2);
@@ -150,7 +182,7 @@
 
     .btn-auth {
       border-color: rgba(16, 185, 129, 0.4);
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.12);
       color: var(--emerald);
     }
 
@@ -160,8 +192,8 @@
       border: 1.5px solid var(--crimson);
       box-shadow: 0 10px 30px var(--crimson-glow);
       border-radius: 16px;
-      padding: 14px 20px;
-      margin-bottom: 16px;
+      padding: 12px 18px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -177,19 +209,19 @@
     .hazard-info {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .hazard-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       background: rgba(239, 68, 68, 0.25);
       border: 1px solid var(--crimson);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 18px;
       color: var(--crimson);
       animation: pulse 1.5s infinite;
     }
@@ -200,7 +232,7 @@
     }
 
     .hazard-text h4 {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #FECACA;
       display: flex;
@@ -212,8 +244,8 @@
       background: var(--crimson);
       color: #FFFFFF;
       font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 10px;
+      padding: 2px 7px;
+      border-radius: 8px;
       text-transform: uppercase;
       font-weight: 800;
     }
@@ -226,17 +258,17 @@
 
     .hazard-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-auto-shutoff {
       background: var(--crimson);
       color: #FFFFFF;
       border: none;
-      padding: 10px 18px;
+      padding: 8px 16px;
       border-radius: 20px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -254,42 +286,159 @@
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #475569;
       color: #E2E8F0;
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* AI Coach Companion Banner */
+    .ai-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      backdrop-filter: blur(12px);
+    }
+
+    .ai-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .ai-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .ai-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 16px var(--cyan-glow);
+    }
+
+    .ai-prompt-line {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #E2E8F0;
+      line-height: 1.4;
+    }
+
+    .ai-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #334155;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .ai-input-field {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #FFFFFF;
       font-size: 13px;
+      outline: none;
+    }
+
+    .ai-ask-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .ai-quick-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--cyan);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .btn-dismiss:hover {
-      background: rgba(51, 65, 85, 0.9);
+    .chip:hover {
+      background: var(--cyan);
+      color: #0F172A;
+      transform: translateY(-1px);
+    }
+
+    .ai-action-toggle {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .ai-action-toggle:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 16px var(--cyan-glow);
     }
 
     /* Cards */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: 16px;
+      padding: 16px;
       backdrop-filter: blur(14px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
       position: relative;
     }
 
-    /* Top Stats Row */
+    /* Top Stats Row with Visualizers */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .stat-box {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(30, 41, 59, 0.55);
       border: 1px solid rgba(51, 65, 85, 0.6);
       border-radius: 14px;
-      padding: 14px 16px;
+      padding: 12px 14px;
     }
 
     .stat-label {
@@ -304,26 +453,91 @@
     }
 
     .stat-val {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
       color: var(--text-main);
-      margin-top: 4px;
+      margin-top: 2px;
       display: flex;
       align-items: baseline;
       gap: 4px;
     }
 
     .stat-unit {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--cyan);
     }
 
-    .stat-sub {
-      font-size: 11px;
-      color: var(--emerald);
-      font-weight: 600;
-      margin-top: 2px;
+    .mini-bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 20px;
+      margin-top: 8px;
+    }
+
+    .mini-bar {
+      flex: 1;
+      border-radius: 3px;
+      background: rgba(56, 189, 248, 0.4);
+    }
+
+    .mini-bar.high {
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan-glow);
+    }
+
+    /* 24-Hour Bar Graph Visualizer */
+    .hourly-bar-container {
+      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .hourly-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 60px;
+      padding-bottom: 4px;
+    }
+
+    .h-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: rgba(2, 132, 199, 0.45);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .h-bar:hover, .h-bar.peak {
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .h-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Dashboard Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Canvas / Chart */
@@ -331,11 +545,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .chart-title-wrap h3 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
     }
 
@@ -352,10 +566,10 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 5px 14px;
-      border-radius: 16px;
+      padding: 4px 12px;
+      border-radius: 14px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -369,7 +583,7 @@
     .canvas-container {
       position: relative;
       width: 100%;
-      height: 190px;
+      height: 180px;
     }
 
     canvas {
@@ -380,32 +594,76 @@
 
     .floating-peak-badge {
       position: absolute;
-      top: 22px;
-      right: 32%;
+      top: 18px;
+      right: 28%;
       background: rgba(15, 23, 42, 0.95);
       border: 1.5px solid var(--amber);
       color: #FCD34D;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 10px;
       font-weight: 700;
       box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       animation: bounce 2s infinite ease-in-out;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+      50% { transform: translateY(-3px); }
     }
 
-    /* Devices */
+    /* Goal Ring */
+    .goal-circle-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .goal-info h4 {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .goal-info .goal-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 2px 0;
+    }
+
+    .goal-ring {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: conic-gradient(var(--cyan) 61%, rgba(30, 41, 59, 0.6) 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .goal-ring-inner {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    /* Devices Hub */
     .room-tabs {
       display: flex;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 12px;
       overflow-x: auto;
     }
 
@@ -413,14 +671,15 @@
       background: rgba(30, 41, 59, 0.7);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      white-space: nowrap;
       transition: all 0.2s;
     }
 
@@ -428,65 +687,69 @@
       background: var(--blue);
       color: #FFFFFF;
       border-color: var(--cyan);
-      box-shadow: 0 4px 16px var(--cyan-glow);
+      box-shadow: 0 4px 14px var(--cyan-glow);
     }
 
     .devices-list {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .devices-list {
+        grid-template-columns: 1fr;
+      }
     }
 
     .device-card {
       background: rgba(30, 41, 59, 0.55);
       border: 1px solid rgba(51, 65, 85, 0.6);
-      border-radius: 14px;
-      padding: 12px 14px;
+      border-radius: 12px;
+      padding: 10px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s;
     }
 
-    .device-card:hover, .device-card.focused {
-      transform: scale(1.03);
+    .device-card:hover {
       border-color: var(--cyan);
-      box-shadow: 0 0 16px var(--cyan-glow);
       background: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 0 14px var(--cyan-glow);
     }
 
     .device-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .dev-icon {
-      font-size: 22px;
+      font-size: 20px;
     }
 
     .dev-name {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
     }
 
-    .dev-power {
-      font-size: 11px;
+    .dev-sub {
+      font-size: 10.5px;
       color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
     }
 
     .device-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .stepper-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
       background: #1E293B;
       border: 1px solid #475569;
       color: #FFFFFF;
@@ -507,14 +770,14 @@
     .stepper-val {
       font-size: 12px;
       font-weight: 700;
-      min-width: 32px;
+      min-width: 30px;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .toggle-pill {
       padding: 4px 10px;
-      border-radius: 14px;
+      border-radius: 12px;
       font-size: 11px;
       font-weight: 800;
       cursor: pointer;
@@ -537,53 +800,194 @@
       color: #94A3B8;
     }
 
-    /* Bottom TV Navigation Bar */
-    .tv-nav-bar {
-      margin-top: 18px;
+    /* Global Top Navigation Bar */
+    .top-nav-bar {
       display: flex;
-      gap: 12px;
-      position: sticky;
-      bottom: 8px;
-      z-index: 50;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1.5px solid rgba(56, 189, 248, 0.28);
+      border-radius: 16px;
+      padding: 6px;
+      margin-bottom: 14px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      overflow-x: auto;
+    }
+
+    .top-nav-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .top-nav-tab:hover {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .top-nav-tab.active {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      border-color: var(--cyan);
+      color: #FFFFFF;
+      box-shadow: 0 0 20px var(--cyan-glow);
+    }
+
+    .top-nav-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      font-size: 11px;
+      font-weight: 800;
+      color: #94A3B8;
+    }
+
+    .top-nav-tab.active .top-nav-badge {
+      background: rgba(255, 255, 255, 0.28);
+      color: #FFFFFF;
+    }
+
+    /* Fixed Bottom TV Nav Bar (Centered & Protected) */
+    .tv-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1400px;
+      background: rgba(7, 11, 22, 0.96);
+      border-top: 1.5px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      padding: 10px 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+      box-sizing: border-box;
     }
 
     .tv-nav-item {
       flex: 1;
-      background: rgba(17, 24, 39, 0.95);
-      border: 1.5px solid var(--card-border);
-      border-radius: 14px;
-      padding: 12px 14px;
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px 8px;
       text-align: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transition: all 0.2s;
     }
 
     .tv-nav-item.active {
       background: linear-gradient(135deg, #0284C7, #0369A1);
       color: #FFFFFF;
       border-color: var(--cyan);
-      box-shadow: 0 0 24px var(--cyan-glow);
+      box-shadow: 0 0 18px var(--cyan-glow);
       transform: translateY(-2px);
     }
 
     .tv-nav-item:hover {
-      transform: scale(1.02);
       border-color: var(--cyan);
       color: #FFFFFF;
     }
 
-    /* Tab Contents Section */
+    /* Floating Remote Widget */
+    .remote-toggle-pill {
+      position: fixed;
+      bottom: 68px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1.5px solid var(--cyan);
+      box-shadow: 0 4px 18px var(--cyan-glow);
+      color: #FFFFFF;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      z-index: 105;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .remote-toggle-pill:hover {
+      transform: scale(1.05);
+      background: rgba(2, 132, 199, 0.3);
+    }
+
+    .remote-widget {
+      position: fixed;
+      bottom: 110px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.97);
+      border: 1.5px solid #334155;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      z-index: 106;
+      width: 150px;
+      backdrop-filter: blur(16px);
+    }
+
+    .dpad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin: 8px 0;
+    }
+
+    .dpad-btn {
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: var(--text-main);
+      padding: 8px 0;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+
+    .dpad-btn:hover, .dpad-btn:active {
+      background: var(--cyan);
+      color: #070B16;
+      border-color: var(--cyan);
+    }
+
+    .dpad-center {
+      background: #0284C7;
+      color: #FFFFFF;
+      border-color: #38BDF8;
+    }
+
     .tab-content {
-      display: none;
-      animation: fadeIn 0.3s ease-out;
+      display: none !important;
+      animation: fadeIn 0.25s ease-out;
     }
 
     .tab-content.active {
-      display: block;
+      display: block !important;
     }
 
     @keyframes fadeIn {
@@ -591,96 +995,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Virtual Remote Controller */
-    .remote-widget {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1.5px solid #334155;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
-      border-radius: 24px;
-      padding: 16px;
-      width: 170px;
-      text-align: center;
-      backdrop-filter: blur(16px);
-      z-index: 999;
-    }
-
-    .remote-title {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .dpad-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .dpad-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #1E293B;
-      border: 1px solid #475569;
-      color: #E2E8F0;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.1s;
-    }
-
-    .dpad-btn:active {
-      background: var(--cyan);
-      color: #070B16;
-      transform: scale(0.92);
-    }
-
-    .dpad-center {
-      background: var(--blue);
-      border-color: var(--cyan);
-      font-weight: 800;
-      font-size: 11px;
-    }
-
-    .remote-action-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .remote-sm-btn {
-      flex: 1;
-      padding: 6px 8px;
-      border-radius: 10px;
-      background: #1E293B;
-      border: 1px solid #475569;
-      color: #94A3B8;
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .remote-sm-btn.alexa {
-      background: rgba(0, 202, 255, 0.15);
-      border-color: #00CAFF;
-      color: #00CAFF;
-    }
-
-    /* Modal Dialogs */
+    /* Modals */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -696,15 +1011,15 @@
       background: #0F172A;
       border: 1.5px solid var(--cyan);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--cyan-glow);
-      border-radius: 20px;
-      padding: 24px;
+      border-radius: 18px;
+      padding: 22px;
       width: 90%;
-      max-width: 560px;
+      max-width: 520px;
       animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     @keyframes modalPop {
-      from { transform: scale(0.9); opacity: 0; }
+      from { transform: scale(0.92); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
 
@@ -712,11 +1027,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .modal-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: var(--text-main);
     }
@@ -729,17 +1044,69 @@
       cursor: pointer;
     }
 
+    .modal-tab-row {
+      display: flex;
+      gap: 6px;
+      background: #1E293B;
+      padding: 3px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+
+    .m-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .m-tab-btn.active {
+      background: var(--blue);
+      color: #FFFFFF;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #1E293B;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--cyan);
+    }
+
     .profile-cards-grid {
       display: grid;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 8px;
     }
 
     .prof-card {
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid #334155;
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 10px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -753,31 +1120,18 @@
       transform: translateX(4px);
     }
 
-    .prof-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-
-    .prof-role {
-      font-size: 11px;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    /* Toast */
     .toast-msg {
       position: fixed;
-      top: 24px;
-      right: 24px;
+      top: 20px;
+      right: 20px;
       background: #10B981;
       color: #064E3B;
-      padding: 10px 20px;
-      border-radius: 14px;
+      padding: 10px 18px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12.5px;
       box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-      z-index: 1001;
+      z-index: 2000;
       display: none;
       animation: fadeIn 0.3s;
     }
@@ -786,14 +1140,14 @@
     .cam-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
 
     .cam-feed {
-      height: 200px;
+      height: 180px;
       background: #020617;
       border: 1px solid #334155;
-      border-radius: 14px;
+      border-radius: 12px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -816,54 +1170,49 @@
 
     .cam-label {
       position: absolute;
-      top: 10px;
-      left: 12px;
+      top: 8px; left: 10px;
       background: rgba(0, 0, 0, 0.7);
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: #38BDF8;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .cam-status {
       position: absolute;
-      bottom: 10px;
-      right: 12px;
-      font-size: 11px;
+      bottom: 8px; right: 10px;
+      font-size: 10px;
       color: #10B981;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
     }
 
-    /* AI Chat Window */
+    /* AI Chat */
     .chat-container {
       display: flex;
       flex-direction: column;
-      height: 480px;
+      height: 420px;
       background: rgba(15, 23, 42, 0.95);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
+      border-radius: 14px;
       overflow: hidden;
     }
 
     .chat-messages {
       flex: 1;
-      padding: 20px;
+      padding: 16px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .chat-bubble {
       max-width: 80%;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 13px;
       line-height: 1.5;
     }
 
@@ -872,23 +1221,22 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
       color: #E2E8F0;
       align-self: flex-start;
-      border-bottom-left-radius: 4px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      border-bottom-left-radius: 3px;
     }
 
     .chat-bubble.user {
       background: linear-gradient(135deg, #0284C7, #0369A1);
       color: #FFFFFF;
       align-self: flex-end;
-      border-bottom-right-radius: 4px;
+      border-bottom-right-radius: 3px;
     }
 
     .chat-input-bar {
-      padding: 16px;
+      padding: 12px;
       background: #0B132B;
       border-top: 1px solid #1E293B;
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .chat-input {
@@ -896,33 +1244,21 @@
       background: #1E293B;
       border: 1px solid #475569;
       color: #FFFFFF;
-      padding: 12px 18px;
-      border-radius: 24px;
-      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 20px;
+      font-size: 13px;
       outline: none;
-      transition: all 0.2s;
-    }
-
-    .chat-input:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 16px var(--cyan-glow);
     }
 
     .chat-send-btn {
       background: var(--blue);
       color: white;
       border: none;
-      padding: 0 24px;
-      border-radius: 24px;
+      padding: 0 20px;
+      border-radius: 20px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .chat-send-btn:hover {
-      background: #0369A1;
-      transform: scale(1.04);
     }
   </style>
 </head>
@@ -936,12 +1272,15 @@
         <div>
           <div class="brand-title">Home<span class="brand-iq">IQ</span></div>
         </div>
-        <span class="badge-pill badge-firetv">📺 Fire TV</span>
+        <span class="live-dot-badge"><span class="pulsing-dot"></span> LIVE</span>
       </div>
 
       <div class="header-center">
-        <span>📍 <strong>32.5°C</strong> • Bengaluru, IN (Sunny 65%)</span>
-        <span id="liveClock">Thu, Oct 22 • 8:45 PM</span>
+        <button class="weather-btn" onclick="openWeatherModal()">
+          <span>🌤️ <strong id="headerTemp">32.5°C</strong> • <span id="headerCity">Bengaluru, IN</span></span>
+          <span style="font-size: 11px; color: var(--cyan); font-weight: 800;">⇄ Change</span>
+        </button>
+        <span id="liveClock">Thu, Oct 22 • 9:15 PM</span>
       </div>
 
       <div class="header-actions">
@@ -955,6 +1294,35 @@
         </button>
       </div>
     </header>
+
+    <!-- Global TV & Web Top Navigation Bar (Tabs 1 to 5) -->
+    <nav class="top-nav-bar" id="topNavBar">
+      <button class="top-nav-tab active" id="topNav_1" onclick="switchTab(1)">
+        <span>🏠</span>
+        <span>Dashboard</span>
+        <span class="top-nav-badge">1</span>
+      </button>
+      <button class="top-nav-tab" id="topNav_2" onclick="switchTab(2)">
+        <span>🛋️</span>
+        <span>Room Details</span>
+        <span class="top-nav-badge">2</span>
+      </button>
+      <button class="top-nav-tab" id="topNav_3" onclick="switchTab(3)">
+        <span>📊</span>
+        <span>Energy Analytics</span>
+        <span class="top-nav-badge">3</span>
+      </button>
+      <button class="top-nav-tab" id="topNav_4" onclick="switchTab(4)">
+        <span>🛡️</span>
+        <span>Security &amp; Cameras</span>
+        <span class="top-nav-badge">4</span>
+      </button>
+      <button class="top-nav-tab" id="topNav_5" onclick="switchTab(5)">
+        <span>🤖</span>
+        <span>Bedrock AI Coach</span>
+        <span class="top-nav-badge">5</span>
+      </button>
+    </nav>
 
     <!-- Slide-in Hazard Alert: Family Guardian -->
     <div class="hazard-banner" id="hazardBanner">
@@ -977,51 +1345,85 @@
     <!-- TAB 1: MAIN DASHBOARD -->
     <!-- ========================================== -->
     <div class="tab-content active" id="tabContent_1">
-      <!-- AI Coach Companion Banner -->
+      <!-- AI Coach Companion Banner with Writing Input Block -->
       <div class="ai-banner">
-        <div class="ai-identity">
-          <div class="ai-avatar">🤖</div>
-          <div class="ai-msg-box">
+        <div class="ai-header-row">
+          <div class="ai-identity">
+            <div class="ai-avatar">🤖</div>
             <div class="ai-prompt-line" id="aiCoachText">
               "Hey Venkat! Your AC accounts for 42% of total energy. Setting to 26°C could save ₹85/month."
             </div>
-            <div class="ai-quick-chips">
-              <span class="chip" onclick="askAi('How to save ₹500 this month?')">💡 Save ₹500 Tip</span>
-              <span class="chip" onclick="askAi('What is peak tariff rate?')">⚡ Peak Tariff Alert</span>
-              <span class="chip" onclick="askAi('How is Grandma Savithri doing?')">👵 Elder Care Status</span>
-            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button class="btn-pill" style="border-color: #38BDF8; color: #38BDF8; font-weight: 700;" onclick="switchTab(5)">
+              <span>🤖 Full AI Chat ➔</span>
+            </button>
+            <button class="ai-action-toggle" id="aiActionBtn" onclick="toggleAllLights()">
+              <span>💡 Turn OFF All Lights</span>
+            </button>
           </div>
         </div>
-        <button class="ai-action-toggle" id="aiActionBtn" onclick="toggleAllLights()">
-          <span>💡 Turn OFF All Lights</span>
-        </button>
+
+        <!-- AI Writing Input Block -->
+        <div class="ai-input-row">
+          <input type="text" class="ai-input-field" id="dashAiInput" placeholder="Write any question for IQ (e.g., 'How to save ₹500/month?')" onkeydown="if(event.key==='Enter') submitDashAi()">
+          <button class="ai-ask-btn" onclick="submitDashAi()">Ask IQ ➔</button>
+        </div>
+
+        <div class="ai-quick-chips">
+          <span class="chip" onclick="askAi('How to save ₹500 this month?')">💡 Save ₹500 Tip</span>
+          <span class="chip" onclick="askAi('What is peak tariff rate?')">⚡ Peak Tariff Alert</span>
+          <span class="chip" onclick="askAi('How is Grandma Savithri doing?')">👵 Elder Care Status</span>
+          <span class="chip" onclick="askAi('Turn off unused bedroom lights')">🌙 Turn Off Idle Lights</span>
+        </div>
       </div>
 
       <!-- Main Dashboard Grid -->
       <div class="dashboard-grid">
         <!-- Left: Telemetry & Spline Wave Chart -->
         <div class="card">
+          <!-- 3 Stats with Mini Bar Visualizers -->
           <div class="stats-row">
             <div class="stat-box">
               <div class="stat-label">⚡ Live Power</div>
               <div class="stat-val"><span id="liveWatts">847</span> <span class="stat-unit">W</span></div>
-              <div class="stat-sub">Normal Base Load</div>
+              <div class="mini-bar-chart">
+                <div class="mini-bar" style="height: 40%;"></div>
+                <div class="mini-bar" style="height: 60%;"></div>
+                <div class="mini-bar high" style="height: 90%;"></div>
+                <div class="mini-bar" style="height: 50%;"></div>
+              </div>
             </div>
             <div class="stat-box">
               <div class="stat-label">📅 Today Total</div>
               <div class="stat-val">18.4 <span class="stat-unit">kWh</span></div>
-              <div class="stat-sub">₹89.20 Spent</div>
+              <div class="mini-bar-chart">
+                <div class="mini-bar high" style="height: 75%;"></div>
+                <div class="mini-bar" style="height: 45%;"></div>
+                <div class="mini-bar high" style="height: 85%;"></div>
+                <div class="mini-bar" style="height: 60%;"></div>
+              </div>
             </div>
             <div class="stat-box">
               <div class="stat-label">📊 Month Total</div>
               <div class="stat-val">485.6 <span class="stat-unit">kWh</span></div>
-              <div class="stat-sub">↓ 12% vs last month</div>
+              <div class="mini-bar-chart">
+                <div class="mini-bar" style="height: 50%;"></div>
+                <div class="mini-bar high" style="height: 70%;"></div>
+                <div class="mini-bar" style="height: 60%;"></div>
+                <div class="mini-bar high" style="height: 95%;"></div>
+              </div>
             </div>
           </div>
 
           <div class="chart-header">
             <div class="chart-title-wrap">
-              <h3>Power Consumption Analytics (Catmull-Rom Spline)</h3>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h3 style="margin: 0;">Power Consumption Analytics</h3>
+                <button class="btn-pill" style="border-color: var(--cyan); color: var(--cyan); font-size: 11px; padding: 4px 10px;" onclick="switchTab(3)">
+                  📊 Full Analytics ➔
+                </button>
+              </div>
             </div>
             <div class="filter-capsule">
               <button class="filter-btn active" onclick="setChartRange('today', this)">Today</button>
@@ -1037,10 +1439,19 @@
             </div>
             <canvas id="splineCanvas"></canvas>
           </div>
+
+          <!-- 24-Hour Usage Columns Visualizer -->
+          <div class="hourly-bar-container">
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">24-HOUR USAGE (kWh)</div>
+            <div class="hourly-bars" id="hourlyBarsRow"></div>
+            <div class="h-bar-labels">
+              <span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>12 AM</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Right: Daily Goal & Security Status -->
-        <div style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Right: Daily Goal, Security, Weather -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
           <div class="card goal-circle-card">
             <div class="goal-info">
               <h4>DAILY ECO TARGET</h4>
@@ -1052,24 +1463,39 @@
             </div>
           </div>
 
-          <div class="security-status-card" onclick="switchTab(4)">
-            <div class="sec-left">
-              <div class="sec-icon">🛡️</div>
-              <div>
-                <div class="sec-title">HOME MODE: ARMED</div>
-                <div class="sec-sub">8/8 Perimeter Beams • Gas 0.0 ppm</div>
+          <div class="card" style="padding: 12px 14px; cursor: pointer;" onclick="switchTab(4)">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="font-size: 24px;">🛡️</div>
+                <div>
+                  <div style="font-size: 13px; font-weight: 700; color: #A7F3D0;">HOME MODE: ARMED</div>
+                  <div style="font-size: 10.5px; color: var(--text-muted);">8/8 Perimeter Beams • Gas 0.0 ppm</div>
+                </div>
               </div>
+              <span style="color: var(--emerald); font-weight: 800;">➔</span>
             </div>
-            <span style="font-size: 18px; color: var(--emerald);">➔</span>
           </div>
 
-          <div class="card" style="padding: 14px 16px;">
+          <div class="card" style="padding: 12px 14px; cursor: pointer;" onclick="openWeatherModal()">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 12px; font-weight: 700; color: var(--text-muted);">CROSS-DEVICE VOICE</div>
-              <span class="badge-pill" style="background: rgba(0,202,255,0.15); color: #00CAFF;">Echo Active</span>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="font-size: 24px;">☀️</div>
+                <div>
+                  <div style="font-size: 13px; font-weight: 700;" id="cardWeatherCity">32.5°C • Bengaluru, IN</div>
+                  <div style="font-size: 10.5px; color: var(--text-muted);">Sunny, 65% humidity • Normal Grid</div>
+                </div>
+              </div>
+              <span style="font-size: 12px; color: var(--cyan); font-weight: 700;">Switch ⇄</span>
             </div>
-            <p style="font-size: 12px; color: #CBD5E1; margin-top: 6px;">
-              <em>"Alexa, show my energy report"</em> deep-links directly to this Fire TV dashboard.
+          </div>
+
+          <div class="card" style="padding: 12px 14px; cursor: pointer;" onclick="switchTab(5); simulateVoiceAsk();">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--text-muted);">CROSS-DEVICE VOICE</div>
+              <span class="badge-pill" style="background: rgba(0,202,255,0.15); color: #00CAFF;">🎙️ Test Alexa ➔</span>
+            </div>
+            <p style="font-size: 11px; color: #CBD5E1; margin-top: 5px;">
+              <em>"Alexa, show my energy report"</em> triggers this Fire TV dashboard via AWS Lambda deep links.
             </p>
           </div>
         </div>
@@ -1077,9 +1503,11 @@
 
       <!-- Device Hub Steppers & Toggles -->
       <div class="card devices-section">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <h3 style="font-size: 16px; font-weight: 700;">Multi-Room Device Hub (13 Connected Devices)</h3>
-          <span style="font-size: 12px; color: var(--cyan); font-weight: 600; cursor: pointer;" onclick="switchTab(2)">View Detailed Room Controls ➔</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="font-size: 15px; font-weight: 700;">Multi-Room Device Hub (13 Connected Devices)</h3>
+          <button class="btn-pill" style="border-color: var(--cyan); color: var(--cyan); font-size: 11.5px; padding: 5px 12px;" onclick="switchTab(2)">
+            🛋️ Open Room Details ➔
+          </button>
         </div>
 
         <div class="room-tabs">
@@ -1097,33 +1525,36 @@
     <!-- TAB 2: ROOM DETAIL VIEW -->
     <!-- ========================================== -->
     <div class="tab-content" id="tabContent_2">
-      <div class="card" style="margin-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div class="card" style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">🛋️ Room Detail & Zone Controls</h2>
-            <p style="font-size: 13px; color: var(--text-muted);">Full hardware telemetry, smart steppers, and automation schedules per room.</p>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+              <button class="btn-pill" style="padding: 5px 10px; font-size: 11px;" onclick="switchTab(1)">⬅ Back to Dashboard</button>
+              <h2 style="font-size: 19px; font-weight: 800; color: #FFFFFF; margin: 0;">🛋️ Room Detail &amp; Zone Controls</h2>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted);">Granular temperature, volume, lighting steppers, and automation scenes.</p>
           </div>
           <div style="display: flex; gap: 8px;">
-            <button class="btn-pill" onclick="applyPreset('cinema')">🎬 Cinema Mode</button>
+            <button class="btn-pill" onclick="applyPreset('cinema')">🎬 Cinema</button>
             <button class="btn-pill" onclick="applyPreset('eco')">🌱 Eco Saver</button>
-            <button class="btn-pill" onclick="applyPreset('night')">🌙 Night Mode</button>
+            <button class="btn-pill" onclick="applyPreset('night')">🌙 Night</button>
           </div>
         </div>
 
-        <div class="room-tabs" style="margin-bottom: 20px;">
+        <div class="room-tabs" style="margin-bottom: 16px;">
           <button class="room-tab active" onclick="switchDetailRoom('living', this)">🛋️ Living Room</button>
           <button class="room-tab" onclick="switchDetailRoom('kitchen', this)">🍳 Kitchen</button>
           <button class="room-tab" onclick="switchDetailRoom('bedroom', this)">🛏️ Master Bedroom</button>
           <button class="room-tab" onclick="switchDetailRoom('garage', this)">🚗 Garage</button>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px;">
           <div class="stat-box">
             <div class="stat-label">Active Power</div>
             <div class="stat-val" id="detailRoomPower">1,695 <span class="stat-unit">W</span></div>
           </div>
           <div class="stat-box">
-            <div class="stat-label">Room Climate</div>
+            <div class="stat-label">Climate</div>
             <div class="stat-val">24.0 <span class="stat-unit">°C</span></div>
           </div>
           <div class="stat-box">
@@ -1144,15 +1575,18 @@
     <!-- TAB 3: ENERGY ANALYTICS -->
     <!-- ========================================== -->
     <div class="tab-content" id="tabContent_3">
-      <div class="card" style="margin-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <div class="card" style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">📊 Dynamic Spline Energy Analytics</h2>
-            <p style="font-size: 13px; color: var(--text-muted);">Cubic Bézier wave curves with Catmull-Rom tangent pathing & peak tariff evaluation.</p>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+              <button class="btn-pill" style="padding: 5px 10px; font-size: 11px;" onclick="switchTab(1)">⬅ Back to Dashboard</button>
+              <h2 style="font-size: 19px; font-weight: 800; color: #FFFFFF; margin: 0;">📊 Dynamic Spline Energy Analytics</h2>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted);">Cubic Bézier wave curves with Catmull-Rom tangent pathing &amp; peak tariff evaluation.</p>
           </div>
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">REGION:</span>
-            <select id="tariffSelect" onchange="changeTariffRegion(this.value)" style="background: #1E293B; color: #38BDF8; border: 1px solid #475569; padding: 6px 14px; border-radius: 12px; font-weight: 700; outline: none; cursor: pointer;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">REGION:</span>
+            <select id="tariffSelect" onchange="changeTariffRegion(this.value)" style="background: #1E293B; color: #38BDF8; border: 1px solid #475569; padding: 5px 12px; border-radius: 10px; font-weight: 700; outline: none; cursor: pointer;">
               <option value="blr">📍 Bengaluru (BESCOM)</option>
               <option value="mum">📍 Mumbai (Tata Power)</option>
               <option value="del">📍 Delhi (BSES)</option>
@@ -1163,7 +1597,7 @@
         </div>
 
         <div class="chart-header">
-          <div class="stat-sub" style="font-size: 13px;">Peak Tariff Window: <strong>6:00 PM – 8:00 PM (₹12.40/kWh)</strong></div>
+          <div class="stat-sub" style="font-size: 12px;" id="tariffWindowText">Peak Tariff Window: <strong>6:00 PM – 8:00 PM (₹12.40/kWh)</strong></div>
           <div class="filter-capsule">
             <button class="filter-btn active" onclick="setAnalyticsRange('today', this)">Today</button>
             <button class="filter-btn" onclick="setAnalyticsRange('week', this)">Week</button>
@@ -1172,14 +1606,14 @@
           </div>
         </div>
 
-        <div class="canvas-container" style="height: 280px;">
+        <div class="canvas-container" style="height: 250px;">
           <div class="floating-peak-badge" id="analyticsPeakBadge">
             <span>⚡ Max Peak: 6:00 PM • 4.8 kW (₹59.50/hr)</span>
           </div>
           <canvas id="analyticsSplineCanvas"></canvas>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px;">
           <div class="stat-box">
             <div class="stat-label">❄️ HVAC &amp; AC Load</div>
             <div class="stat-val">42% <span class="stat-unit">7.7 kWh</span></div>
@@ -1208,11 +1642,14 @@
     <!-- TAB 4: SECURITY & CAMERAS -->
     <!-- ========================================== -->
     <div class="tab-content" id="tabContent_4">
-      <div class="card" style="margin-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div class="card" style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">🛡️ Security Center &amp; IP Cameras</h2>
-            <p style="font-size: 13px; color: var(--text-muted);">Real-time perimeter tripwires, infrared camera feeds, and emergency circuit disconnects.</p>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+              <button class="btn-pill" style="padding: 5px 10px; font-size: 11px;" onclick="switchTab(1)">⬅ Back to Dashboard</button>
+              <h2 style="font-size: 19px; font-weight: 800; color: #FFFFFF; margin: 0;">🛡️ Security Center &amp; IP Cameras</h2>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted);">Real-time perimeter tripwires, infrared camera feeds, and emergency circuit disconnects.</p>
           </div>
           <button class="btn-auto-shutoff" onclick="alert('⚡ Master Breaker Disconnected: All heavy circuits isolated in 10ms.');">
             🛑 Emergency 10ms Breaker Disconnect
@@ -1223,30 +1660,30 @@
           <div class="cam-feed">
             <div class="cam-scanline"></div>
             <div class="cam-label">📹 CAM 1: FRONT ENTRANCE</div>
-            <div style="font-size: 40px; opacity: 0.6;">🚪</div>
+            <div style="font-size: 36px; opacity: 0.6;">🚪</div>
             <div class="cam-status">SMART DEADBOLT: LOCKED 🔒</div>
           </div>
           <div class="cam-feed">
             <div class="cam-scanline"></div>
             <div class="cam-label">📹 CAM 2: LIVING ROOM</div>
-            <div style="font-size: 40px; opacity: 0.6;">🛋️</div>
+            <div style="font-size: 36px; opacity: 0.6;">🛋️</div>
             <div class="cam-status">PIR MOTION: NORMAL 🟢</div>
           </div>
           <div class="cam-feed">
             <div class="cam-scanline"></div>
             <div class="cam-label">📹 CAM 3: KITCHEN INDUCTION</div>
-            <div style="font-size: 40px; opacity: 0.6;">🍳</div>
-            <div class="cam-status" style="color: var(--crimson);">ELDER CARE ANOMALY DETECTED ⚠</div>
+            <div style="font-size: 36px; opacity: 0.6;">🍳</div>
+            <div class="cam-status" id="camStoveStatus" style="color: var(--crimson);">ELDER CARE ANOMALY DETECTED ⚠</div>
           </div>
           <div class="cam-feed">
             <div class="cam-scanline"></div>
             <div class="cam-label">📹 CAM 4: BACKYARD PATIO</div>
-            <div style="font-size: 40px; opacity: 0.6;">🌲</div>
+            <div style="font-size: 36px; opacity: 0.6;">🌲</div>
             <div class="cam-status">8/8 BEAMS ARMED 🟢</div>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px;">
           <div class="stat-box">
             <div class="stat-label">Catalytic Gas / CO Sensor</div>
             <div class="stat-val" style="color: var(--emerald);">0.0 <span class="stat-unit">ppm</span></div>
@@ -1270,13 +1707,16 @@
     <!-- TAB 5: AI ASSISTANT / VOICE COMMAND -->
     <!-- ========================================== -->
     <div class="tab-content" id="tabContent_5">
-      <div class="card" style="margin-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="ai-avatar" style="width: 48px; height: 48px; font-size: 26px;">🤖</div>
+      <div class="card" style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="ai-avatar" style="width: 44px; height: 44px; font-size: 24px;">🤖</div>
             <div>
-              <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">"IQ" — AI Smart Home Energy Coach</h2>
-              <p style="font-size: 13px; color: var(--text-muted);">Powered by Amazon Bedrock (Anthropic Claude 3 Haiku) with cross-device Alexa integration.</p>
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                <button class="btn-pill" style="padding: 5px 10px; font-size: 11px;" onclick="switchTab(1)">⬅ Back to Dashboard</button>
+                <h2 style="font-size: 19px; font-weight: 800; color: #FFFFFF; margin: 0;">"IQ" — AI Smart Home Energy Coach</h2>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted);">Powered by Amazon Bedrock (Anthropic Claude 3 Haiku) with cross-device Alexa integration.</p>
             </div>
           </div>
           <button class="btn-pill" style="border-color: #00CAFF; color: #00CAFF;" onclick="simulateVoiceAsk()">
@@ -1296,12 +1736,39 @@
           </div>
         </div>
 
-        <div style="display: flex; gap: 8px; margin-top: 12px;">
+        <div style="display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;">
           <span class="chip" onclick="askAiChat('How to save ₹500 on electricity bill?')">💡 How to save ₹500?</span>
           <span class="chip" onclick="askAiChat('Is Grandma Savithri safe in Bengaluru?')">👵 Elder Care Wellness Check</span>
           <span class="chip" onclick="askAiChat('What appliances are consuming peak power right now?')">⚡ Peak Load Breakdown</span>
           <span class="chip" onclick="askAiChat('Turn off living room AC and dim all lights')">🌙 Bedtime Automation</span>
         </div>
+      </div>
+    </div>
+
+    <!-- Floating Remote Widget with Collapse / Expand -->
+    <button class="remote-toggle-pill" id="remoteTogglePill" onclick="toggleRemoteWidget()">
+      🎮 Remote <span id="remoteToggleArrow">▲</span>
+    </button>
+    
+    <div class="remote-widget" id="remoteWidget" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <div style="font-size: 11px; font-weight: 800; color: var(--cyan);">🎮 FIRE TV REMOTE</div>
+        <button onclick="toggleRemoteWidget()" style="background: none; border: none; color: #94A3B8; font-size: 14px; cursor: pointer; padding: 0 4px;">✕</button>
+      </div>
+      <div class="dpad-grid">
+        <div></div>
+        <button class="dpad-btn" onclick="simulateKey('ArrowUp')">▲</button>
+        <div></div>
+        <button class="dpad-btn" onclick="simulateKey('ArrowLeft')">◀</button>
+        <button class="dpad-btn dpad-center" onclick="simulateKey('Enter')">OK</button>
+        <button class="dpad-btn" onclick="simulateKey('ArrowRight')">▶</button>
+        <div></div>
+        <button class="dpad-btn" onclick="simulateKey('ArrowDown')">▼</button>
+        <div></div>
+      </div>
+      <div style="margin-top: 6px; display: flex; gap: 4px;">
+        <button class="btn-pill" style="flex: 1; padding: 5px 2px; font-size: 10px; text-align: center;" onclick="simulateKey('Escape')">BACK</button>
+        <button class="btn-pill" style="flex: 1; padding: 5px 2px; font-size: 10px; text-align: center; border-color: #00CAFF; color: #00CAFF;" onclick="switchTab(5); simulateVoiceAsk();">🎙️ ALEXA</button>
       </div>
     </div>
 
@@ -1315,59 +1782,146 @@
     </div>
   </div>
 
-  <!-- Virtual Fire TV Remote Controller for Browser Testing -->
-  <div class="remote-widget">
-    <div class="remote-title">🎮 Fire TV Remote</div>
-    <div class="dpad-grid">
-      <div></div>
-      <button class="dpad-btn" onclick="simulateKey('ArrowUp')">▲</button>
-      <div></div>
-      <button class="dpad-btn" onclick="simulateKey('ArrowLeft')">◀</button>
-      <button class="dpad-btn dpad-center" onclick="simulateKey('Enter')">OK</button>
-      <button class="dpad-btn" onclick="simulateKey('ArrowRight')">▶</button>
-      <div></div>
-      <button class="dpad-btn" onclick="simulateKey('ArrowDown')">▼</button>
-      <div></div>
-    </div>
-    <div class="remote-action-row">
-      <button class="remote-sm-btn" onclick="simulateKey('Escape')">BACK</button>
-      <button class="remote-sm-btn alexa" onclick="switchTab(5); simulateVoiceAsk();">🎙️ ALEXA</button>
+  <!-- Location / Weather Switcher Modal -->
+  <div class="modal-backdrop" id="weatherModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">📍 Select Household Location &amp; Weather</div>
+        <button class="modal-close" onclick="closeModal('weatherModal')">✕</button>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
+        Changing your location dynamically updates local weather, ambient temperature, humidity, and grid tariff rates:
+      </p>
+      <div class="profile-cards-grid">
+        <div class="prof-card" onclick="setCityWeather('Bengaluru, IN', '32.5°C', 'Sunny, 65% humidity', 'blr')">
+          <div>
+            <div class="prof-name">📍 Bengaluru, India (Default)</div>
+            <div class="prof-role">32.5°C • BESCOM ₹12.40/kWh Peak Tariff</div>
+          </div>
+          <span style="color: var(--cyan); font-weight: 700;">Select ➔</span>
+        </div>
+        <div class="prof-card" onclick="setCityWeather('Mumbai, IN', '31.0°C', 'Humid, 78% humidity', 'mum')">
+          <div>
+            <div class="prof-name">📍 Mumbai, India</div>
+            <div class="prof-role">31.0°C • Tata Power ₹14.80/kWh Peak Tariff</div>
+          </div>
+          <span style="color: var(--cyan); font-weight: 700;">Select ➔</span>
+        </div>
+        <div class="prof-card" onclick="setCityWeather('Delhi, IN', '27.5°C', 'Hazy, 52% humidity', 'del')">
+          <div>
+            <div class="prof-name">📍 Delhi NCR, India</div>
+            <div class="prof-role">27.5°C • BSES ₹11.20/kWh Peak Tariff</div>
+          </div>
+          <span style="color: var(--cyan); font-weight: 700;">Select ➔</span>
+        </div>
+        <div class="prof-card" onclick="setCityWeather('London, UK', '16.2°C', 'Overcast, 82% humidity', 'lon')">
+          <div>
+            <div class="prof-name">📍 London, United Kingdom</div>
+            <div class="prof-role">16.2°C • UK Power £0.28/kWh Flat Rate</div>
+          </div>
+          <span style="color: var(--cyan); font-weight: 700;">Select ➔</span>
+        </div>
+        <div class="prof-card" onclick="setCityWeather('New York, US', '19.4°C', 'Clear, 58% humidity', 'nyc')">
+          <div>
+            <div class="prof-name">📍 New York, United States</div>
+            <div class="prof-role">19.4°C • ConEd $0.24/kWh Time-of-Use</div>
+          </div>
+          <span style="color: var(--cyan); font-weight: 700;">Select ➔</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Auth Modal Dialog -->
+  <!-- Auth Modal Dialog (With BOTH Login & Sign Up Tabs) -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal-box">
       <div class="modal-header">
-        <div class="modal-title">🔑 Resident Authentication &amp; Fast Demo Profiles</div>
+        <div class="modal-title">👤 Resident Access &amp; Multi-Profile Hub</div>
         <button class="modal-close" onclick="closeModal('authModal')">✕</button>
       </div>
-      <p style="font-size: 13px; color: var(--text-muted);">
-        Select any 1-Click Demo Profile designed for hackathon judges to immediately test role-based access without typing:
-      </p>
 
-      <div class="profile-cards-grid">
-        <div class="prof-card" onclick="selectProfile('Venkat Reddy', 'Admin', '👑')">
-          <div>
-            <div class="prof-name">👑 Venkat Reddy (Admin)</div>
-            <div class="prof-role">Full access: master breakers, tripwires &amp; regional tariffs</div>
+      <div class="modal-tab-row">
+        <button class="m-tab-btn active" id="mTabLogin" onclick="switchAuthSubTab('login')">🔐 Fast Login</button>
+        <button class="m-tab-btn" id="mTabSignup" onclick="switchAuthSubTab('signup')">✨ Sign Up New Resident</button>
+      </div>
+
+      <!-- Login Sub-Tab -->
+      <div id="authLoginContent">
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+          Choose a 1-Click Demo Profile designed for hackathon judges, or log in with credentials:
+        </p>
+
+        <div class="profile-cards-grid" style="margin-bottom: 14px;">
+          <div class="prof-card" onclick="selectProfile('Venkat Reddy', 'Admin', '👑')">
+            <div>
+              <div class="prof-name">👑 Venkat Reddy (Admin)</div>
+              <div class="prof-role">Full access: master breakers, tripwires &amp; tariffs</div>
+            </div>
+            <span style="font-size: 11px; color: var(--emerald); font-weight: 800;">1-Click ➔</span>
           </div>
-          <span style="font-size: 12px; color: var(--emerald); font-weight: 700;">Select ➔</span>
-        </div>
-        <div class="prof-card" onclick="selectProfile('Alex Johnson', 'Resident', '🏠')">
-          <div>
-            <div class="prof-name">🏠 Alex Johnson (Resident)</div>
-            <div class="prof-role">Daily resident view, room steppers &amp; daily challenges</div>
+          <div class="prof-card" onclick="selectProfile('Alex Johnson', 'Resident', '🏠')">
+            <div>
+              <div class="prof-name">🏠 Alex Johnson (Resident)</div>
+              <div class="prof-role">Daily resident view, room steppers &amp; challenges</div>
+            </div>
+            <span style="font-size: 11px; color: var(--cyan); font-weight: 800;">1-Click ➔</span>
           </div>
-          <span style="font-size: 12px; color: var(--cyan); font-weight: 700;">Select ➔</span>
-        </div>
-        <div class="prof-card" onclick="selectProfile('Priya Caretaker', 'Elder Care', '👵')">
-          <div>
-            <div class="prof-name">👵 Priya Caretaker (Elder Care)</div>
-            <div class="prof-role">Grandma Savithri safety tracking &amp; stove auto-shutoff</div>
+          <div class="prof-card" onclick="selectProfile('Priya Caretaker', 'Elder Care', '👵')">
+            <div>
+              <div class="prof-name">👵 Priya Caretaker (Elder Care)</div>
+              <div class="prof-role">Grandma Savithri safety tracking &amp; auto-shutoff</div>
+            </div>
+            <span style="font-size: 11px; color: var(--amber); font-weight: 800;">1-Click ➔</span>
           </div>
-          <span style="font-size: 12px; color: var(--amber); font-weight: 700;">Select ➔</span>
         </div>
+
+        <div class="form-group">
+          <label class="form-label">Email / Resident ID</label>
+          <input type="text" class="form-input" id="loginEmail" value="venkat@homeiq.internal">
+        </div>
+        <div class="form-group">
+          <label class="form-label">4-Digit Master PIN</label>
+          <input type="password" class="form-input" id="loginPin" value="1234">
+        </div>
+        <button class="chat-send-btn" style="width: 100%; padding: 10px; margin-top: 6px;" onclick="customLogin()">
+          Log In to HomeIQ
+        </button>
+      </div>
+
+      <!-- Sign Up Sub-Tab -->
+      <div id="authSignupContent" style="display: none;">
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+          Register a new household resident or caretaker profile:
+        </p>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="signupName" placeholder="e.g. John Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" id="signupEmail" placeholder="john@smartvilla.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Villa / Apartment Unit ID</label>
+          <input type="text" class="form-input" id="signupVilla" placeholder="Villa 402 - Green Glen">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-group">
+            <label class="form-label">Role</label>
+            <select class="form-input" id="signupRole" style="cursor: pointer;">
+              <option value="Admin">👑 Admin</option>
+              <option value="Resident">🏠 Resident</option>
+              <option value="Elder Care">👵 Elder Care</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">4-Digit Security PIN</label>
+            <input type="password" class="form-input" id="signupPin" placeholder="4 digits">
+          </div>
+        </div>
+        <button class="chat-send-btn" style="width: 100%; padding: 10px; margin-top: 8px;" onclick="customSignUp()">
+          Create Resident Profile ✨
+        </button>
       </div>
     </div>
   </div>
@@ -1379,11 +1933,35 @@
         <div class="modal-title">🏆 Energy Savings Leaderboard &amp; Challenges</div>
         <button class="modal-close" onclick="closeModal('streakModal')">✕</button>
       </div>
-      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid var(--amber); padding: 12px 16px; border-radius: 12px; margin-bottom: 14px;">
-        <div style="font-size: 16px; font-weight: 800; color: #FCD34D;">🔥 7-Day Eco Streak Active!</div>
-        <div style="font-size: 12px; color: #FDE68A; margin-top: 2px;">Your household has saved ₹340.00 this week below utility baseline.</div>
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid var(--amber); padding: 12px 14px; border-radius: 12px; margin-bottom: 12px;">
+        <div style="font-size: 15px; font-weight: 800; color: #FCD34D;">🔥 7-Day Eco Streak Active!</div>
+        <div style="font-size: 11.5px; color: #FDE68A; margin-top: 2px;">Your household has saved ₹340.00 this week below baseline load.</div>
       </div>
-      <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">WEEKLY FAMILY LEADERBOARD</h4>
+
+      <h4 style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">DAILY ACTIVE CHALLENGES</h4>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+        <div style="background: #1E293B; padding: 10px 12px; border-radius: 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;">
+            <span>Daily Eco Sprint (Under 20 kWh)</span>
+            <span style="color: var(--cyan);">68% (18.4/20)</span>
+          </div>
+          <div style="height: 6px; background: #334155; border-radius: 3px; margin-top: 6px; overflow: hidden;">
+            <div style="width: 68%; height: 100%; background: var(--cyan);"></div>
+          </div>
+        </div>
+
+        <div style="background: #1E293B; padding: 10px 12px; border-radius: 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;">
+            <span>Peak Tariff Defender (Zero AC 6–8 PM)</span>
+            <span style="color: var(--emerald);">COMPLETED 🏆</span>
+          </div>
+          <div style="height: 6px; background: #334155; border-radius: 3px; margin-top: 6px; overflow: hidden;">
+            <div style="width: 100%; height: 100%; background: var(--emerald);"></div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">WEEKLY FAMILY LEADERBOARD</h4>
       <div class="profile-cards-grid">
         <div class="prof-card"><span>🥇 1. Alex Johnson</span><span style="color: var(--emerald); font-weight: 800;">48.5 kWh saved (1420 pts)</span></div>
         <div class="prof-card"><span>🥈 2. Grandma Savithri</span><span style="color: var(--emerald); font-weight: 800;">34.2 kWh saved (1180 pts)</span></div>
@@ -1396,64 +1974,174 @@
   <div class="toast-msg" id="toastMsg">Action Executed</div>
 
   <script>
-    // Tab Switching Router
+    // Tab Router
     let currentActiveTab = 1;
 
     function switchTab(tabIndex) {
-      currentActiveTab = tabIndex;
-      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-      document.querySelectorAll('.tv-nav-item').forEach(btn => btn.classList.remove('active'));
+      currentActiveTab = Number(tabIndex);
 
+      // 1. Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tc => {
+        tc.classList.remove('active');
+        tc.style.display = 'none';
+      });
+
+      // 2. Show active tab
       const targetTab = document.getElementById(`tabContent_${tabIndex}`);
-      if (targetTab) targetTab.classList.add('active');
+      if (targetTab) {
+        targetTab.classList.add('active');
+        targetTab.style.display = 'block';
+      }
 
-      const targetNav = document.getElementById(`navItem_${tabIndex}`);
-      if (targetNav) targetNav.classList.add('active');
+      // 3. Highlight Top Nav Bar
+      document.querySelectorAll('.top-nav-tab').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const topBtn = document.getElementById(`topNav_${tabIndex}`);
+      if (topBtn) topBtn.classList.add('active');
 
+      // 4. Highlight Bottom Nav Bar
+      document.querySelectorAll('.tv-nav-item').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const botBtn = document.getElementById(`navItem_${tabIndex}`);
+      if (botBtn) botBtn.classList.add('active');
+
+      // 5. Scroll viewport to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // 6. Tab Lifecycle rendering
       if (tabIndex === 1) {
         setTimeout(drawSpline, 60);
+        setTimeout(render24HourBars, 60);
       } else if (tabIndex === 2) {
         renderDetailDevices();
       } else if (tabIndex === 3) {
-        setTimeout(drawAnalyticsSpline, 60);
+        setTimeout(drawAnalyticsSpline, 80);
       } else if (tabIndex === 5) {
-        document.getElementById('chatInput').focus();
+        setTimeout(() => {
+          const inp = document.getElementById('chatInput');
+          if (inp) inp.focus();
+        }, 120);
       }
 
-      showToast(`Navigated to Tab ${tabIndex}`);
+      // 7. Update URL Hash
+      const tabMeta = {
+        1: { name: 'Main Dashboard', hash: '#dashboard' },
+        2: { name: 'Room Details View', hash: '#rooms' },
+        3: { name: 'Energy Analytics', hash: '#analytics' },
+        4: { name: 'Security & Cameras', hash: '#security' },
+        5: { name: 'Bedrock AI Coach', hash: '#ai' }
+      };
+      const info = tabMeta[tabIndex] || { name: `Tab ${tabIndex}`, hash: '#dashboard' };
+      if (history.replaceState) {
+        history.replaceState(null, null, info.hash);
+      }
+
+      showToast(`Navigated to Tab ${tabIndex}: ${info.name}`);
     }
+
+    function toggleRemoteWidget() {
+      const w = document.getElementById('remoteWidget');
+      const arr = document.getElementById('remoteToggleArrow');
+      if (w.style.display === 'none' || w.style.display === '') {
+        w.style.display = 'block';
+        if (arr) arr.innerText = '▼';
+      } else {
+        w.style.display = 'none';
+        if (arr) arr.innerText = '▲';
+      }
+    }
+
+    function simulateKey(key) {
+      showToast(`Remote Key: ${key}`);
+      if (key === 'ArrowRight') {
+        const nextTab = (currentActiveTab % 5) + 1;
+        switchTab(nextTab);
+      } else if (key === 'ArrowLeft') {
+        const prevTab = currentActiveTab === 1 ? 5 : currentActiveTab - 1;
+        switchTab(prevTab);
+      } else if (key === 'Escape') {
+        switchTab(1);
+      } else if (key === 'Enter') {
+        showToast('OK pressed');
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (['1', '2', '3', '4', '5'].includes(e.key)) {
+        switchTab(Number(e.key));
+      } else if (['ArrowLeft', 'ArrowRight', 'Escape'].includes(e.key)) {
+        simulateKey(e.key);
+      }
+    });
+
+    function handleHashRoute() {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#rooms' || hash === '#room-details') switchTab(2);
+      else if (hash === '#analytics' || hash === '#energy') switchTab(3);
+      else if (hash === '#security' || hash === '#cameras') switchTab(4);
+      else if (hash === '#ai' || hash === '#alexa') switchTab(5);
+      else switchTab(1);
+    }
+    window.addEventListener('popstate', handleHashRoute);
 
     // Live Clock
     function updateClock() {
       const now = new Date();
       const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-      document.getElementById('liveClock').innerText = now.toLocaleDateString('en-US', options);
+      const el = document.getElementById('liveClock');
+      if (el) el.innerText = now.toLocaleDateString('en-US', options);
     }
     setInterval(updateClock, 1000);
     updateClock();
 
+    // 24-Hour Usage Bar Chart Generation
+    function render24HourBars() {
+      const c = document.getElementById('hourlyBarsRow');
+      if (!c) return;
+      c.innerHTML = '';
+      const usageValues = [
+        0.4, 0.3, 0.3, 0.2, 0.5, 0.8, 1.2, 1.6, 2.1, 1.9, 2.4, 3.2, 
+        3.5, 3.1, 2.8, 3.4, 4.1, 4.8, 4.2, 3.8, 2.9, 2.2, 1.5, 0.85
+      ];
+      const max = Math.max(...usageValues);
+
+      usageValues.forEach((val, i) => {
+        const bar = document.createElement('div');
+        bar.className = 'h-bar';
+        if (i === 17) bar.classList.add('peak'); // 6 PM
+        const pct = (val / max) * 100;
+        bar.style.height = `${pct}%`;
+        bar.title = `${i}:00 - ${val} kWh`;
+        bar.onclick = () => showToast(`Hour ${i}:00 ➔ ${val} kWh`);
+        c.appendChild(bar);
+      });
+    }
+
     // Device Data Store
     const roomDevices = {
       living: [
-        { id: 'tv1', name: 'Smart TV (55")', icon: '📺', watts: 120, state: true, type: 'stepper', val: 80, unit: '%' },
-        { id: 'spk1', name: 'Sonos Speaker', icon: '🔊', watts: 30, state: true, type: 'stepper', val: 60, unit: '%' },
-        { id: 'light1', name: 'Ambient Ceiling Light', icon: '💡', watts: 45, state: true, type: 'stepper', val: 80, unit: '%' },
-        { id: 'ac1', name: 'Dual Inverter AC', icon: '❄️', watts: 1500, state: true, type: 'stepper', val: 24, unit: '°C' }
+        { id: 'tv1', name: 'Smart TV (55")', sub: 'Samsung Smart TV', icon: '📺', watts: 120, state: true, type: 'stepper', val: 80, unit: '%' },
+        { id: 'spk1', name: 'Sonos Speaker', sub: 'Sonos Play 1', icon: '🔊', watts: 30, state: true, type: 'stepper', val: 60, unit: '%' },
+        { id: 'light1', name: 'Ceiling Light', sub: 'Ceiling Ambient', icon: '💡', watts: 45, state: true, type: 'stepper', val: 80, unit: '%' },
+        { id: 'ac1', name: 'Dual Inverter AC', sub: 'Living AC', icon: '❄️', watts: 1500, state: true, type: 'stepper', val: 24, unit: '°C' }
       ],
       kitchen: [
-        { id: 'stove', name: 'Induction Stove', icon: '🍳', watts: 1800, state: true, type: 'toggle' },
-        { id: 'fridge', name: 'Smart Refrigerator', icon: '🧊', watts: 150, state: true, type: 'toggle' },
-        { id: 'microwave', name: 'Microwave Oven', icon: '🍲', watts: 0, state: false, type: 'toggle' },
-        { id: 'chimney', name: 'Auto Clean Chimney', icon: '💨', watts: 65, state: true, type: 'toggle' }
+        { id: 'stove', name: 'Induction Stove', sub: 'Kitchen Stove', icon: '🍳', watts: 1800, state: true, type: 'toggle' },
+        { id: 'fridge', name: 'Smart Refrigerator', sub: 'Double Door', icon: '🧊', watts: 150, state: true, type: 'toggle' },
+        { id: 'microwave', name: 'Microwave Oven', sub: 'Countertop', icon: '🍲', watts: 0, state: false, type: 'toggle' },
+        { id: 'chimney', name: 'Auto Clean Chimney', sub: 'Kitchen Exhaust', icon: '💨', watts: 65, state: true, type: 'toggle' }
       ],
       bedroom: [
-        { id: 'ac2', name: 'Master Bedroom AC', icon: '❄️', watts: 0, state: false, type: 'stepper', val: 22, unit: '°C' },
-        { id: 'fan1', name: 'BLDC Ceiling Fan', icon: '🌀', watts: 35, state: true, type: 'stepper', val: 3, unit: 'spd' },
-        { id: 'light2', name: 'Bedside Circadian Lamp', icon: '💡', watts: 15, state: true, type: 'stepper', val: 50, unit: '%' },
-        { id: 'cam1', name: 'Elder Care IP Camera', icon: '📹', watts: 5, state: true, type: 'toggle' }
+        { id: 'ac2', name: 'Bedroom AC', sub: 'Master Inverter', icon: '❄️', watts: 0, state: false, type: 'stepper', val: 22, unit: '°C' },
+        { id: 'fan1', name: 'BLDC Ceiling Fan', sub: 'Quiet Fan', icon: '🌀', watts: 35, state: true, type: 'stepper', val: 3, unit: 'spd' },
+        { id: 'light2', name: 'Bedside Lamp', sub: 'Circadian Amber', icon: '💡', watts: 15, state: true, type: 'stepper', val: 50, unit: '%' },
+        { id: 'cam1', name: 'Indoor Camera', sub: 'Elder Care IP', icon: '📹', watts: 5, state: true, type: 'toggle' }
       ],
       garage: [
-        { id: 'ev1', name: 'EV Wallbox Charger', icon: '⚡', watts: 3300, state: false, type: 'toggle' }
+        { id: 'ev1', name: 'EV Wallbox Charger', sub: '7.4 kW Level 2', icon: '⚡', watts: 3300, state: false, type: 'toggle' }
       ]
     };
 
@@ -1478,6 +2166,7 @@
               <button class="stepper-btn" onclick="stepVal('${dev.id}', -1)">-</button>
               <span class="stepper-val" id="val_${dev.id}">${dev.val}${dev.unit}</span>
               <button class="stepper-btn" onclick="stepVal('${dev.id}', 1)">+</button>
+              <span class="dev-sub" id="pwr_${dev.id}" style="margin: 0 4px; font-weight:700;">${dev.state ? dev.watts + ' W' : '0 W'}</span>
               <button class="toggle-pill ${dev.state ? 'on' : 'off'}" onclick="toggleDevice('${dev.id}', this)">
                 ${dev.state ? '● ON' : '○ OFF'}
               </button>
@@ -1486,6 +2175,7 @@
         } else {
           controlHtml = `
             <div class="device-controls">
+              <span class="dev-sub" id="pwr_${dev.id}" style="margin-right: 6px; font-weight:700;">${dev.state ? dev.watts + ' W' : '0 W'}</span>
               <button class="toggle-pill ${dev.state ? 'on' : 'off'}" onclick="toggleDevice('${dev.id}', this)">
                 ${dev.state ? '● ON' : '○ OFF'}
               </button>
@@ -1498,7 +2188,7 @@
             <span class="dev-icon">${dev.icon}</span>
             <div>
               <div class="dev-name">${dev.name}</div>
-              <div class="dev-power" id="pwr_${dev.id}">${dev.state ? dev.watts + ' W' : '0 W'}</div>
+              <div class="dev-sub">${dev.sub}</div>
             </div>
           </div>
           ${controlHtml}
@@ -1531,6 +2221,7 @@
               <button class="stepper-btn" onclick="stepVal('${dev.id}', -1); renderDetailDevices();">-</button>
               <span class="stepper-val">${dev.val}${dev.unit}</span>
               <button class="stepper-btn" onclick="stepVal('${dev.id}', 1); renderDetailDevices();">+</button>
+              <span class="dev-sub" style="margin: 0 4px; font-weight:700;">${dev.state ? dev.watts + ' W' : '0 W'}</span>
               <button class="toggle-pill ${dev.state ? 'on' : 'off'}" onclick="toggleDevice('${dev.id}', this); renderDetailDevices();">
                 ${dev.state ? '● ON' : '○ OFF'}
               </button>
@@ -1539,6 +2230,7 @@
         } else {
           controlHtml = `
             <div class="device-controls">
+              <span class="dev-sub" style="margin-right: 6px; font-weight:700;">${dev.state ? dev.watts + ' W' : '0 W'}</span>
               <button class="toggle-pill ${dev.state ? 'on' : 'off'}" onclick="toggleDevice('${dev.id}', this); renderDetailDevices();">
                 ${dev.state ? '● ON' : '○ OFF'}
               </button>
@@ -1551,7 +2243,7 @@
             <span class="dev-icon">${dev.icon}</span>
             <div>
               <div class="dev-name">${dev.name}</div>
-              <div class="dev-power">${dev.state ? dev.watts + ' W' : '0 W'}</div>
+              <div class="dev-sub">${dev.sub}</div>
             </div>
           </div>
           ${controlHtml}
@@ -1559,13 +2251,15 @@
         container.appendChild(div);
       });
 
-      document.getElementById('detailRoomPower').innerHTML = `${roomPower} <span class="stat-unit">W</span>`;
-      document.getElementById('detailDeviceCount').innerText = `${activeCount} / ${list.length}`;
+      const pEl = document.getElementById('detailRoomPower');
+      if (pEl) pEl.innerHTML = `${roomPower} <span class="stat-unit">W</span>`;
+      const cEl = document.getElementById('detailDeviceCount');
+      if (cEl) cEl.innerText = `${activeCount} / ${list.length}`;
     }
 
     function switchRoom(room, btn) {
       activeRoom = room;
-      document.querySelectorAll('.room-tabs .room-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#tabContent_1 .room-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderDevices();
     }
@@ -1574,26 +2268,6 @@
       activeDetailRoom = room;
       document.querySelectorAll('#tabContent_2 .room-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderDetailDevices();
-    }
-
-    function applyPreset(preset) {
-      if (preset === 'cinema') {
-        roomDevices.living[0].state = true; // TV
-        roomDevices.living[1].state = true; // Sonos
-        roomDevices.living[2].val = 20;     // Dim lights
-        roomDevices.living[3].val = 22;     // AC cool
-        showToast('🎬 Cinema Preset Activated: TV ON, lights dimmed to 20%, AC at 22°C.');
-      } else if (preset === 'eco') {
-        roomDevices.living[3].val = 26;     // Eco AC
-        roomDevices.living[2].val = 50;
-        showToast('🌱 Eco Saver Preset: AC set to 26°C, shedding 35% load.');
-      } else if (preset === 'night') {
-        roomDevices.living[0].state = false;
-        roomDevices.living[2].state = false;
-        showToast('🌙 Night Mode: Living room devices shut off, security armed.');
-      }
-      renderDevices();
       renderDetailDevices();
     }
 
@@ -1637,7 +2311,27 @@
       if (el) el.innerText = total;
     }
 
-    // Spline Canvas Chart (Tab 1)
+    function applyPreset(preset) {
+      if (preset === 'cinema') {
+        roomDevices.living[0].state = true;
+        roomDevices.living[1].state = true;
+        roomDevices.living[2].val = 20;
+        roomDevices.living[3].val = 22;
+        showToast('🎬 Cinema Preset: TV ON, lights dimmed to 20%, AC at 22°C.');
+      } else if (preset === 'eco') {
+        roomDevices.living[3].val = 26;
+        roomDevices.living[2].val = 50;
+        showToast('🌱 Eco Saver Preset: AC set to 26°C, shedding 35% load.');
+      } else if (preset === 'night') {
+        roomDevices.living[0].state = false;
+        roomDevices.living[2].state = false;
+        showToast('🌙 Night Mode: Living room devices shut off, perimeter armed.');
+      }
+      renderDevices();
+      renderDetailDevices();
+    }
+
+    // Spline Canvas Chart (Tab 1 & Tab 3)
     const chartDataSets = {
       today: [320, 280, 240, 220, 310, 580, 940, 1100, 1450, 1200, 1680, 2200, 2450, 2100, 1950, 2400, 3200, 4800, 4200, 3600, 2900, 2100, 1400, 847],
       week: [18.2, 22.4, 19.8, 24.1, 21.0, 17.5, 18.4],
@@ -1663,6 +2357,7 @@
         peakBadge.style.display = 'none';
       }
       drawSpline();
+      showToast(`Chart updated to: ${range.toUpperCase()}`);
     }
 
     function setAnalyticsRange(range, btn) {
@@ -1670,11 +2365,12 @@
       document.querySelectorAll('#tabContent_3 .filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       drawAnalyticsSpline();
+      showToast(`Analytics chart updated to: ${range.toUpperCase()}`);
     }
 
     function drawSpline() {
       const canvas = document.getElementById('splineCanvas');
-      if (!canvas || !canvas.parentElement) return;
+      if (!canvas || !canvas.parentElement || canvas.parentElement.clientWidth === 0) return;
       const ctx = canvas.getContext('2d');
       const dpr = window.devicePixelRatio || 1;
       
@@ -1689,23 +2385,20 @@
 
       ctx.clearRect(0, 0, w, h);
 
-      // Grid lines
       ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)';
       ctx.lineWidth = 1;
-      for (let y = 30; y < h; y += 40) {
+      for (let y = 25; y < h; y += 38) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(w, y);
         ctx.stroke();
       }
 
-      // Map Points
       const coords = pts.map((val, i) => ({
-        x: (i / (pts.length - 1)) * (w - 40) + 20,
-        y: h - 25 - (val / maxVal) * (h - 50)
+        x: (i / (pts.length - 1)) * (w - 30) + 15,
+        y: h - 20 - (val / maxVal) * (h - 45)
       }));
 
-      // Catmull-Rom to Cubic Bézier Spline
       ctx.beginPath();
       ctx.moveTo(coords[0].x, coords[0].y);
 
@@ -1723,7 +2416,6 @@
         ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
       }
 
-      // Gradient Fill
       const grad = ctx.createLinearGradient(0, 0, 0, h);
       grad.addColorStop(0, 'rgba(56, 189, 248, 0.38)');
       grad.addColorStop(0.7, 'rgba(2, 132, 199, 0.1)');
@@ -1735,7 +2427,6 @@
       ctx.fillStyle = grad;
       ctx.fill();
 
-      // Stroke Line
       ctx.beginPath();
       ctx.moveTo(coords[0].x, coords[0].y);
       for (let i = 0; i < coords.length - 1; i++) {
@@ -1750,16 +2441,16 @@
         ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
       }
       ctx.strokeStyle = '#38BDF8';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 2.8;
       ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
-      ctx.shadowBlur = 12;
+      ctx.shadowBlur = 10;
       ctx.stroke();
       ctx.shadowBlur = 0;
     }
 
     function drawAnalyticsSpline() {
       const canvas = document.getElementById('analyticsSplineCanvas');
-      if (!canvas || !canvas.parentElement) return;
+      if (!canvas || !canvas.parentElement || canvas.parentElement.clientWidth === 0) return;
       const ctx = canvas.getContext('2d');
       const dpr = window.devicePixelRatio || 1;
       
@@ -1774,7 +2465,6 @@
 
       ctx.clearRect(0, 0, w, h);
 
-      // Grid
       ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)';
       ctx.lineWidth = 1;
       for (let y = 30; y < h; y += 40) {
@@ -1828,17 +2518,12 @@
         ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
       }
       ctx.strokeStyle = '#10B981';
-      ctx.lineWidth = 3.5;
-      ctx.shadowColor = 'rgba(16, 185, 129, 0.9)';
-      ctx.shadowBlur = 14;
+      ctx.lineWidth = 3.2;
+      ctx.shadowColor = 'rgba(16, 185, 129, 0.85)';
+      ctx.shadowBlur = 12;
       ctx.stroke();
       ctx.shadowBlur = 0;
     }
-
-    window.addEventListener('resize', () => {
-      drawSpline();
-      drawAnalyticsSpline();
-    });
 
     // Hazard Auto-Shutoff Logic
     let shutoffTimer = 58;
@@ -1854,11 +2539,16 @@
 
     function triggerAutoShutoff() {
       clearInterval(shutoffInterval);
-      roomDevices.kitchen[0].state = false; // Stove
+      roomDevices.kitchen[0].state = false;
       renderDevices();
       renderDetailDevices();
       document.getElementById('hazardBanner').style.display = 'none';
-      showToast('🛑 Emergency Auto-Shutoff Executed: Kitchen stove disconnected in 10ms. Hazard resolved!');
+      const cam = document.getElementById('camStoveStatus');
+      if (cam) {
+        cam.style.color = '#10B981';
+        cam.innerText = 'HAZARD RESOLVED: 0 W 🟢';
+      }
+      showToast('🛑 Emergency Auto-Shutoff: Kitchen stove disconnected in 10ms. Hazard resolved!');
       document.getElementById('aiCoachText').innerText = '"Family Guardian: Stove anomaly resolved safely. Kitchen wattage dropped to 0W."';
     }
 
@@ -1868,7 +2558,7 @@
       showToast('Hazard banner dismissed');
     }
 
-    // AI Coach Chat
+    // AI Coach Interaction
     function askAi(query) {
       showToast(`AI Processing: "${query}"`);
       setTimeout(() => {
@@ -1881,7 +2571,15 @@
         } else {
           document.getElementById('aiCoachText').innerText = `"IQ: Live audit complete. Aggregate household power is optimized at ${document.getElementById('liveWatts').innerText}W."`;
         }
-      }, 350);
+      }, 300);
+    }
+
+    function submitDashAi() {
+      const inp = document.getElementById('dashAiInput');
+      const q = inp.value.trim();
+      if (!q) return;
+      inp.value = '';
+      askAi(q);
     }
 
     function askAiChat(promptText) {
@@ -1900,7 +2598,7 @@
           renderDevices();
           renderDetailDevices();
         }
-      }, 450);
+      }, 400);
     }
 
     function sendChatMessage() {
@@ -1930,14 +2628,14 @@
     }
 
     function simulateVoiceAsk() {
-      showToast('🎙️ Echo Voice Trigger: "Alexa, show my energy report"');
+      showToast('🎙️ Echo Voice: "Alexa, show my energy report"');
       appendUserMsg('🎙️ "Alexa, show my energy report"');
       setTimeout(() => {
         appendAiMsg("Opening Energy Analytics on your Fire TV. Current active draw is 847 Watts. Today's consumption is 18.4 kWh (12% lower than yesterday).");
         setTimeout(() => {
           switchTab(3);
-        }, 800);
-      }, 500);
+        }, 700);
+      }, 450);
     }
 
     let allLightsState = true;
@@ -1947,13 +2645,41 @@
       roomDevices.bedroom[2].state = allLightsState;
       renderDevices();
       renderDetailDevices();
-      document.getElementById('aiActionBtn').innerHTML = `<span>💡 Turn ${allLightsState ? 'OFF' : 'ON'} All Lights</span>`;
-      showToast(`All household lights switched ${allLightsState ? 'ON' : 'OFF'}`);
+      
+      const btn = document.getElementById('aiActionBtn');
+      if (allLightsState) {
+        btn.innerHTML = `<span>💡 Turn OFF All Lights</span>`;
+        showToast('💡 Lights turned ON! Power increased by 60W.');
+      } else {
+        btn.innerHTML = `<span>💡 Turn ON All Lights</span>`;
+        showToast('💡 Lights turned OFF! Slashed 60W from home load.');
+      }
     }
 
     function changeTariffRegion(region) {
-      showToast(`Tariff switched to ${region.toUpperCase()}`);
+      const tMap = {
+        blr: 'Peak Tariff Window: 6:00 PM – 8:00 PM (₹12.40/kWh)',
+        mum: 'Peak Tariff Window: 5:30 PM – 8:30 PM (₹14.80/kWh)',
+        del: 'Peak Tariff Window: 6:00 PM – 9:00 PM (₹11.20/kWh)',
+        lon: 'Standard Tariff Rate: £0.28/kWh (Flat Rate)',
+        nyc: 'Time-of-Use Peak: 4:00 PM – 7:00 PM ($0.24/kWh)'
+      };
+      document.getElementById('tariffWindowText').innerHTML = tMap[region] || tMap.blr;
+      showToast(`Tariff Region: ${region.toUpperCase()}`);
       drawAnalyticsSpline();
+    }
+
+    // Weather Switcher
+    function openWeatherModal() { document.getElementById('weatherModal').style.display = 'flex'; }
+    function setCityWeather(city, temp, desc, regionKey) {
+      document.getElementById('headerCity').innerText = city;
+      document.getElementById('headerTemp').innerText = temp;
+      document.getElementById('cardWeatherCity').innerText = `${temp} • ${city}`;
+      closeModal('weatherModal');
+      const sel = document.getElementById('tariffSelect');
+      if (sel) sel.value = regionKey;
+      changeTariffRegion(regionKey);
+      showToast(`Location set to ${city} (${temp})`);
     }
 
     // Modal Handlers
@@ -1961,10 +2687,37 @@
     function openStreakModal() { document.getElementById('streakModal').style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
+    function switchAuthSubTab(tab) {
+      if (tab === 'login') {
+        document.getElementById('authLoginContent').style.display = 'block';
+        document.getElementById('authSignupContent').style.display = 'none';
+        document.getElementById('mTabLogin').classList.add('active');
+        document.getElementById('mTabSignup').classList.remove('active');
+      } else {
+        document.getElementById('authLoginContent').style.display = 'none';
+        document.getElementById('authSignupContent').style.display = 'block';
+        document.getElementById('mTabLogin').classList.remove('active');
+        document.getElementById('mTabSignup').classList.add('active');
+      }
+    }
+
     function selectProfile(name, role, icon) {
       document.getElementById('headerAuthBtn').innerHTML = `<span>👤 ${name}</span><span style="color: var(--emerald);">● ${role}</span>`;
       closeModal('authModal');
-      showToast(`Authenticated as ${name} (${role})`);
+      showToast(`Logged in as ${name} (${role})`);
+    }
+
+    function customLogin() {
+      const email = document.getElementById('loginEmail').value;
+      const name = email.split('@')[0];
+      selectProfile(name, 'Resident', '🏠');
+    }
+
+    function customSignUp() {
+      const name = document.getElementById('signupName').value || 'New Resident';
+      const role = document.getElementById('signupRole').value;
+      selectProfile(name, role, '✨');
+      showToast(`Account created for ${name}!`);
     }
 
     function showToast(msg) {
@@ -1974,30 +2727,17 @@
       setTimeout(() => { toast.style.display = 'none'; }, 2600);
     }
 
-    // Keyboard / Remote Navigation
-    function simulateKey(key) {
-      showToast(`Remote Key: ${key}`);
-      if (key === 'ArrowRight') {
-        const nextTab = (currentActiveTab % 5) + 1;
-        switchTab(nextTab);
-      } else if (key === 'ArrowLeft') {
-        const prevTab = currentActiveTab === 1 ? 5 : currentActiveTab - 1;
-        switchTab(prevTab);
-      } else if (key === 'Escape') {
-        switchTab(1);
-      }
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (['ArrowLeft', 'ArrowRight', 'Escape'].includes(e.key)) {
-        simulateKey(e.key);
-      }
+    // Init
+    window.addEventListener('resize', () => {
+      drawSpline();
+      drawAnalyticsSpline();
     });
 
-    // Initial render
     renderDevices();
     renderDetailDevices();
-    setTimeout(drawSpline, 150);
+    render24HourBars();
+    handleHashRoute();
+    setTimeout(drawSpline, 120);
   </script>
 </body>
 </html>
