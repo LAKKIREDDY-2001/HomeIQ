@@ -29,13 +29,17 @@ A 10-foot smart home command center for Fire TV that combines real-time power te
   <br />
   <img src="docs/screenshots/homeiq-demo.gif" alt="HomeIQ 10-Foot Fire TV Live Demo Animation" width="920" style="border-radius: 14px; box-shadow: 0 16px 36px rgba(0,0,0,0.6);" />
   <p><em>↑ 15-second live Fire TV walkthrough: Bézier spline wave telemetry, Family Guardian stove auto-shutoff, Bedrock AI Coach &amp; Alexa voice integration</em></p>
+  <p style="margin-top: 14px;">
+    <a href="https://homeiq-tefz.onrender.com/#ai"><strong>🚀 Live App Deployment (Render)</strong></a> &nbsp;•&nbsp; 
+    <a href="https://lakkireddy-2001.github.io/HomeIQ/"><strong>🌐 Live Web Simulator (GitHub Pages)</strong></a>
+  </p>
   <p>
-    <a href="https://homeiq-tefz.onrender.com/#ai"><strong>🚀 Launch Live Web App (Render)</strong></a> •
-    <a href="https://homeiq-tefz.onrender.com/#dashboard">🏠 Dashboard</a> •
-    <a href="https://homeiq-tefz.onrender.com/#rooms">🛋️ Room Details</a> •
-    <a href="https://homeiq-tefz.onrender.com/#analytics">📊 Energy Analytics</a> •
-    <a href="https://homeiq-tefz.onrender.com/#security">🛡️ Security Feeds</a> •
-    <a href="https://homeiq-tefz.onrender.com/#ai">🤖 Bedrock AI Coach</a>
+    <strong>Direct Feature Links:</strong>
+    <a href="https://homeiq-tefz.onrender.com/#dashboard">🏠 1. Dashboard</a> •
+    <a href="https://homeiq-tefz.onrender.com/#rooms">🛋️ 2. Room Details</a> •
+    <a href="https://homeiq-tefz.onrender.com/#analytics">📊 3. Energy Analytics</a> •
+    <a href="https://homeiq-tefz.onrender.com/#security">🛡️ 4. Security Feeds</a> •
+    <a href="https://homeiq-tefz.onrender.com/#ai">🤖 5. Bedrock AI Coach</a>
   </p>
 </div>
 
